@@ -1,0 +1,44 @@
+.navbar{
+    background-color: darkolivegreen;
+    
+}
+
+.navbar img{
+    width: 50px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black;
+  }
+
+.footerlinks > ul > li > a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar h1{
+    color: white;
+    text-align: center;
+}
+
+
+.navbar img:hover{
+    transform: scale(1.2);
+    transition: 0.5s;
+}
+
+.navbar a:hover{
+    color: white;
+    cursor: pointer;
+}
+
+.searchbar {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: transparent;
+}
