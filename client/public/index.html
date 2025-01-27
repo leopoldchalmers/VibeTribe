@@ -13,41 +13,46 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
 
-  <div class="navbar">
+  <nav class="container-fluid text-center custom-navbar">
+    <div class="row">
+      <div class="col-2 text-start">
+        <a href="index.html">
+          <img src="logo.png" class="navbarImg" alt="VibeTribe Logo"/>
+        </a>
+      </div>
+      <div class="col-8 text-center">
+        <h1> <a href="index.html" class="navbarTitle">VibeTribe</a> </h1>
+      </div>
+      <div class="col-2 text-end">
+        <a href="account.html">
+          <img src="Profile_icon.webp" class="navbarImg" alt="Profile Icon"/>
+        </a>
+      </div>
+    </div>
+  </nav>
 
-    <a href="index.html">
-      <img src="logo.png" alt="VibeTribe Logo"/>
-    </a>
-    <h1> <a href="index.html">VibeTribe</a> </h1>
-    <a href="mytribes.html">
-      Tribes
-    </a>
-    <a href="account.html">
-      <img src="Profile_icon.webp" alt="Profile Icon"/>
-    </a>
-  </div>
 
   <input type="text" placeholder="Search for tribe..." id="searchbar">
 
-  <footer class="footerlinks">
-    <ul>
-      <li>
-        <a href = "about.html">
-           About
-        </a>
-      </li>
-      <li>
-        <a href = "contact.html">
-          Contact
-        </a>
-      </li>
-      <li>
-        <a href = "help.html">
+  <footer>
+    <div class="container-fluid text-center fixed-bottom footerlinks">
+      <div class="row">
+        <div class="col-4 text">
+          <a href = "about.html">
+            About
+          </a>
+        </div>
+        <div class="col-4 text">
+          <a href = "contact.html">
+            Contact
+          </a>
+        </div>
+        <div class="col-4 text">
+          <a href = "help.html">
             Help
-        </a>
-      </li>
-    </ul>
-
+          </a>
   </footer>
+
+
 </body>
 </html>

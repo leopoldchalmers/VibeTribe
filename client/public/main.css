@@ -1,34 +1,29 @@
-.navbar{
+.custom-navbar {
     background-color: darkolivegreen;
-    
 }
 
-.navbar img{
-    width: 50px;
+.footerlinks {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    background-color: lightgrey;
 }
 
-.navbar a {
-    text-decoration: none;
-    color: black;
-  }
-
-.footerlinks > ul > li > a {
+.footerlinks a {
     text-decoration: none;
     color: black;
 }
 
-.navbar h1{
+.footerlinks a:hover {
     color: white;
-    text-align: center;
+    cursor: pointer;
 }
 
-
-.navbar img:hover{
+.navbarImg:hover{
     transform: scale(1.2);
     transition: 0.5s;
 }
 
-.navbar a:hover{
+.navbarTitle:hover{
     color: white;
     cursor: pointer;
 }
@@ -42,3 +37,15 @@
     box-sizing: border-box;
     background-color: transparent;
 }
+
+.navbarImg {
+    width: 40px;
+    height: auto;
+    padding-top: 10px;
+}
+
+.navbarTitle {
+    text-decoration: none;
+    color: black;
+}
+
