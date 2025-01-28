@@ -1,11 +1,15 @@
 .custom-navbar {
-    background-color: darkolivegreen;
+    background-color: #1f5132;
+}
+
+html body{
+    background-color: #F2E9DC;
 }
 
 .footerlinks {
     padding-bottom: 30px;
     padding-top: 30px;
-    background-color: lightgrey;
+    background-color: #808F85;
 }
 
 .footerlinks a {
