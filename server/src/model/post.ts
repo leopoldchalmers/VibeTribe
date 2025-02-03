@@ -8,5 +8,5 @@ export interface Post {
     createdAt : number;
     updatedAt : number;
     likes : number;
+    tribe : number;
 }
-

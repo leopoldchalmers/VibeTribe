@@ -1,5 +1,6 @@
 import { Post } from '../model/post';
 import { User } from '../model/user';
+import { Tribe } from '../model/tribe';
 
 export class PostService {
   private posts : Post[] = [];
@@ -8,7 +9,7 @@ export class PostService {
       return JSON.parse(JSON.stringify(this.posts));
   }
 
-  async addPost(title: string, description: string, author: User) : Promise<Post> {
+  async addPost(title: string, description: string, author: User, tribe: number) : Promise<Post> {
     
     const post: Post = {
           id: Date.now(),
@@ -18,6 +19,7 @@ export class PostService {
           updatedAt: Date.now(),
           author: author,
           likes: 0,
+          tribe: tribe
       };
       this.posts.push(post);
 

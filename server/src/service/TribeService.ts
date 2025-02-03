@@ -1,6 +1,9 @@
 import { Tribe } from "../model/tribe";
 
 export class TribeService {
+    updateTribe(tribeToUpdate: any) {
+        throw new Error("Method not implemented.");
+    }
     private tribes : Tribe[] = [];
 
     async getTribes(): Promise<Tribe[]> {
