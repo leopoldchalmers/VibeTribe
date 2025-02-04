@@ -10,14 +10,25 @@ const tribeService = new TribeService();
 
 export const postRouter = express.Router();
 
-postRouter.get("/", async (
+postRouter.get("/posts", async (
     req: Request<{}, {}, {}>,
     res: Response<Array<Post> | String>
 ) => {
     try {
         const posts = await postService.getPosts();
-        const tribes = await tribeService.getTribes();
         res.status(200).send(posts);
+    } catch (e: any) {
+        res.status(500).send(e.message);
+    }
+});
+
+postRouter.get("/posts/:id", async (
+    req: Request<{id: number}, {}, {}>,
+    res: Response<Array<Post> | String>
+) => {
+    try {
+        const posts = await postService.getPostById(req.params.id);
+        res.status(200).send(JSON.stringify(posts));
     } catch (e: any) {
         res.status(500).send(e.message);
     }
@@ -45,10 +56,9 @@ postRouter.patch("/", async (
 })
         
 
-
 postRouter.patch("/:id", async (
-    req: Request<{ id: string }, {}, { done: boolean }>,
-    res: Response<Tribe | string>
+    req: Request<{ id: number }, {}, {}>,
+    res: Response<Post | string>
 ) => {
     try {
         if (req.params.id == null) {
@@ -56,7 +66,7 @@ postRouter.patch("/:id", async (
             return;
         }
 
-        const index = parseInt(req.params.id, 10);
+        const index = req.params.id;
         if (! (index >= 0)) {
              res.status(400).send(`id number must be a non-negative integer`);
             return;
