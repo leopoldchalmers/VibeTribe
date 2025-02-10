@@ -36,23 +36,3 @@ tribeRouter.post("/", async (
     }
 })
 
-tribeRouter.patch("/:id", async (
-    req: Request<{ id: string }, {}, { done: boolean }>,
-    res: Response<Tribe | string>
-) => {
-    try {
-        if (req.params.id == null) {
-            res.status(400).send(`Missing id param`);
-            return;
-        }
-
-        const index = parseInt(req.params.id, 10);
-        if (! (index >= 0)) {
-             res.status(400).send(`id number must be a non-negative integer`);
-            return;
-        }
-    }
-    catch (e: any) {
-            res.status(500).send(e.message);
-    }
-    });

@@ -13,8 +13,8 @@ export class PostService {
       return this.posts.find(post => post.id === id);
   }
 
-  async addPost(title: string, description: string, author: User, tribe: number) : Promise<Post> {
-    
+
+   async addPost(title: string, description: string, author: User, tribe: number) : Promise<Post> {
     const post: Post = {
           id: Date.now(),
           title: title,
@@ -28,9 +28,20 @@ export class PostService {
       this.posts.push(post);
 
       return { ...post };
-
+    }
+      
+    async updatePost(id: number, title: string, description: string) : Promise<Post | undefined> {
+      const post = this.posts.find(post => post.id === id);
+      if(post) {
+        post.title = title;
+        post.description = description;
+        post.updatedAt = Date.now();
+        return { ...post };
       }
+      return undefined;
+
+}   
+
+
 
 }
-  
-
