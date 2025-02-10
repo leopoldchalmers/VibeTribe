@@ -9,6 +9,10 @@ export class PostService {
       return JSON.parse(JSON.stringify(this.posts));
   }
 
+  async getPostById(id: number) : Promise<Post | undefined> {
+      return this.posts.find(post => post.id === id);
+  }
+
   async addPost(title: string, description: string, author: User, tribe: number) : Promise<Post> {
     
     const post: Post = {
