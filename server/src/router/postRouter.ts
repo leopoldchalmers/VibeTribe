@@ -4,13 +4,14 @@ import { PostService } from "../service/PostService";
 import { TribeService } from "../service/TribeService";
 import { Post } from "../model/post";
 import { User } from "../model/user";
+import { title } from "process";
 
 const postService = new PostService();
 const tribeService = new TribeService();
 
 export const postRouter = express.Router();
 
-postRouter.get("/posts", async (
+postRouter.get("/", async (
     req: Request<{}, {}, {}>,
     res: Response<Array<Post> | String>
 ) => {
@@ -22,20 +23,31 @@ postRouter.get("/posts", async (
     }
 });
 
-postRouter.get("/posts/:id", async (
-    req: Request<{id: number}, {}, {}>,
-    res: Response<Array<Post> | String>
+postRouter.get("/:id", async (
+    req: Request<{ id: string }>, 
+    res: Response<Post | string>
 ) => {
     try {
-        const posts = await postService.getPostById(req.params.id);
-        res.status(200).send(JSON.stringify(posts));
+        const postId = Number(req.params.id); 
+        if (isNaN(postId)) {
+            res.status(400).send("Invalid ID format");
+            return;
+        }
+
+        const post = await postService.getPostById(postId); 
+        if (!post) {
+            res.status(404).send("Post not found");
+            return;
+        }
+
+        res.status(200).send(post); 
     } catch (e: any) {
-        res.status(500).send(e.message);
+        res.status(500).send(e.message); 
     }
 });
 
-postRouter.patch("/", async (
-    req: Request<{}, {}, { title : string, description: number, author: User, tribe: number }>,
+postRouter.post("/", async (
+    req: Request<{}, {}, { title : string, description: string, author: User, tribe: number }>,
     res: Response<Post | string>
 ) => {
     try {
@@ -44,7 +56,7 @@ postRouter.patch("/", async (
         const tribe = req.body.tribe;
         const title = req.body.title;
         if (typeof(description) !== "string") {
-            res.status(400).send(`Bad PUT call to ${req.originalUrl} --- description has type ${typeof(description)}`);
+            res.status(400).send(`Bad POST call to ${req.originalUrl} --- description has type ${typeof(description)}`);
             return;
         }
         const newPost = await postService.addPost(title, description, author, tribe);
@@ -53,24 +65,39 @@ postRouter.patch("/", async (
     } catch (e: any) {
         res.status(500).send(e.message);
     }
-})
+});
         
 
 postRouter.patch("/:id", async (
-    req: Request<{ id: number }, {}, {}>,
+    req: Request<{ id: string }, {}, {title: string, description: string}>,
     res: Response<Post | string>
 ) => {
     try {
-        if (req.params.id == null) {
+
+        const postId = Number(req.params.id);
+
+        if (postId == null) {
             res.status(400).send(`Missing id param`);
             return;
         }
 
-        const index = req.params.id;
-        if (! (index >= 0)) {
+
+        if (! (postId >= 0)) {
              res.status(400).send(`id number must be a non-negative integer`);
             return;
         }
+
+        const description = req.body.description;
+        const title = req.body.title;
+        if (typeof(description) !== "string") {
+            res.status(400).send(`Bad PATCH call to ${req.originalUrl} --- description has type ${typeof(description)}`);
+            return;
+        }
+
+        const updatedPost = await postService.updatePost(postId, title, description);
+        res.status(200).send(updatedPost);
+    
+        
     }
     catch (e: any) {
             res.status(500).send(e.message);
