@@ -14,7 +14,7 @@ export class PostService {
   }
 
 
-   async addPost(title: string, description: string, author: User, tribe: number) : Promise<Post> {
+   async addPost(title: string, description: string, author: User, tribe: Tribe) : Promise<Post> {
     const post: Post = {
           id: Date.now(),
           title: title,
@@ -41,7 +41,5 @@ export class PostService {
       return undefined;
 
 }   
-
-
 
 }

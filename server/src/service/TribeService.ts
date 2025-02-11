@@ -16,7 +16,6 @@ export class TribeService {
             description: description,
             posts: [],
             owner: owner
-            
         }
         this.tribes.push(tribe);
         return {...tribe };

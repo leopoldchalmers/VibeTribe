@@ -47,7 +47,7 @@ postRouter.get("/:id", async (
 });
 
 postRouter.post("/", async (
-    req: Request<{}, {}, { title : string, description: string, author: User, tribe: number }>,
+    req: Request<{}, {}, { title : string, description: string, author: User, tribe: Tribe }>,
     res: Response<Post | string>
 ) => {
     try {

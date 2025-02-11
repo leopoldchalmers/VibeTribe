@@ -1,4 +1,5 @@
 import { User } from './user';
+import { Tribe } from './tribe';
 
 export interface Post {
     id : number;
@@ -8,5 +9,5 @@ export interface Post {
     createdAt : number;
     updatedAt : number;
     likes : number;
-    tribe : number;
+    tribe : Tribe;
 }
