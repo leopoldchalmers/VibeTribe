@@ -25,6 +25,7 @@ html body{
 .navbarImg:hover{
   transform: scale(1.2);
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .navbarTitle:hover{
@@ -54,5 +55,34 @@ html body{
 }
 
 .form-container {
+    padding-top: 30px;
     max-width: 300px; 
+    margin: 0 auto;
+  }
+
+  .loginButton{
+    margin: 0 auto;
+
+  }
+  .signUpButton{
+    margin: 0 auto;
+    width: 300px;
+  }
+
+  .signUptext{
+    padding-top: 30px;
+    text-align: center;
+
+  }
+
+  .loginTitle{
+    padding-top: 30px;
+    text-align: center;
+    font-family: "Lucida Console", "Courier New", monospace;
+
+  }
+
+  .loginBack{
+    padding-top: 30px;
+    text-align: center;
   }

@@ -3,18 +3,20 @@ import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from "react-router-dom";
 
-function Account() {
+function SignUp() {
 
     const navigate = useNavigate();
-
+    
     return (
         <>
         <div className="d-grid gap-2 col-6 mx-auto">
-            <h1 className="loginTitle">Log in to VibeTribe </h1>
+            <h1 className="loginTitle">Sign up to VibeTribe </h1>
         </div>   
 
     <Form className="form-container">
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Label>First Name</Form.Label>
+        <Form.Control type="text" placeholder="First Name" />
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="name@example.com" />
         <Form.Label>Password</Form.Label>
@@ -23,14 +25,15 @@ function Account() {
     </Form>
 
             <div className="d-grid gap-2 col-6 mx-auto">
-
-            <button type="button" className="btn btn-light loginButton" >Log in</button>
-            <p className="signUptext">Don't have an account?</p>  
-            <button type="button" className="btn btn-light signUpButton" onClick={()=> navigate("/signup")}  >Sign up</button>
+            <button type="button" className="btn btn-light loginButton" >Create Account</button>
+            </div>
+            
+            <div className = "d-grid gap-2 col-6 mx-auto loginBack" >
+            <button type="button" className="btn btn-light loginButton" onClick={()=> navigate("/account")} >Already have an accout</button>
             </div>
 
         </>
     )
 } 
 
-export default Account;
+export default SignUp;
