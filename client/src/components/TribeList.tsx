@@ -8,7 +8,7 @@ export function TribeList({ tribes }: { tribes: Tribe[] }) {
 
     return (
         <div>
-            <h1>Tribe List</h1>
+            <h1 className= "smallTitle">Tribe List</h1>
             <ul>
                 {tribes.map(tribe => (
                     <li key={tribe.id}>{tribe.description}</li>

@@ -86,3 +86,10 @@ html body{
     padding-top: 30px;
     text-align: center;
   }
+
+  .smallTitle{
+    margin: 0 auto;
+    white-space: nowrap;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 20px;
+  }
