@@ -1,20 +1,44 @@
-import "../App.css"
-import 'bootstrap/dist/css/bootstrap.css';
+import { useEffect, useState } from "react";
+import { getTribes } from "../api";
+import { TribeList } from "../components/TribeList";
+import { Tribe } from "../api";
 
-interface Home {
-    title: string
-    logopath: string
-    links: string[]
-}
+function Home() {
 
-function Home(){
+    const [tribes, setTribes] = useState<Tribe[]>([]);
+
+    useEffect(() => {
+        async function fetchTribes() {
+            try {
+                const data = await getTribes();
+                console.log("Fetched tribes:", data);
+                setTribes(data);
+            } catch (error) {
+                console.error("Error fetching tribes:", error);
+                setTribes([
+                    {
+                        id: Date.now(),
+                        description: "Default tribe for testing",
+                        posts: [],
+                        owner: 1
+                    }
+                ]);
+            }
+        }
+        fetchTribes();
+    }, []);
+
+
     return (
-        <>
-       <div>
+
+
+        <div >
             <h1>Home</h1>
-       </div>
-       </>
+            <TribeList tribes={tribes} />
+        </div>
     );
+
+    
 }
 
-export default Home
+export default Home;

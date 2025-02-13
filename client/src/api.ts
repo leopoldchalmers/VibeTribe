@@ -7,9 +7,19 @@ export type Tribe = {
     owner: number;
 }
 
-const BASE_URL = 'http://localhost:5173:';
+const BASE_URL = 'http://localhost:5000';
 
-export async function getTribes(): Promise<Tribe[]> {
-    const response = await axios.get<Tribe[]>(`${BASE_URL}/tribe`);
-    return response.data;
-}
+
+export const getTribes = async () => {
+    try {
+        const response = await fetch('http://localhost:8080/tribes'); 
+        if (!response.ok) {
+            throw new Error('Failed to fetch tribes');
+        }
+        const data = await response.json();
+        return data; 
+    } catch (error) {
+        console.error('Error fetching tribes:', error);
+        throw error; 
+    }
+};
