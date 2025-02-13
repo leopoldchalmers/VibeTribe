@@ -10,7 +10,7 @@ function SignUp() {
     return (
         <>
         <div className="d-grid gap-2 col-6 mx-auto">
-            <h1 className="loginTitle">Sign up to VibeTribe </h1>
+            <h1 className="pageTitle">Sign up to VibeTribe </h1>
         </div>   
 
     <Form className="form-container">
@@ -34,6 +34,6 @@ function SignUp() {
 
         </>
     )
-} 
+}
 
 export default SignUp;

@@ -11,7 +11,7 @@ export function TribeList({ tribes }: { tribes: Tribe[] }) {
             <h1>Tribe List</h1>
             <ul>
                 {tribes.map(tribe => (
-                    <li key={tribe.id}>{tribe.description} owner: {tribe.owner}</li>
+                    <li key={tribe.id}>{tribe.description}</li>
                 ))}
             </ul>
         </div>

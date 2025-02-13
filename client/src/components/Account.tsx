@@ -10,7 +10,7 @@ function Account() {
     return (
         <>
         <div className="d-grid gap-2 col-6 mx-auto">
-            <h1 className="loginTitle">Log in to VibeTribe </h1>
+            <h1 className="pageTitle">Log in to VibeTribe </h1>
         </div>   
 
     <Form className="form-container">

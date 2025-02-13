@@ -33,7 +33,7 @@ function Home() {
 
 
         <div >
-            <h1>Home</h1>
+            <h1 className="pageTitle">Home</h1>
             <TribeList tribes={tribes} />
         </div>
     );
