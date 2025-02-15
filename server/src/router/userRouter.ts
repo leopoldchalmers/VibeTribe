@@ -26,6 +26,11 @@ userRouter.post("/", async (
         const name = req.body.name;
         const email = req.body.email;
         const password = req.body.password;
+
+        if (!name || !email || !password) {
+            res.status(400).send("All fields are required");
+            return;
+        }
         
         if (typeof(name) !== "string") {
             res.status(400).send(`Bad PUT call to ${req.originalUrl} --- name has type ${typeof(name)}`);
