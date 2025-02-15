@@ -3,9 +3,9 @@ import { User } from '../model/user';
 
 export class UserService {
 
-  private Users: User[] = [];
+  private users: User[] = [];
 
-  async createUser(id: number, name: string, email: string, password: string): Promise<User> {
+  async createUser(name: string, email: string, password: string): Promise<User> {
 
     const user: User = {
         id: Date.now(),
@@ -14,13 +14,13 @@ export class UserService {
         password: password
     }
 
-    this.Users.push(user);
+    this.users.push(user);
 
     return {...user};    
 
   }
 
-    async getUsers(): Promise<User[]> {
-        return this.Users;
-    }
+  async getUsers(): Promise<User[]> {
+      return JSON.parse(JSON.stringify(this.users));
+  }
 }
