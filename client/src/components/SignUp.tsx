@@ -28,7 +28,9 @@ function SignUp() {
     try {
       const response = await axios.post("http://localhost:8080/users", formData);
       console.log("User created:", response.data);
-      navigate("/account");
+      localStorage.setItem("user", JSON.stringify(response.data));
+      navigate("/home");
+
   } catch (error) {
       console.error("Error creating user:", error);
   }
