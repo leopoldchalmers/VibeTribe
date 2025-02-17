@@ -98,3 +98,13 @@ html body{
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 20px;
   }
+
+  .tribeButton{
+    margin: 0 auto;
+    width: 300px;
+  }
+
+  .goBack {
+    margin: auto;
+
+  }

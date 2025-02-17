@@ -1,8 +1,17 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import App from './App';
 
 describe('App Component', () => {
+
+  test('renders the heading VibeTribe', () => {
+    render(<App />);
+    const headingElement = screen.getByText(/VibeTribe/i);
+    expect(headingElement).toBeInTheDocument();
+  });
+
+  /*
+
   test('renders the heading Vite + React', () => {
     render(<App />);
     const headingElement = screen.getByText(/Vite \+ React/i);
@@ -31,4 +40,9 @@ describe('App Component', () => {
     const docsParagraph = screen.getByText(/Click on the Vite and React logos to learn more/i);
     expect(docsParagraph).toBeInTheDocument();
   });
+  */
+
+  
 });
+
+

@@ -1,29 +1,23 @@
-import { useEffect, useState } from "react";
 import { getTribes } from "../api";
+import { createTribe } from "../api";
 import { TribeList } from "../components/TribeList";
 import { Tribe } from "../api";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+
+
 
 function Home() {
 
     const [tribes, setTribes] = useState<Tribe[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchTribes() {
-            try {
-                const data = await getTribes();
-                console.log("Fetched tribes:", data);
-                setTribes(data);
-            } catch (error) {
-                console.error("Error fetching tribes:", error);
-                setTribes([
-                    {
-                        id: Date.now(),
-                        description: "Default tribe for testing",
-                        posts: [],
-                        owner: 1
-                    }
-                ]);
-            }
+        const data = await getTribes();
+        console.log("Fetched tribes:", data);
+        setTribes(data);
         }
         fetchTribes();
     }, []);
@@ -31,11 +25,16 @@ function Home() {
 
     return (
 
+        <>
 
-        <div >
+        <div>
             <h1 className="pageTitle">Home</h1>
+            <button type="button" className="btn btn-light tribeButton" onClick={() => navigate("/createTribe")}> Create Tribe</button>
+
             <TribeList tribes={tribes} />
         </div>
+        </>
+
     );
 
     

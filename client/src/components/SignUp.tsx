@@ -80,7 +80,7 @@ function SignUp() {
       <div className="d-grid gap-2 col-6 mx-auto loginBack" >
         <button type="button" className="btn btn-light loginButton" onClick={() => navigate("/account")} >Already have an accout</button>
       </div>
-
+      
     </>
   )
 }

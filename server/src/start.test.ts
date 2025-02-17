@@ -15,3 +15,4 @@ test("End-to-end test", async () => {
     expect(res2.body.map((tribe : Tribe) => tribe.description)).toContain(desc);
 });
 // Kommentar: Tänk på o testa cases där det går fel. 
+
