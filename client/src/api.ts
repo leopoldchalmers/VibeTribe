@@ -7,6 +7,17 @@ export type Tribe = {
     owner: number;
 }
 
+export type Post = {
+    id : number;
+    title : string;
+    description : string;
+    author : number;
+    createdAt : number;
+    updatedAt : number;
+    likes : number;
+    tribe : Tribe;
+}
+
 const BASE_URL = 'http://localhost:5000';
 
 
