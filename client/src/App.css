@@ -62,8 +62,13 @@ html body{
 
   .loginButton{
     margin: 0 auto;
-
   }
+
+  .logoutButton{
+    margin: 0 auto;
+    width: 300px;
+  }
+
   .signUpButton{
     margin: 0 auto;
     width: 300px;
