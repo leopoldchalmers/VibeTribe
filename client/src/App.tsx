@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 function App() {
 
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [, setIsLoggedIn] = useState(false);
  
   useEffect(() => {
     const user = localStorage.getItem("user");

@@ -2,11 +2,6 @@ import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from "react-router-dom";
 
-interface NavbarProps {
-    title: string
-    logopath: string
-    links: string[]
-}
 
 function Navbar(){
 

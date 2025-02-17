@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "test": "jest",
+    "test": "jest app.test.tsx",
     "test:w": "jest --watchAll",
     "test:cov": "jest --coverage",
     "preview": "vite preview"
