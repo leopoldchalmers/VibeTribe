@@ -19,8 +19,8 @@ export class PostService {
           id: Date.now(),
           title: title,
           description: description,
-          createdAt:  Date.now(),
-          updatedAt: Date.now(),
+          createdAt:  new Date(Date.now()).toLocaleDateString(),
+          updatedAt: new Date(Date.now()).toLocaleDateString(),
           author: author,
           likes: 0,
           tribe: tribe
@@ -35,7 +35,7 @@ export class PostService {
       if(post) {
         post.title = title;
         post.description = description;
-        post.updatedAt = Date.now();
+        post.updatedAt = new Date(Date.now()).toLocaleDateString();
         return { ...post };
       }
       return undefined;

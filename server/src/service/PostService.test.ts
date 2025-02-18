@@ -12,10 +12,13 @@ test("If a post is created, it should be returned to list", async () => {
         password: "authorpassword"
     }
     const tribe: Tribe = {
+        title: "Tribe title",
         id: 0,
         description: "Tribe description",
         posts: [],
-        owner: 0
+        owner: 0,
+        createdAt: new Date(Date.now()).toLocaleDateString(),
+        updatedAt: new Date(Date.now()).toLocaleDateString()
     };
     const postService = new PostService();
     

@@ -1,13 +1,15 @@
 import { Form } from "react-bootstrap";
 import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Account() {
 
-    const navigate = useNavigate();
+    //Add custom error handlign, ternary expressions, and conditional rendering, boolean expression med ?, sant renderar en del "":"" renderar en annan del (en if or else statement)
+    // Cases som är undefined eller tomma, hur ska användaren få feedback på det?
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState<any>(null);
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -30,7 +32,10 @@ function Account() {
 
   const handleLogin = async () => {
       try {
+
+          console.log("Logging in with", formData);
           const response = await axios.post("http://localhost:8080/users/login", formData);
+          console.log("User logged in:", response.data);
           localStorage.setItem("user", JSON.stringify(response.data));
           setIsLoggedIn(true);
           setUser(response.data);
@@ -79,7 +84,9 @@ function Account() {
 
 
               <p className="signUptext">Don't have an account?</p>
-              <button type="button" className="btn btn-light signUpButton" onClick={() => navigate("/signup")}>Sign up</button>
+              <a href = "./signup">
+                <button type="button" className="btn btn-light signUpButton" >Sign up</button>
+                </a>
             </div>
           )}
 

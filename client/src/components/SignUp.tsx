@@ -1,14 +1,12 @@
 import { Form } from "react-bootstrap";
 import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 
 function SignUp() {
 
-  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -29,7 +27,7 @@ function SignUp() {
       const response = await axios.post("http://localhost:8080/users", formData);
       console.log("User created:", response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
-      navigate("/home");
+      window.location.href = "/home";
 
   } catch (error) {
       console.error("Error creating user:", error);
@@ -78,7 +76,9 @@ function SignUp() {
         </Form>
 
       <div className="d-grid gap-2 col-6 mx-auto loginBack" >
-        <button type="button" className="btn btn-light loginButton" onClick={() => navigate("/account")} >Already have an accout</button>
+        <a href = "./account">
+        <button type="button" className="btn btn-light loginButton" >Already have an accout</button>
+        </a>
       </div>
       
     </>

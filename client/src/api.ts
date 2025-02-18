@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export type Tribe = {
     title: string;
     id: number;
@@ -22,7 +20,7 @@ export type Post = {
     tribe : Tribe;
 }
 
-const BASE_URL = 'http://localhost:5000';
+//const BASE_URL = 'http://localhost:5000';
 
 
 export const getTribes = async () => {

@@ -1,8 +1,6 @@
 import { getTribes } from "../api";
-import { createTribe } from "../api";
 import { TribeList } from "../components/TribeList";
 import { Tribe } from "../api";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 
@@ -11,7 +9,6 @@ import { useEffect, useState } from "react";
 function Home() {
 
     const [tribes, setTribes] = useState<Tribe[]>([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchTribes() {
@@ -29,7 +26,7 @@ function Home() {
 
         <div>
             <h1 className="pageTitle">Home</h1>
-            <button type="button" className="btn btn-light tribeButton" onClick={() => navigate("/createTribe")}> Create Tribe</button>
+            <a href = "./createtribe"><button type="button" className="btn btn-light tribeButton" > Create Tribe</button> </a>
 
             <TribeList tribes={tribes} />
         </div>

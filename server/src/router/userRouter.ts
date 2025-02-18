@@ -77,8 +77,6 @@ userRouter.post("/login", async (
         }
         res.status(200).send(user);
 
-        res.status(200).send(user);
-
     } catch (e: any) {
         res.status(500).send(e.message);
     }

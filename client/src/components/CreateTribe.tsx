@@ -49,7 +49,9 @@ function CreateTribe() {
           <h1 className="pageTitle">Create tribe </h1>
         </div>
 
-        <button type="submit" className="btn btn-light goBack" onClick={() => navigate("/home")}> Go back</button>
+        <a href = "./home"> 
+        <button type="submit" className="btn btn-light goBack"> Go back</button>
+        </a>
 
         <Form className="form-container" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

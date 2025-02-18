@@ -6,8 +6,8 @@ export interface Post {
     title : string;
     description : string;
     author : User;
-    createdAt : number;
-    updatedAt : number;
+    createdAt : string;
+    updatedAt : string;
     likes : number;
     tribe : Tribe;
 }
