@@ -1,17 +1,27 @@
+
+
+import dotenv from "dotenv";
+dotenv.config();
+
+console.log("Starting server...");
+
+
 import express from "express";
 import { tribeRouter } from "./router/tribeRouter";
 import { postRouter } from "./router/postRouter";
 import { userRouter } from "./router/userRouter";
 import cors from "cors";
 import session from "express-session";
-import dotenv from "dotenv";
+import { log } from "console";
+
 
 export const app = express();
 
 //app.use(cors());
 
-dotenv.config();
-if (! process.env.SESSION_SECRET) {
+console.log("SESSION_SECRET: ", process.env.SESSION_SECRET);
+
+if (!process.env.SESSION_SECRET) {
   console.log("Could not find SESSION_SECRET in .env file");
   process.exit();
 }
