@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 function Account() {
 
     //Add custom error handlign, ternary expressions, and conditional rendering, boolean expression med ?, sant renderar en del "":"" renderar en annan del (en if or else statement)

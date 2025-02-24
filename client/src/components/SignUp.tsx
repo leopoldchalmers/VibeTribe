@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from "react";
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
 
 function SignUp() {
 

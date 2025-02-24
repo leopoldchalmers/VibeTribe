@@ -1,4 +1,4 @@
-import { PostComponent } from "../components/post";
+import { PostComponent } from "../components/Post";
 import { Post } from "../api";
 
 export function PostList({ posts }: { posts: Post[] }) {
