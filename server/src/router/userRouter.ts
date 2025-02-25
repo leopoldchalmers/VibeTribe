@@ -55,8 +55,14 @@ export function userRouter(userService: UserService): Router {
         res : Response<User | string>
     ) => {
         try {
+            console.log("TEST TEST TEST TEST TEST");
+        
             const email = req.body.email;
             const password = req.body.password;
+
+            console.log("Email: ", email);
+            console.log("Password: ", password
+            );
 
             if (!email || !password) {
                 res.status(400).send("All fields are required");
@@ -64,6 +70,7 @@ export function userRouter(userService: UserService): Router {
             }
 
             const users = await userService.getUsers();
+            console.log("Users: ", users);
             const user = users.find(u => u.email === email && u.password === password);
             
             if (!user) {
@@ -71,7 +78,10 @@ export function userRouter(userService: UserService): Router {
                 return;
             }
             req.session.userid = user.id;
+            console.log("User logged in:", user);
+            res.status(200).send(user); // R. Adams told us to remove this, but it doesnt seem to work without it, users are not saved in local storage without this and we use this in order to login
             res.status(200); // TODO Edit this
+            
 
         } catch (e: any) {
             res.status(500).send(e.message);
