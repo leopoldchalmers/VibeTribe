@@ -19,12 +19,15 @@ tribeRouter.get("/", async (
 });
 
 tribeRouter.post("/", async (
-    req: Request<{}, {}, { title : string, description : string, owner: number }>,
+    req: Request<{}, {}, { title : string, description : string, owner: number }>, // TODO Delete owner
     res: Response<Tribe | string>
 ) => {
-
-
     try {
+        //@ts-ignore
+        if (!req.session.userid) {
+            res.status(403).send("Not logged in");
+            return;
+        }
         const title = req.body.title;
         const description = req.body.description;
         const owner = req.body.owner;
@@ -36,7 +39,8 @@ tribeRouter.post("/", async (
             res.status(400).send(`Bad PUT call to ${req.originalUrl} --- description has type ${typeof(description)}`);
             return;
         }
-        const newTribe = await tribeService.createTribe(title, description, owner);
+        //@ts-ignore
+        const newTribe = await tribeService.createTribe(title, description, req.session.userid);
         res.status(201).send(newTribe);
     } catch (e: any) {
         res.status(500).send(e.message);

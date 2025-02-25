@@ -6,21 +6,11 @@ const userService = new UserService();
 
 export const userRouter = express.Router();
 
-userRouter.get("/", async (
-    req: Request<{}, {}, {}>,
-    res: Response<Array<User> | String>
-) => {
-    try {
-        const users = await userService.getUsers();
-        res.status(200).send(users);
-    } catch (e: any) {
-        res.status(500).send(e.message);
-    }
-});
+
 
 userRouter.post("/", async (
     req: Request<{}, {}, { name : string, email: string, password: string }>,
-    res: Response<User | string>
+    res: Response<{name: string, email:string} | string>
 ) => {
     try {
         const name = req.body.name;
@@ -46,17 +36,21 @@ userRouter.post("/", async (
             res.status(400).send(`Bad PUT call to ${req.originalUrl} --- password has type ${typeof(password)}`);
             return;
         }
-        
+        //något här
         const newUser = await userService.createUser(name, email, password)
-            res.status(201).send(newUser);
+            res.status(201).send({name: name, email: email});
     } catch (e: any) {
         res.status(500).send(e.message);
     }
 })
 
+interface LoginRequest extends Request {
+    body: {email: string, password: string},
+    session : any
+}
 
 userRouter.post("/login", async (
-    req : Request<{}, {}, { email: string, password: string }>,
+    req : LoginRequest,
     res : Response<User | string>
 ) => {
     try {
@@ -75,7 +69,8 @@ userRouter.post("/login", async (
             res.status(401).send("Invalid email or password");
             return;
         }
-        res.status(200).send(user);
+        req.session.userid = user.id;
+        res.status(200).send(user); // TODO Edit this
 
     } catch (e: any) {
         res.status(500).send(e.message);
