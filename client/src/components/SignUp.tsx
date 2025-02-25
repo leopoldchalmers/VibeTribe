@@ -6,6 +6,8 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
+//ÄNDRA FFRÅN LOCAL STORAGE TILL SESSION
+
 function SignUp() {
 
 
