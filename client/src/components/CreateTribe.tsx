@@ -6,8 +6,6 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-
-
 function CreateTribe() {
     
     const navigate = useNavigate();

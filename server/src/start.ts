@@ -13,6 +13,8 @@ import { userRouter } from "./router/userRouter";
 import cors from "cors";
 import session from "express-session";
 import { log } from "console";
+import { TribeService } from "./service/TribeService";
+import { UserService } from "./service/UserService";
 
 
 export const app = express();
@@ -36,7 +38,12 @@ app.use(cors({
 }));
 app.use(express.json());
 
+const userService = new UserService();
+const tribeService = new TribeService();
 
-app.use("/tribes", tribeRouter);
+app.use(tribeRouter(tribeService));
+app.use(userRouter(userService));
+
+//app.use("/tribes", tribeRouter);
 app.use("/posts", postRouter);
-app.use("/users", userRouter);
+//app.use("/users", userRouter);
