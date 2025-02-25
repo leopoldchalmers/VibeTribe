@@ -17,8 +17,15 @@ export class UserService {
     this.users.push(user);
 
     return {...user};    
-
   }
+
+
+  async findUser(name: string, email: string, password : string): Promise<User | undefined> {
+    if (! password) {
+        return this.users.find((user) => user.name === name);
+    }
+    return this.users.find((user) => user.name === name && user.password === password);
+}
 
   async getUsers(): Promise<User[]> {
       return JSON.parse(JSON.stringify(this.users));
