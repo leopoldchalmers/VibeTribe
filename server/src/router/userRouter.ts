@@ -6,9 +6,13 @@ export function userRouter(userService: UserService): Router {
 
     const userRouter = express.Router();
 
-
     interface LoginRequest extends Request {
         body: {email: string, password: string},
+        session : any
+    }
+
+    interface LoginResponse extends Response {
+        body: {name: string, email: string},
         session : any
     }
 
@@ -52,7 +56,7 @@ export function userRouter(userService: UserService): Router {
 
     userRouter.post("/users/login", async (
         req : LoginRequest,
-        res : Response<User | string>
+        res : LoginResponse | Response
     ) => {
         try {
             console.log("TEST TEST TEST TEST TEST");
@@ -72,16 +76,17 @@ export function userRouter(userService: UserService): Router {
             const users = await userService.getUsers();
             console.log("Users: ", users);
             const user = users.find(u => u.email === email && u.password === password);
-            
+
             if (!user) {
                 res.status(401).send("Invalid email or password");
                 return;
             }
             req.session.userid = user.id;
             console.log("User logged in:", user);
-            res.status(200).send(user); // R. Adams told us to remove this, but it doesnt seem to work without it, users are not saved in local storage without this and we use this in order to login
-            res.status(200); // TODO Edit this
+            res.status(200).send({name: user.name, email: user.email}); // R. Adams told us to remove this, but it doesnt seem to work without it, users are not saved in local storage without this and we use this in order to login
             
+
+           
 
         } catch (e: any) {
             res.status(500).send(e.message);
@@ -90,5 +95,5 @@ export function userRouter(userService: UserService): Router {
     )
 
     return userRouter;
-
+ 
 }
