@@ -52,14 +52,12 @@ export function userRouter(userService: UserService): Router {
         }
     })
 
-   
 
     userRouter.post("/users/login", async (
         req : LoginRequest,
         res : LoginResponse | Response
     ) => {
         try {
-            console.log("TEST TEST TEST TEST TEST");
         
             const email = req.body.email;
             const password = req.body.password;
@@ -84,9 +82,6 @@ export function userRouter(userService: UserService): Router {
             req.session.userid = user.id;
             console.log("User logged in:", user);
             res.status(200).send({name: user.name, email: user.email}); // R. Adams told us to remove this, but it doesnt seem to work without it, users are not saved in local storage without this and we use this in order to login
-            
-
-           
 
         } catch (e: any) {
             res.status(500).send(e.message);

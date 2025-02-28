@@ -1,9 +1,43 @@
-import { Form } from "react-bootstrap";
 import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from "react";
-import axios from "axios";
+import { NavLink, useNavigate } from "react-router-dom";
+import { registerUser } from "../api";
 
+export function SignUp() {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
+
+  return (
+      <section>
+          <h1>Register New User</h1>
+          <p>
+              <label htmlFor="username">Username</label>
+              <input type="text" id="username" onChange={(e) => {
+                  setUsername(e.target.value);
+              }}></input>
+          </p>
+          <p>
+              <label htmlFor="password">Password</label>
+              <input type="password" id="password" onChange={(e) => {
+                  setPassword(e.target.value);
+              }}></input>
+          </p>
+          <p><button onClick={async () => {
+              await registerUser(username, password);
+              navigate("/");
+          }}>Register </button></p>
+          <NavLink to="/" end>Back to login screen</NavLink>
+      </section>
+  )
+
+}
+
+
+
+
+/*
 axios.defaults.withCredentials = true;
 
 function SignUp() {
@@ -85,4 +119,4 @@ function SignUp() {
   )
 }
 
-export default SignUp;
+export default SignUp;*/
