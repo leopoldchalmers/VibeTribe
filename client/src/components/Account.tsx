@@ -1,13 +1,96 @@
-import { Form } from "react-bootstrap";
 import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
-//import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { NavLink, useNavigate } from "react-router-dom";
+import { login, LoginResult } from "../api";
 
 axios.defaults.withCredentials = true;
 
-function Account() {
+export function Account() {
+  interface Errors {
+      username ?: string,
+      password ?: string,
+      serverError ?: string
+  }
+
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errors, setErrors] = useState<Errors>({});
+  const navigate = useNavigate();
+  
+  return (
+      <section>
+          <h1>Sign In</h1>
+              <p>
+              <label htmlFor="username">Username</label>
+              <input type="text" id="username" onChange={(e) => {
+                  setUsername(e.target.value);
+              }}></input>
+              {errors.username ? 
+              (<p style={{color: "red"}}>{errors.username}</p>)
+              : (<></>) }
+          </p>
+          <p>
+              <label htmlFor="password">Password</label>
+              <input type="password" id="password" onChange={(e) => {
+                  setPassword(e.target.value);
+              }}></input>
+              {errors.password ? 
+              (<p style={{color: "red"}}>{errors.password}</p>)
+              : (<></>) }
+              </p>
+              {errors.serverError ? 
+              (<p style={{color: "red"}}>{errors.serverError}</p>)
+              : (<></>) }
+              <p><button onClick={async () => {
+                  setErrors({});
+                  if (username.length === 0) {
+                      setErrors((errors) => {
+                          return {
+                              ...errors,
+                              username : "Username must not be empty"
+                          }
+                      });
+                  }
+                  if (password.length < 5) {
+                      setErrors((errors) => {
+                          return {
+                              ...errors,
+                              password : "Password must be at least 5 characters long"
+                          }
+                      });
+                  }
+                  if (!errors.password && !errors.username) {
+                      const loginResult = await login(username, password);
+                      if (loginResult === LoginResult.INVALID_CREDENTIALS) {
+                          setErrors((errors) => {
+                              return {
+                                  ...errors,
+                                  username : "Username or password invalid"
+                              }
+                          });    
+                      }
+                      if (loginResult === LoginResult.SERVER_ERROR) {
+                          setErrors((errors) => {
+                              return {
+                                  ...errors,
+                                  serverError: "An error occurred while processing your request. Please try again later."
+                              }
+                          })
+                      }
+                      if (loginResult === LoginResult.SUCCESS) {
+                          navigate("/todo");
+                      }
+                  }
+              }}>Log In</button></p>
+          <NavLink to="/register" end>Register new user</NavLink>
+      </section>
+  );
+}
+
+
+/*function Account() {
 
     //Add custom error handlign, ternary expressions, and conditional rendering, boolean expression med ?, sant renderar en del "":"" renderar en annan del (en if or else statement)
     // Cases som är undefined eller tomma, hur ska användaren få feedback på det?
@@ -105,4 +188,4 @@ function Account() {
     );
 }
 
-export default Account;
+export default Account;*/

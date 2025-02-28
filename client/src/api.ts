@@ -26,7 +26,7 @@ export type Post = {
 }
 
 export const getTribes = async () => {
-    try {
+    /*try {
         const response = await fetch('http://localhost:8080/tribes'); 
         if (!response.ok) {
             throw new Error('Failed to fetch tribes');
@@ -36,11 +36,13 @@ export const getTribes = async () => {
     } catch (error) {
         console.error('Error fetching tribes:', error);
         throw error; 
-    }
+    }*/
+    const response = await axios.get<Tribe[]>(`${BASE_URL}/tribes`)
+    return response.data
 }
 
-export const createTribe = async (description: string) => {
-    try {
+export const createTribe = async (description: string, title: string) => {
+    /*try {
         const response = await fetch('http://localhost:8080/tribes', {
             method: 'POST',
             headers: {
@@ -56,12 +58,21 @@ export const createTribe = async (description: string) => {
     } catch (error) {
         console.error('Error creating tribe:', error);
         throw error;
-    }
+    }*/
+
+    try {
+        const response = await axios.post<Tribe>(`${BASE_URL}/tribes`, {title, description});
+        return response.data;
+      } catch (e : any) {
+        console.log(e);
+        return undefined;
+      }
 }
     
-export async function registerUser(username: string, password: string) : Promise<void> {
+export async function registerUser(username: string, password: string, email: string) : Promise<void> {
     try {
-        await axios.post(`${BASE_URL}/users`, {username : username, password: password});
+        await axios.post(`${BASE_URL}/users`, {username : username, password: password, email: email});
+        console.log('User registered');
     } catch (e:any) {
         console.log(e);
     }
@@ -75,7 +86,8 @@ export enum LoginResult {
 
 export async function login(username: string, password: string) : Promise<LoginResult> {
     try {
-        await axios.post(`${BASE_URL}/user/login`, {username: username, password: password});
+        await axios.post(`${BASE_URL}/users/login`, {username: username, password: password});
+        console.log('Login successful');
         return LoginResult.SUCCESS;
     } catch (e : any) {
         if (e.response.status === 401) {

@@ -1,6 +1,5 @@
 import { User } from '../model/user';
 
-
 export class UserService {
 
   private users: User[] = [];
@@ -8,8 +7,7 @@ export class UserService {
   async createUser(name: string, email: string, password: string): Promise<User> {
 
     const user: User = {
-        id: Date.now(),
-        name: name,
+        username: name,
         email: email,
         password: password
     }
@@ -19,13 +17,15 @@ export class UserService {
     return {...user};    
   }
 
-  async findUser(name: string, email: string, password : string): Promise<User | undefined> {
+  async findUser(username: string, email: string, password : string): Promise<User | undefined> {
     if (! password) {
-        return this.users.find((user) => user.name === name);
+        return this.users.find((user) => user.username === username);
     }
-    return this.users.find((user) => user.name === name && user.password === password);
+    
+    return this.users.find((user) => user.username === username && user.password === password);
 }
 
+// We should remove this method in the future, since it can be a security issue
   async getUsers(): Promise<User[]> {
       return JSON.parse(JSON.stringify(this.users));
   }

@@ -1,7 +1,7 @@
 import './App.css'
 import Navbar from './components/Navbar.tsx'
 import Footer from './components/Footer.tsx'
-import Account from './components/Account.tsx'
+import {Account} from './components/Account.tsx'
 import {SignUp} from './components/SignUp.tsx'
 import Home from './components/Home.tsx'
 import CreateTribe from './components/CreateTribe.tsx'

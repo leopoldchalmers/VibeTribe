@@ -7,6 +7,7 @@ import { registerUser } from "../api";
 export function SignUp() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const navigate = useNavigate();
 
   return (
@@ -19,14 +20,20 @@ export function SignUp() {
               }}></input>
           </p>
           <p>
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" onChange={(e) => {
+                setEmail(e.target.value);
+            }}></input>
+          </p>
+          <p>
               <label htmlFor="password">Password</label>
               <input type="password" id="password" onChange={(e) => {
                   setPassword(e.target.value);
               }}></input>
           </p>
           <p><button onClick={async () => {
-              await registerUser(username, password);
-              navigate("/");
+              await registerUser(username, email, password);
+              navigate("/home");
           }}>Register </button></p>
           <NavLink to="/" end>Back to login screen</NavLink>
       </section>
