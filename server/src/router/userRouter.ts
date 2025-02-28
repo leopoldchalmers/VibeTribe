@@ -2,16 +2,21 @@ import express, { Request, Response, Router } from "express";
 import { User } from "../model/user";
 import { UserService } from "../service/UserService";
 
+declare module 'express-session' {
+    interface SessionData {
+        username?: string;
+    }
+}
 
 export function userRouter(userService: UserService): Router {
     const userRouter = express.Router();
 
     interface UserRequest extends Request {
-        body: { username: string, email:string, password: string },
+        body: { username: string, email: string, password: string },
         session: any
     }
 
-    // get one user by username and get all information
+    // only for testing
     userRouter.get("/users/:username", async (
         req: UserRequest,
         res: Response) => {
@@ -37,10 +42,27 @@ export function userRouter(userService: UserService): Router {
             res.status(401).send("No such username or password");
             return;
         }
-        req.session.username = req.body.username; // Login
+         // Login
+     //   req.session.username = user.username;
+        req.session.username = req.body.username;
         res.status(200).send("Logged in");
     })
 
+    userRouter.get("/users/session", (req: Request, res: Response) => {
+        console.log("Session data:", req.session);
+        let username : string | undefined = req.session.username;
+        if (username) {
+            res.status(200).send(`Logged in as: ${username}`);
+        } else {
+            res.status(401).send("No user logged in");
+        }
+    });
+
+    userRouter.post("/users/logout", (req: Request, res: Response) => {
+        delete req.session.username; 
+        res.status(200).send("Logged out");
+    });
+    
     return userRouter;
 }
 

@@ -16,10 +16,36 @@ export function Account() {
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors>({});
+
   const navigate = useNavigate();
-  
+
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/users/login")
+      .then(response => {
+        const loggedInMessage = response.data; 
+        console.log(loggedInMessage);
+        setIsLoggedIn(true);
+      })
+      .catch(error => {
+        console.log("Ingen aktiv session", error);
+        setIsLoggedIn(false);
+      });
+  }, []);
+
   return (
+    <>
+    {isLoggedIn ? (
+        <><h1>Välkommen, {username}!</h1><button onClick={async () => {
+          await axios.post("http://localhost:8080/users/logout");
+          setIsLoggedIn(false);
+          navigate("/");
+        } }>Logga ut</button></>
+   
+    ) : (
+
       <section>
           <h1>Sign In</h1>
               <p>
@@ -80,14 +106,17 @@ export function Account() {
                           })
                       }
                       if (loginResult === LoginResult.SUCCESS) {
-                          navigate("/todo");
+                          navigate("/home");
                       }
                   }
               }}>Log In</button></p>
-          <NavLink to="/register" end>Register new user</NavLink>
+          <NavLink to="/SignUp" end>Register new user</NavLink>
       </section>
+    )}
+    </>
   );
 }
+
 
 
 /*function Account() {
@@ -188,4 +217,5 @@ export function Account() {
     );
 }
 
-export default Account;*/
+export default Account;
+*/

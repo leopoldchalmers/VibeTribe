@@ -6,8 +6,8 @@ import { registerUser } from "../api";
 
 export function SignUp() {
   const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
   return (
@@ -33,7 +33,7 @@ export function SignUp() {
           </p>
           <p><button onClick={async () => {
               await registerUser(username, email, password);
-              navigate("/home");
+              navigate("/");
           }}>Register </button></p>
           <NavLink to="/" end>Back to login screen</NavLink>
       </section>

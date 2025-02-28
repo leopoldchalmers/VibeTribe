@@ -69,10 +69,11 @@ export const createTribe = async (description: string, title: string) => {
       }
 }
     
-export async function registerUser(username: string, password: string, email: string) : Promise<void> {
+export async function registerUser(username: string, email: string, password: string) : Promise<void> {
     try {
-        await axios.post(`${BASE_URL}/users`, {username : username, password: password, email: email});
+        await axios.post(`${BASE_URL}/users`, {username : username, email: email, password: password});
         console.log('User registered');
+
     } catch (e:any) {
         console.log(e);
     }

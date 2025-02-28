@@ -1,10 +1,7 @@
-
-
 import dotenv from "dotenv";
 dotenv.config();
 
 console.log("Starting server...");
-
 
 import express from "express";
 import { tribeRouter } from "./router/tribeRouter";

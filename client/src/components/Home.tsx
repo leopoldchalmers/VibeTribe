@@ -10,6 +10,7 @@ function Home() {
 
     const [tribes, setTribes] = useState<Tribe[]>([]);
 
+
     useEffect(() => {
         async function fetchTribes() {
         const data = await getTribes();
