@@ -1,9 +1,11 @@
 import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login, LoginResult } from "../api";
+import { UserContext } from "../UserContext";
+
 
 axios.defaults.withCredentials = true;
 
@@ -16,38 +18,15 @@ export function Account() {
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors>({});
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get("http://localhost:8080/users/login")
-      .then(response => {
-        const loggedInMessage = response.data; 
-        console.log(loggedInMessage);
-        setIsLoggedIn(true);
-      })
-      .catch(error => {
-        console.log("No active session", error);
-        setIsLoggedIn(false);
-      });
-}, []);
+  const userContext = useContext(UserContext)
 
   return (
-    <>
-    {isLoggedIn ? (
-        <><h1>Welcome, {username}!</h1><button onClick={async () => {
-          await axios.post("http://localhost:8080/users/logout");
-          axios.get("http://localhost:8080/users/session")
-          setIsLoggedIn(false);
-          navigate("/account");
-        } }>Log out</button></>
-   
-    ) : (
-
       <section>
-          <h1>Sign In</h1>
+          <h1>VibeTribe</h1>
               <p>
               <label htmlFor="username">Username</label>
               <input type="text" id="username" onChange={(e) => {
@@ -106,14 +85,13 @@ export function Account() {
                           })
                       }
                       if (loginResult === LoginResult.SUCCESS) {
+                          userContext.setUser({ username});
                           navigate("/home");
                       }
                   }
               }}>Log In</button></p>
-          <NavLink to="/SignUp" end>Register new user</NavLink>
+          <NavLink to="/signup" end>Register new user</NavLink>
       </section>
-    )}
-    </>
   );
 }
 

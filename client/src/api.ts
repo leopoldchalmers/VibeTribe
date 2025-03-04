@@ -25,6 +25,10 @@ export type Post = {
     tribe : Tribe;
 }
 
+export type User = {
+    username: string;
+}
+
 export const getTribes = async () => {
     /*try {
         const response = await fetch('http://localhost:8080/tribes'); 

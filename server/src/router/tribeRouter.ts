@@ -7,9 +7,13 @@ import { TribeService } from "../service/TribeService";
 export function tribeRouter(tribeService: TribeService): Router {
     const tribeRouter = express.Router();
 
+    interface TribeRequest{
+        session: any
+    }
+
     tribeRouter.get("/tribes", async (
-        req: Request<{}, {}, {}>,
-        res: Response<Array<Tribe> | String>
+        req: TribeRequest,
+        res: Response<Tribe[] | string>
     ) => {
         try {
             const tribes = await tribeService.getTribes();
@@ -19,19 +23,23 @@ export function tribeRouter(tribeService: TribeService): Router {
         }
     });
 
+    interface CreateTribeRequest extends Request {
+        body: { title : string, description : string}
+        session: any
+    }
+
     tribeRouter.post("/tribes", async (
-        req: Request<{}, {}, { title : string, description : string, owner: number }>, // TODO Delete owner
+        req: CreateTribeRequest, // TODO Delete owner
         res: Response<Tribe | string>
     ) => {
         try {
             //@ts-ignore
-            if (!req.session.userid) {
+            if (!req.session.username) {
                 res.status(403).send("Not logged in");
                 return;
             }
             const title = req.body.title;
             const description = req.body.description;
-            const owner = req.body.owner;
             if (!title || !description) {
                 res.status(400).send("All fields are required");
                 return;
