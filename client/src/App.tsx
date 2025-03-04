@@ -5,8 +5,8 @@ import {Account} from './components/Account.tsx'
 import {SignUp} from './components/SignUp.tsx'
 import Home from './components/Home.tsx'
 import CreateTribe from './components/CreateTribe.tsx'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useState } from 'react'
 import {UserContext} from './UserContext.ts'
 import { User } from './api.ts'
 import AccountInfo from './components/AccountInfo.tsx'
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{user, setUser}}>
-      <Router>
+      <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/home" element={<Home />} />
@@ -27,7 +27,7 @@ function App() {
           <Route path="/createTribe" element={<CreateTribe />} /> 
         </Routes>
         <Footer />
-      </Router>
+      </BrowserRouter>
     </UserContext.Provider>
   );
 }

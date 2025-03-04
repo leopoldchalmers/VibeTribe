@@ -2,14 +2,11 @@ import { getTribes } from "../api";
 import { TribeList } from "../components/TribeList";
 import { Tribe } from "../api";
 import { useEffect, useState } from "react";
-import { UserContext } from '../UserContext'
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 function Home() {
 
     const [tribes, setTribes] = useState<Tribe[]>([]);
-    const userContext = useContext(UserContext);
 
     useEffect(() => {
         async function fetchTribes() {

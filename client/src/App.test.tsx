@@ -7,7 +7,9 @@ import App from './App';
 describe('App Component', () => {
 
   test('renders the heading VibeTribe', () => {
-    render(<App />);
+    render(
+    <App />
+  );
     const headingElement = screen.getByText(/VibeTribe/i);
     expect(headingElement).toBeInTheDocument();
   });

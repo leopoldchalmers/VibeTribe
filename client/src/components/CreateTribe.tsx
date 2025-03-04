@@ -6,10 +6,14 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
+
+
 function CreateTribe() {
     
     const navigate = useNavigate();
     
+
+    //Feel like we should remove this and just use the one in the api file?
     const [tribe, setTribe] = useState<Tribe>({
         id: 0,
         posts : [],

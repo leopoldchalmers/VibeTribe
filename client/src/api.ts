@@ -94,6 +94,7 @@ export enum LogoutResult {
     SERVER_ERROR
 }
 
+
 export async function login(username: string, password: string) : Promise<LoginResult> {
     try {
         await axios.post(`${BASE_URL}/users/login`, {username: username, password: password});

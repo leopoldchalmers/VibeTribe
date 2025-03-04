@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "test": "jest app.test.tsx",
+    "test": "jest",
     "test:w": "jest --watchAll",
     "test:cov": "jest --coverage",
     "preview": "vite preview"
@@ -39,6 +39,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "jest-fixed-jsdom": "^0.0.9",
     "jest-transformer-svg": "^2.0.2",
     "supertest-session": "^5.0.1",
     "ts-jest": "^29.2.4",
