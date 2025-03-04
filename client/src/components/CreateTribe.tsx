@@ -13,7 +13,7 @@ function CreateTribe() {
     const [tribe, setTribe] = useState<Tribe>({
         id: 0,
         posts : [],
-        owner: 2,
+        owner: "",
         title: "",
         description: "",
         members: [],

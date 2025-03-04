@@ -8,7 +8,7 @@ export type Tribe = {
     id: number;
     description: string;
     posts: [];
-    owner: number;
+    owner: string;
     createdAt: string;
     updatedAt: string;
     members: [];
