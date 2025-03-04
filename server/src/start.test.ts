@@ -2,7 +2,8 @@ import * as SuperTest from "supertest";
 import { app } from "./start";
 import { Tribe } from "./model/tribe";
 
-const request = SuperTest.default(app);
+const session = require("supertest-session");
+const request = session(app);
 
 test("End-to-end test", async () => {
     const desc = "Tribe description";

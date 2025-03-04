@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 function Navbar(){
 
-    
     return (
         <nav className="container-fluid text-center custom-navbar">
             <div className="row">

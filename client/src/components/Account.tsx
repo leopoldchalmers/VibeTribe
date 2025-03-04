@@ -21,7 +21,6 @@ export function Account() {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
     axios.get("http://localhost:8080/users/login")
       .then(response => {
@@ -30,19 +29,20 @@ export function Account() {
         setIsLoggedIn(true);
       })
       .catch(error => {
-        console.log("Ingen aktiv session", error);
+        console.log("No active session", error);
         setIsLoggedIn(false);
       });
-  }, []);
+}, []);
 
   return (
     <>
     {isLoggedIn ? (
-        <><h1>Välkommen, {username}!</h1><button onClick={async () => {
+        <><h1>Welcome, {username}!</h1><button onClick={async () => {
           await axios.post("http://localhost:8080/users/logout");
+          axios.get("http://localhost:8080/users/session")
           setIsLoggedIn(false);
-          navigate("/");
-        } }>Logga ut</button></>
+          navigate("/account");
+        } }>Log out</button></>
    
     ) : (
 

@@ -6,8 +6,7 @@ test("If a post is created, it should be returned to list", async () => {
     const title = "Post title";
     const description = "Post description";
     const author: User = {
-        id: 0,
-        name: "Author name",
+        username: "Author name",
         email: "author@gmail.com",
         password: "authorpassword"
     }
