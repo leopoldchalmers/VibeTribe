@@ -2,10 +2,9 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../UserContext';
 
-const AccountInfo = () => {
+export function AccountInfo() {
   const { user } = useContext(UserContext);
 
-  // Optionally, you can redirect or show a message if the user is not logged in
   if (!user) return <div>Please log in to view account details.</div>;
 
   return (
