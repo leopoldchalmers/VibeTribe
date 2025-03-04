@@ -1,20 +1,22 @@
 // AccountInfo.js
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from '../UserContext';
 import axios from 'axios';
-import { logout } from "../api";
+import { logout, LogoutResult } from "../api";
 
  
 
 axios.defaults.withCredentials = true;
 
-
+interface Errors {
+  logoutError ?: string
+}
 export function AccountInfo() {
 
   const navigate = useNavigate();
   const { user, setUser} = useContext(UserContext);
-  
+  const [errors, setErrors] = useState<Errors>({});
 
   if (!user) return <div>Please log in to view account details.</div>;
 
@@ -24,12 +26,25 @@ export function AccountInfo() {
       <p>Username: {user.username}</p>
 
     <button onClick={async () => {
-      await logout();
-      //setUser(undefined);  
+      const result = await logout();
+      if (result === LogoutResult.SERVER_ERROR) {
+        console.log("Server error");
+        setErrors((errors) => {
+          return {
+            ...errors,
+            logoutError: "A server error was encountered. Try again later."
+          }
+        })
+      }
+      if (result === LogoutResult.SUCCESS) {
+        setUser(undefined);
+        navigate("/account");
+      }
       
-      
-      navigate("/account");
-    }}>Log out</button>    
+    }}>Log out</button>   
+    {errors.logoutError ? 
+    (<p style={{color: "red"}}>{errors.logoutError}</p>)
+    : (<></>) } 
     </div>
   )
   };

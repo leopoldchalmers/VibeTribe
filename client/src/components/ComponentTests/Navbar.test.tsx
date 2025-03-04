@@ -14,4 +14,6 @@ describe('Navbar Component', () => {
         render(<Navbar />);
         const link = screen.getByRole('link', { name: /Home/i });
         expect(link).toBeInTheDocument();
-    });
+    }
+    )
+})

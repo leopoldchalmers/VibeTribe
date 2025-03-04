@@ -4,7 +4,7 @@ import { User } from './api'
 
 export type UserContextType = {
   user?: User
-  setUser: (user: User) => void
+  setUser: (user: User | undefined) => void
 }
 
 export const UserContext = createContext<UserContextType>({ setUser: () => {} })
