@@ -17,7 +17,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{user, setUser}}>
-      <BrowserRouter>
+      <BrowserRouter >
         <Navbar />
         <Routes>
           <Route path="/home" element={<Home />} />

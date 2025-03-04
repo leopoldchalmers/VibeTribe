@@ -25,7 +25,7 @@ function Navbar(){
             <div className="row">
             <div className="col-2 text-start">
                 <Link to="/home">
-                    <img src="logo.png" className="navbarImg" alt="VibeTribe Logo"/>
+                    <img src="logo.png" className="navbarImg" alt="Logo"/>
                 </Link>
             </div>
             <div className="col-8 text-center">

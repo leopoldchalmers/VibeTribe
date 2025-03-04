@@ -10,7 +10,7 @@ describe('CreateTribe Component', () => {
         <MemoryRouter> 
         <CreateTribe />
         </MemoryRouter>);
-        const headingElement = screen.getByText(/Create tribe/i);
+        const headingElement = screen.getByRole('heading', {name:/Create tribe/i});
         expect(headingElement).toBeInTheDocument();
     });
     test('CreateTribe has a go back button', () => {
@@ -27,7 +27,7 @@ describe('CreateTribe Component', () => {
             <MemoryRouter> 
             <CreateTribe />
             </MemoryRouter>);
-        const form = screen.getByRole('form');
+        const form = screen.getByTestId('form');
         expect(form).toBeInTheDocument();
     }
     );

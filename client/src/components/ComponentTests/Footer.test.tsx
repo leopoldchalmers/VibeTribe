@@ -6,13 +6,13 @@ import { MemoryRouter } from 'react-router-dom';
 
 describe('Footer Component', () => {
 
-    test('renders the footer', () => {
+    test('footer has a help link', () => {
         render(
             <MemoryRouter>
             <Footer />
             </MemoryRouter>);
-        const footerElement = screen.getByText(/VibeTribe/i);
-        expect(footerElement).toBeInTheDocument();
+        const link = screen.getByRole('link', { name: /Help/i });
+        expect(link).toBeInTheDocument();
     });
 
     test('footer has a about link', () => {

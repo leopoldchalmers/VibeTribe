@@ -2,7 +2,7 @@ import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import { useContext, useState } from "react";
 import axios from "axios";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login, LoginResult } from "../api";
 import { UserContext } from "../UserContext";
 
@@ -26,7 +26,7 @@ export function Account() {
 
   return (
       <section>
-          <h1>VibeTribe</h1>
+          <h1>Log in to VibeTribe</h1>
               <p>
               <label htmlFor="username">Username</label>
               <input type="text" id="username" onChange={(e) => {
@@ -90,7 +90,7 @@ export function Account() {
                       }
                   }
               }}>Log In</button></p>
-          <NavLink to="/signup" end>Register new user</NavLink>
+          <Link to="/SignUp" >Sign up</Link>
       </section>
   );
 }

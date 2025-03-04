@@ -6,6 +6,8 @@ const session = require("supertest-session");
 const request = session(app);
 
 test("End-to-end test", async () => {
+    const user = await request.post("/users").send({username: "TestUser", password: "password"});
+    const res3 = await request.post("/users/login").send({username: "TestUser", password: "password"});
     const desc = "Tribe description";
     const title = "Post title";
     const res1 = await request.post("/tribes").send({title: title, description : desc});

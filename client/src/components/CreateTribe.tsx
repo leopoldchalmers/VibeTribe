@@ -57,7 +57,8 @@ function CreateTribe() {
         <button type="submit" className="btn btn-light goBack"> Go back</button>
         </a>
 
-        <Form className="form-container" onSubmit={handleSubmit}>
+        <section data-testid="form">
+        <Form  className="form-container" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
 
           <Form.Label>Tribe Name</Form.Label>
@@ -82,6 +83,7 @@ function CreateTribe() {
         <button type="submit" className="btn btn-light tribeButton">Create Tribe</button>
         </div>
         </Form>
+        </section>
         </>
     
     )

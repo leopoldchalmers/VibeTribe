@@ -26,15 +26,15 @@ describe('Account Component', () => {
         expect(button).toBeInTheDocument();
     }
     );
-    test('account has a sign up button', () => {
+    test('account has navigation link to signup', () => {
         render(
             <MemoryRouter>
                 <Account />
             </MemoryRouter>
     
         );
-        const button = screen.getByRole('button', { name: /Sign up/i });
-        expect(button).toBeInTheDocument();
+        const link = screen.getByRole('link', { name: /Sign up/i });
+        expect(link).toBeInTheDocument();
     }
     );
 
