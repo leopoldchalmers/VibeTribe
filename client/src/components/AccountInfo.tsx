@@ -1,9 +1,20 @@
 // AccountInfo.js
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 import { UserContext } from '../UserContext';
+import axios from 'axios';
+import { logout } from "../api";
+
+ 
+
+axios.defaults.withCredentials = true;
+
 
 export function AccountInfo() {
-  const { user } = useContext(UserContext);
+
+  const navigate = useNavigate();
+  const { user, setUser} = useContext(UserContext);
+  
 
   if (!user) return <div>Please log in to view account details.</div>;
 
@@ -11,8 +22,16 @@ export function AccountInfo() {
     <div>
       <h1>Account Info</h1>
       <p>Username: {user.username}</p>
+
+    <button onClick={async () => {
+      await logout();
+      //setUser(undefined);  
+      
+      
+      navigate("/account");
+    }}>Log out</button>    
     </div>
-  );
-};
+  )
+  };
 
 export default AccountInfo;

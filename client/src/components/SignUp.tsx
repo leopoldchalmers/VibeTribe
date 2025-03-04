@@ -33,9 +33,9 @@ export function SignUp() {
           </p>
           <p><button onClick={async () => {
               await registerUser(username, email, password);
-              navigate("/");
+              navigate("/home");
           }}>Register </button></p>
-          <NavLink to="/" end>Back to login screen</NavLink>
+          <NavLink to="/account" end>Back to login screen</NavLink>
       </section>
   )
 

@@ -89,6 +89,11 @@ export enum LoginResult {
     SERVER_ERROR
 }
 
+export enum LogoutResult {
+    SUCCESS,
+    SERVER_ERROR
+}
+
 export async function login(username: string, password: string) : Promise<LoginResult> {
     try {
         await axios.post(`${BASE_URL}/users/login`, {username: username, password: password});
@@ -100,5 +105,17 @@ export async function login(username: string, password: string) : Promise<LoginR
         }
         return LoginResult.SERVER_ERROR;
     }
+}
+
+export async function logout() : Promise<LogoutResult> {
+    try {
+        await axios.post(`${BASE_URL}/users/logout`);
+        console.log('Logged out');
+        return LogoutResult.SUCCESS;
+    } catch (e : any) {
+        console.log(e);
+        return LogoutResult.SERVER_ERROR;
+    }
+    
 }
 

@@ -59,8 +59,9 @@ export function userRouter(userService: UserService): Router {
     });
 
     userRouter.post("/users/logout", (req: Request, res: Response) => {
-        delete req.session.username; 
-        res.status(200).send("Logged out");
+        delete req.session.username;
+        console.log("LOGGED OUT (USER ROUTER)")
+        res.status(200).send("blabla Logged out");
     });
     
     return userRouter;

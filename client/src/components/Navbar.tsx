@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { UserContext } from "../UserContext";
 
 import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function Navbar(){
 
@@ -23,12 +24,14 @@ function Navbar(){
         <nav className="container-fluid text-center custom-navbar">
             <div className="row">
             <div className="col-2 text-start">
-                <a href= "./home">
-                <img src="logo.png" className= "navbarImg" alt="VibeTribe Logo"/>
-                </a>
+                <Link to="/home">
+                    <img src="logo.png" className="navbarImg" alt="VibeTribe Logo"/>
+                </Link>
             </div>
             <div className="col-8 text-center">
-                <h1> <a href= "./home" className="navbarTitle">VibeTribe</a> </h1>
+                <h1> 
+                    <Link to="/home" className="navbarTitle">VibeTribe</Link>
+                    </h1>
             </div>
             <div className="col-2 text-end">
                 <button 
