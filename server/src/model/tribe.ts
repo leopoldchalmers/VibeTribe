@@ -5,7 +5,6 @@ export interface Tribe {
     id : number;
     description : string;
     posts: Post[];
-    owner: number;
     createdAt: string;
     updatedAt: string;
 }

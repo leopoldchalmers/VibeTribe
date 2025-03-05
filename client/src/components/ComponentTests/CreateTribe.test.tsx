@@ -7,9 +7,9 @@ describe('CreateTribe Component', () => {
 
     test('renders the heading Create tribe', () => {
         render(
-        <MemoryRouter> 
-        <CreateTribe />
-        </MemoryRouter>);
+            <MemoryRouter> 
+            <CreateTribe />
+            </MemoryRouter>);
         const headingElement = screen.getByRole('heading', {name:/Create tribe/i});
         expect(headingElement).toBeInTheDocument();
     });
