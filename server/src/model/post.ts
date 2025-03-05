@@ -5,7 +5,7 @@ export interface Post {
     id : number;
     title : string;
     description : string;
-    author : User;
+    author : string;
     createdAt : string;
     updatedAt : string;
     likes : number;

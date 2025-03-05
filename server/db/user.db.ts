@@ -1,7 +1,8 @@
-import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from "sequelize";
+ import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from "sequelize";
 import { Association } from "sequelize";
 import { conn } from "./conn";
 import { TribeModel } from "./tribe.db";
+import {PostModel} from "./post.db"
 
 export class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
   declare username: string;
@@ -9,6 +10,7 @@ export class UserModel extends Model<InferAttributes<UserModel>, InferCreationAt
   declare password: string;
   declare static associations: {
     tribes: Association<UserModel, TribeModel>;
+    posts: Association<UserModel, PostModel>;
   };
 }
 
@@ -34,8 +36,3 @@ UserModel.init(
   }
 );
 
-UserModel.hasMany(TribeModel, {
-    sourceKey: 'username',
-    foreignKey: 'username',
-    as: 'tribes'
-  });

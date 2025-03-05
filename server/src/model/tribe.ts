@@ -4,7 +4,7 @@ export interface Tribe {
     title : string;
     id : number;
     description : string;
-    posts: Post[];
+    owner: string;
     createdAt: string;
     updatedAt: string;
 }
