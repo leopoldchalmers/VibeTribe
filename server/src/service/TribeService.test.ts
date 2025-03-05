@@ -8,10 +8,9 @@ describe("TribeService Tests", () => {
         const tribeService = new TribeService();
         const title = "Test Tribe";
         const description = "This is a test tribe";
-        const owner = 1;
 
-        await tribeService.createTribe(title, description, owner);
+        await tribeService.createTribe(title, description);
         const tribes = await tribeService.getTribes();
-        expect(tribes.some(tribe => tribe.title === title && tribe.description === description && tribe.owner === owner)).toBeTruthy();
+        expect(tribes.some(tribe => tribe.title === title && tribe.description === description)).toBeTruthy();
     });
 });
