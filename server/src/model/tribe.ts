@@ -1,8 +1,8 @@
 import { Post } from "./post";
 
 export interface Tribe {
-    title : string;
     id : number;
+    title : string;
     description : string;
     owner: string;
     createdAt: string;

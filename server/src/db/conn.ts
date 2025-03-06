@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-export const sequelize = new Sequelize('postgres://app_db_user:Comando45@localhost:5432/');
+export const sequelize = new Sequelize('postgres://app-db-user:webappgroup1gang@localhost:5432/app_db_user');
 
 export let conn : Sequelize;
 
@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === "test") {
     storage: ':memory:',
   })
 } else {
-  conn = new Sequelize('postgres://app_db_user:Commando450@localhost:5432/');
+  conn = new Sequelize('postgres://app-db-user:webappgroup1gang@localhost:5432/app_db_user');
 }
 
 export async function initDB() {

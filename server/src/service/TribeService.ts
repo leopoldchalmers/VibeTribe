@@ -1,25 +1,52 @@
 import { Tribe } from "../model/tribe";
+import { ITribeService } from "../dbservice/ITribeService";
+import { User } from "../model/user";
+import { TribeModel } from "../db/tribe.db";
+import { ARRAY } from "sequelize";
 
-export class TribeService {
-    updateTribe(tribeToUpdate: any) {
-        throw new Error("Method not implemented.");
-    }
-    private tribes : Tribe[] = [];
+export class TribeService implements ITribeService{
 
     async getTribes(): Promise<Tribe[]> {
-        return JSON.parse(JSON.stringify(this.tribes));
+        return TribeModel.findAll()
+    }
+    async createTribe(name: string, description: string, owner: string): Promise<Tribe> {
+        const tribe = await TribeModel.create({
+            title: name, 
+            description: description, 
+            owner: owner, 
+            createdAt: new Date().toISOString(), 
+            updatedAt: new Date().toISOString(),
+            id: new Date().getTime(),
+            members: [owner]
+        }
+        )
+        return tribe
     }
 
-    async createTribe (title: string, description : string): Promise<Tribe> {
-        const tribe = {
-            title: title,
-            id: Date.now(),
-            description: description,
-            posts: [],
-            createdAt : new Date(Date.now()).toLocaleDateString(),
-            updatedAt : new Date(Date.now()).toLocaleDateString()
-        }
-        this.tribes.push(tribe);
-        return {...tribe };
+    async getTribe(tribeId: number): Promise<Tribe | null> {
+        return TribeModel.findByPk(tribeId)
     }
+
+    async deleteTribe(tribeId: number): Promise<void> {
+        await TribeModel.destroy({where: {id: tribeId}})
+    }
+
+    async addUserToTribe(username: string, tribeId: number): Promise<void> {
+        const tribe = await TribeModel.findByPk(tribeId)
+        if(tribe && tribe.members.find(member => member === username) === undefined){
+            tribe.members.push(username)
+            await tribe.save()
+        }
+    }
+
+    async removeUserFromTribe(username: string, tribeId: number): Promise<void> {
+        const tribe = await TribeModel.findByPk(tribeId)
+        if(tribe && tribe.members.find(member => member === username) !== undefined){
+            tribe.members = tribe.members.filter(member => member !== username)
+            await tribe.save()
+        }
+    }
+
+
+
 }
