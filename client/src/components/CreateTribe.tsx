@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
 import axios from "axios";
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
 axios.defaults.withCredentials = true;
 
@@ -11,18 +13,20 @@ axios.defaults.withCredentials = true;
 function CreateTribe() {
     
     const navigate = useNavigate();
+
+    const userContext = useContext(UserContext);
+    const user = userContext.user;
     
 
     //Feel like we should remove this and just use the one in the api file?
     const [tribe, setTribe] = useState<Tribe>({
         id: 0,
-        posts : [],
         owner: "",
         title: "",
         description: "",
-        members: [],
-        createdAt: "",
-        updatedAt: ""
+        members: ["test"],
+        createdAt: new Date(),
+        updatedAt: new Date()
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,15 +37,23 @@ function CreateTribe() {
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
+
+        
         e.preventDefault();
+        console.log("User:", user);
         try {
+            if (!user) {
+                console.error("User is not logged in");
+                return;
+            }
+            tribe.owner = user.username;
+            console.log("Creating tribe:", tribe);
           const response = await axios.post("http://localhost:8080/tribes", tribe);
           console.log("Tribe created:", response.data);
-          localStorage.setItem("tribe", JSON.stringify(response.data));
           navigate("/home");
     
       } catch (error) {
-          console.error("Error creating tribe:", error);
+          console.error("Error caught creating tribe:", error);
       }
       };
     

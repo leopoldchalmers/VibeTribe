@@ -5,8 +5,8 @@ export interface Tribe {
     title : string;
     description : string;
     owner: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 

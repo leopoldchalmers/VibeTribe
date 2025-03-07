@@ -4,18 +4,21 @@ import { User } from "../model/user";
 import { TribeModel } from "../db/tribe.db";
 import { ARRAY } from "sequelize";
 
+
 export class TribeService implements ITribeService{
 
     async getTribes(): Promise<Tribe[]> {
         return TribeModel.findAll()
     }
     async createTribe(name: string, description: string, owner: string): Promise<Tribe> {
+        console.log("TEST TEST TEST")
+        console.log(owner)
         const tribe = await TribeModel.create({
             title: name, 
             description: description, 
             owner: owner, 
-            createdAt: new Date().toISOString(), 
-            updatedAt: new Date().toISOString(),
+            createdAt: new Date(Date.now()), 
+            updatedAt: new Date(Date.now()),
             id: new Date().getTime(),
             members: [owner]
         }

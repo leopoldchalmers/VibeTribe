@@ -9,8 +9,8 @@ export class TribeModel extends Model<InferAttributes<TribeModel>, InferCreation
   declare id: number;
   declare description: string;
   declare owner: ForeignKey<UserModel['username']>;
-  declare createdAt: string;
-  declare updatedAt: string;
+  declare createdAt: Date;
+  declare updatedAt: Date;
   declare members: string[];
   //declare static associations: {
    // posts: Association<TribeModel, PostModel>;
@@ -21,7 +21,7 @@ export class TribeModel extends Model<InferAttributes<TribeModel>, InferCreation
 TribeModel.init(
     {
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.NUMBER,
         primaryKey: true,
         autoIncrement: true
     },
@@ -35,7 +35,7 @@ TribeModel.init(
     },
     owner: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: UserModel,
             key: 'username'   
@@ -64,7 +64,7 @@ TribeModel.init(
 );
 
 TribeModel.hasOne(UserModel, {
-    sourceKey: 'username',
-    foreignKey: 'owner',
-    as: 'owner'
+    sourceKey: 'owner',
+    foreignKey: 'username',
+    as: 'ownerUser'
 });

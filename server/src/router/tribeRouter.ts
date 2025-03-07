@@ -24,7 +24,7 @@ export function tribeRouter(tribeService: TribeService): Router {
     });
 
     interface CreateTribeRequest extends Request {
-        body: { title : string, description : string}
+        body: { title : string, description : string, owner: string },
         session: any
     }
 
@@ -52,6 +52,7 @@ export function tribeRouter(tribeService: TribeService): Router {
             const newTribe = await tribeService.createTribe(title, description, req.session.userid);
             res.status(201).send(newTribe);
         } catch (e: any) {
+            console.error(e);
             res.status(500).send(e.message);
         }
     })

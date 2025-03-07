@@ -7,11 +7,10 @@ export type Tribe = {
     title: string;
     id: number;
     description: string;
-    posts: [];
     owner: string;
-    createdAt: string;
-    updatedAt: string;
-    members: [];
+    createdAt: Date;
+    updatedAt: Date;
+    members: string[];
 }
 
 export type Post = {

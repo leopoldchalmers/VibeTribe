@@ -1,5 +1,4 @@
 import { Tribe } from "../model/tribe";
-import { User } from "../model/user";
 
 export interface ITribeService {
     createTribe(name: string, description: string, owner: string): Promise<Tribe>;
