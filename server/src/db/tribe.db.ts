@@ -6,7 +6,7 @@ import { PostModel } from "./post.db";
 
 export class TribeModel extends Model<InferAttributes<TribeModel>, InferCreationAttributes<TribeModel>> {
   declare title: string;
-  declare id: number;
+  declare id: CreationOptional<number>;  
   declare description: string;
   declare owner: ForeignKey<UserModel['username']>;
   declare createdAt: Date;
@@ -21,7 +21,7 @@ export class TribeModel extends Model<InferAttributes<TribeModel>, InferCreation
 TribeModel.init(
     {
     id: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
@@ -35,7 +35,7 @@ TribeModel.init(
     },
     owner: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         references: {
             model: UserModel,
             key: 'username'   

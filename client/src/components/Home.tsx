@@ -40,6 +40,7 @@ function Home() {
     return (
         <div>
           <h1 className="pageTitle">Home</h1>
+          <h1></h1> 
           <button onClick={handleCreateTribeButtonClick}>Create Tribe</button>
           <TribeList tribes={tribes} />
         </div>

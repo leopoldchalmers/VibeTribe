@@ -19,8 +19,7 @@ function CreateTribe() {
     
 
     //Feel like we should remove this and just use the one in the api file?
-    const [tribe, setTribe] = useState<Tribe>({
-        id: 0,
+    const [tribe, setTribe] = useState<Omit<Tribe, "id">>({
         owner: "",
         title: "",
         description: "",
@@ -28,6 +27,7 @@ function CreateTribe() {
         createdAt: new Date(),
         updatedAt: new Date()
     });
+    
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTribe(prevState => ({

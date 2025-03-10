@@ -19,7 +19,6 @@ export class TribeService implements ITribeService{
             owner: owner, 
             createdAt: new Date(Date.now()), 
             updatedAt: new Date(Date.now()),
-            id: new Date().getTime(),
             members: [owner]
         }
         )
@@ -28,6 +27,10 @@ export class TribeService implements ITribeService{
 
     async getTribe(tribeId: number): Promise<Tribe | null> {
         return TribeModel.findByPk(tribeId)
+    }
+
+    async getTribesByUser(owner: string): Promise<Tribe[] | null> {
+        return TribeModel.findAll({where: {owner: owner}})
     }
 
     async deleteTribe(tribeId: number): Promise<void> {

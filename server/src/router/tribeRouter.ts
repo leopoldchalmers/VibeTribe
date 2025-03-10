@@ -23,6 +23,7 @@ export function tribeRouter(tribeService: TribeService): Router {
         }
     });
 
+
     interface CreateTribeRequest extends Request {
         body: { title : string, description : string, owner: string },
         session: any
@@ -49,7 +50,7 @@ export function tribeRouter(tribeService: TribeService): Router {
                 return;
             }
             //@ts-ignore
-            const newTribe = await tribeService.createTribe(title, description, req.session.userid);
+            const newTribe = await tribeService.createTribe(title, description, req.session.username);
             res.status(201).send(newTribe);
         } catch (e: any) {
             console.error(e);
@@ -57,6 +58,20 @@ export function tribeRouter(tribeService: TribeService): Router {
         }
     })
 
+    tribeRouter.get("/tribes/:user", async (
+        req: Request<{user: string}, {}, {}>,
+        res: Response<Tribe[] | null>
+    ) => {
+        try {
+            const owner = req.params.user;
+            const tribes = await tribeService.getTribesByUser(owner);
+            res.status(200).send(tribes);
+        } catch (e: any) {
+            res.status(500).send(e.message);
+        }
+    });
+
     return tribeRouter;
+    
 
 }
