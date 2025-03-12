@@ -15,6 +15,7 @@ export class TribeModel extends Model<InferAttributes<TribeModel>, InferCreation
   //declare static associations: {
    // posts: Association<TribeModel, PostModel>;
 
+
 }
 
 TribeModel.init(
