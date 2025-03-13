@@ -36,7 +36,6 @@ function Home() {
       }
     }
 
-
     return (
         <div>
           <h1 className="pageTitle">Home</h1>

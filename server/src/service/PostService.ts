@@ -14,7 +14,7 @@ export class PostService {
   }
 
 
-   async addPost(title: string, description: string, author: User, tribe: Tribe) : Promise<Post> {
+   async addPost(title: string, description: string, author: string, tribe: Tribe) : Promise<Post> {
     const post: Post = {
           id: Date.now(),
           title: title,

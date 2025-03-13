@@ -13,11 +13,9 @@ axios.defaults.withCredentials = true;
 function CreateTribe() {
     
     const navigate = useNavigate();
-
     const userContext = useContext(UserContext);
     const user = userContext.user;
     
-
     //Feel like we should remove this and just use the one in the api file?
     const [tribe, setTribe] = useState<Omit<Tribe, "id">>({
         owner: "",
@@ -27,7 +25,6 @@ function CreateTribe() {
         createdAt: new Date(),
         updatedAt: new Date()
     });
-    
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTribe(prevState => ({
