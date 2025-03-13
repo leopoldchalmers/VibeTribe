@@ -1,3 +1,4 @@
+// AccountInfo.js
 import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from '../UserContext';
@@ -22,7 +23,11 @@ export function AccountInfo() {
     <div>
       <h1>Account Info</h1>
       <p>Username: {user.username}</p>
+
       <p>Your tribes:</p>
+      
+
+
     <button onClick={async () => {
       const result = await logout();
       if (result === LogoutResult.SERVER_ERROR) {

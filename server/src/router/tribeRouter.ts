@@ -2,6 +2,8 @@ import express, { Request, Response, Router} from "express";
 import { Tribe } from "../model/tribe";
 import { TribeService } from "../service/TribeService";
 
+//const tribeService = new TribeService();
+
 export function tribeRouter(tribeService: TribeService): Router {
     const tribeRouter = express.Router();
 
@@ -28,7 +30,7 @@ export function tribeRouter(tribeService: TribeService): Router {
     }
 
     tribeRouter.post("/tribes", async (
-        req: CreateTribeRequest, 
+        req: CreateTribeRequest, // TODO Delete owner
         res: Response<Tribe | string>
     ) => {
         try {
@@ -70,4 +72,6 @@ export function tribeRouter(tribeService: TribeService): Router {
     });
 
     return tribeRouter;
+    
+
 }

@@ -1,3 +1,4 @@
+import { User } from './user';
 import { Tribe } from './tribe';
 
 export interface Post {

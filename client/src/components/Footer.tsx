@@ -11,7 +11,7 @@ function Footer(){
               <Link to="/home">About</Link>
             </div>
             <div className="col-4 text">
-              <Link to="/home">Contact</Link>
+              <Link to="/home">contact</Link>
             </div>
             <div className="col-4 text">
               <Link to="/home">Help</Link>

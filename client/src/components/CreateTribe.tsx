@@ -8,12 +8,17 @@ import { UserContext } from '../UserContext';
 
 axios.defaults.withCredentials = true;
 
+
+
 function CreateTribe() {
     
     const navigate = useNavigate();
+
     const userContext = useContext(UserContext);
     const user = userContext.user;
     
+
+    //Feel like we should remove this and just use the one in the api file?
     const [tribe, setTribe] = useState<Omit<Tribe, "id">>({
         owner: "",
         title: "",
@@ -33,6 +38,7 @@ function CreateTribe() {
 
     const handleSubmit = async (e: React.FormEvent) => {
 
+        
         e.preventDefault();
         console.log("User:", user);
         try {
