@@ -113,15 +113,13 @@ describe("Creating User Tests", () => {
 
 });
 
-    
-    //sign up test end
-
-
-
 
      //Login test start
 
 describe("Login User Tests", () => {
+
+    // If user logs in with correct credentials, the session should be created/updated 
+    test("Log in with correct credentials should update the user session", async () => {
     
     test("User authentication should fail with invalid password", async () => {
         await userService.createUser(user.username, user.email, user.password);
@@ -136,6 +134,8 @@ describe("Login User Tests", () => {
         expect(foundUser).toBeUndefined();
         await userService.removeUser(user.username);
     });
+    } 
+)
 
 }
 );
@@ -143,9 +143,34 @@ describe("Login User Tests", () => {
 
 
 
-    // login test end
+// delete user tests
+
+describe("User deletion tests", () => {
+    
+    test("User should be deleted from the database", async () => {
+        await userService.createUser(user.username, user.email, user.password);
+        await userService.removeUser(user.username);
+        const foundUser = await UserModel.findOne({ where: { username: user.username } });
+        expect(foundUser).toBeNull();
+    }
+    );
+
+    // We must add sessions to the user model to test this (this test is not implemented correctly yet)
+    test("User must be logged in to delete account", async () => {
+        await userService.createUser(user.username, user.email, user.password);
+        await userService.removeUser(user.username);
+        const foundUser = await UserModel.findOne({ where: { username: user.username } });
+        expect(foundUser).toBeNull();
+    }
+    );
+
+} 
+);
 
 
+
+
+    
 
     
 
