@@ -1,29 +1,59 @@
 import { UserService } from "../service/UserService";
 import { User } from "../model/user";
 import bcrypt from "bcrypt";
+import { Sequelize } from 'sequelize';
+
+
+const sequelize = new Sequelize('sqlite::memory:');
+    
+beforeAll(async () => {
+    await sequelize.sync();
+});
+
 
 describe("UserService Tests", () => {
-    
-    test("If a user is created, it should be returned in the list", async () => {
+
+    //Login test start
+
+    test("User authentication should fail with invalid password", async () => {
+        console.log("Starting test for user authentication with invalid password");
+        const username = "testuser";
+        const email = "user@gmail.com";
+        const password = "password";
+        const wrongPassword = "wrongpassword";
+
         const userService = new UserService();
-        const user = await userService.createUser("TestUser", "test@example.com", "password");
-
-        const users = await userService.getUsers();
-        expect(users.some(u => u.username === user.username)).toBeTruthy();
+        console.log("test2");
+        await userService.createUser(username, email, password);
+        console.log(" Test User created");
+        const foundUser = await userService.findUser(username,wrongPassword);
+        console.log("4")
+        expect(foundUser).toBeUndefined();
     });
+});
+
+    
+
+    // login test end
 
 
 
-test("User authentication should fail with invalid password", async () => {
+    //sign up test start
+
+  /*      
+test("User registration should fail with invalid email", async () => {
     const username = "user";
     const email = "user@gmail.com";
     const password = "password";
-    const wrongPassword = "wrongpassword";
+    const wrongEmail = "wrongemail";
 
     const userService = new UserService();
 
     await userService.createUser(username, email, password);
-    const foundUser = await userService.findUser(username, email, wrongPassword);
+    const foundUser = await userService.findUser(username, password);
     expect(foundUser).toBeUndefined();
 });
-});
+    
+*/
+
+    //sign up test end

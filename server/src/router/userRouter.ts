@@ -16,18 +16,6 @@ export function userRouter(userService: UserService): Router {
         session: any
     }
 
-    // only for testing - maybe delete later
-    userRouter.get("/users/:username", async (
-        req: UserRequest,
-        res: Response) => {
-        const user = await userService.getUsers();
-        if (!user) {
-            res.status(404).send("User not found");
-            return;
-        }
-        res.status(200).send(user);
-    })
-
     userRouter.post("/users", async (req: UserRequest, res: Response) => {
         if (! await userService.createUser(req.body.username, req.body.email, req.body.password,)) {
             res.status(400).send("Username already exists");
@@ -37,7 +25,7 @@ export function userRouter(userService: UserService): Router {
     })
 
     userRouter.post("/users/login", async (req: UserRequest, res: Response) => {
-        const user: User | undefined = await userService.findUser(req.body.username, req.body.email, req.body.password);
+        const user: User | undefined = await userService.findUser(req.body.username, req.body.password);
         if (!user) {
             res.status(401).send("No such username or password");
             return;

@@ -5,22 +5,28 @@ import { UserModel } from '../db/user.db';
 
 export class UserService {
 
-  async createUser(name: string, email: string, password: string): Promise<User> {
+  async createUser(name: string, email: string, password: string): Promise<UserModel> {
+    console.log("encrypt password");
 
+   // if (await UserModel.findOne({where: {username: name}})) {
+    //  return null;
+ // }
     const salt = bcrypt.genSaltSync(10);
-
-    const user = await UserModel.create({
+    console.log("username: "+ name);
+    console.log("email: "+ email);
+    console.log("password: "+ password);
+    return await UserModel.create({
       username: name,
       email: email,
       password: bcrypt.hashSync(password, salt),
     });
+    
 
-
-    return user;
+   
 
   }
 
-  async findUser(username: string, email: string, password: string): Promise<User | undefined> {
+  async findUser(username: string, password: string): Promise<User | undefined> {
     const user = await UserModel.findOne({ where: { username: username } });
     if (user) {
       const isValid = await bcrypt.compare(password, user.password);
@@ -29,10 +35,6 @@ export class UserService {
       }
     }
     return undefined;
-  }
-
-  async getUsers(): Promise<User[]> {
-    return UserModel.findAll();
   }
 
 
