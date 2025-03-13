@@ -78,15 +78,13 @@ body {
     text-align: center;
   }
 
-
-
   .tribeButton{
     margin: 0 auto;
     width: 300px;
   }
 
   .goBack {
-    margin: auto;
+    color: #000;
   }
 
   .scrollable-container {

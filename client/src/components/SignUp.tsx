@@ -1,8 +1,8 @@
 import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
 import { registerUser } from "../api";
+import { Link, useNavigate } from "react-router-dom";
 
 export function SignUp() {
   const [username, setUsername] = useState<string>("");
@@ -42,12 +42,17 @@ export function SignUp() {
               }}></input>
           </div>
           <p><button
-           className="logInButton mt-5"
+           className="logInButton mt-4"
             onClick={async () => {
               await registerUser(username, email, password);
               navigate("/home");
           }}>Sign up </button></p>
-          <NavLink to="/account" end>Back to login screen</NavLink>
+
+            <p className="flex items-center space-x-2">
+                <span>Already have an account?  </span>
+                <Link to="/account" className="goBack text-blue-500"> Log in</Link>
+            </p>
+       
           </div>
       </section>
       

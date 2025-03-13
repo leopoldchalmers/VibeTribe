@@ -1,11 +1,9 @@
 import "../App.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import { useContext, useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { login, LoginResult } from "../api";
 import { UserContext } from "../UserContext";
-
 
 export function Account() {
     interface Errors {
@@ -78,9 +76,11 @@ export function Account() {
             Log In
           </button>
   
-          <p className="mt-4">
-            <Link to="/SignUp" className="text-blue-500 hover:underline">Sign up</Link>
+          <p className="flex items-center space-x-2 mt-4">
+            <span>Don't have an account?  </span>
+            <Link to="/signup" className="goBack"> Sign up</Link>
           </p>
+          
         </div>
       </section>
     );
