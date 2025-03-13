@@ -21,7 +21,7 @@ function Navbar(){
     }
 
     return (
-        <nav className="container-fluid text-center custom-navbar">
+        <nav className="container-fluid text-center custom-navbar fixed-top">
             <div className="row">
             <div className="col-2 text-start">
                 <Link to="/home">

@@ -1,0 +1,22 @@
+.card-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+
+  }
+  
+  .card-grid {
+    padding: 5px !important;
+    flex: 1 1 300px;
+    max-width: 320px;
+
+  }
+
+  .cardComponent {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 40px;
+    transition: 0.3s;
+  }
+  

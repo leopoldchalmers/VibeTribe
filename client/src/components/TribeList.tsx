@@ -1,21 +1,20 @@
-import { Tribe } from '../api';
-
+import { Tribe } from "../api";
+import { TribeCard } from "./TribeCard";
+import "./Card.css"; 
+import "../App.css";
 
 export function TribeList({ tribes }: { tribes: Tribe[] }) {
-    if (!tribes || tribes.length === 0) {
-        return <div>No tribes available</div>; 
-    }
+  if (!tribes || tribes.length === 0) {
+    return <div>No tribes available</div>;
+  }
 
-    return (
-        <div>
-            <h1 className= "smallTitle">Tribe List</h1>
-            <ul>
-                {tribes.map(tribe => (
-                    <li 
-                    key={tribe.id}>{"Title: " + tribe.title} <br/>{"Description: " + tribe.description} <br/>{"Members: " + tribe.members} <br/>{"Created At: " + tribe.createdAt} <br/>{"Updated At: " + tribe.updatedAt}
-                    </li>
-                ))}
-            </ul>
+  return (
+    <div className="card-group scrollable-container">
+      {tribes.map((tribe) => (
+        <div className="card-grid" key={tribe.id}>
+          <TribeCard tribe={tribe} />
         </div>
-    );
+      ))}
+    </div>
+  );
 }
