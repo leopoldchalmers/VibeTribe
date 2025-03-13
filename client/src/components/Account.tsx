@@ -6,6 +6,7 @@ import { login, LoginResult } from "../api";
 import { UserContext } from "../UserContext";
 
 export function Account() {
+  
     interface Errors {
         username?: string;
         password?: string;
@@ -80,7 +81,7 @@ export function Account() {
             <span>Don't have an account?  </span>
             <Link to="/signup" className="goBack"> Sign up</Link>
           </p>
-          
+
         </div>
       </section>
     );

@@ -8,8 +8,6 @@ import { UserContext } from '../UserContext';
 
 axios.defaults.withCredentials = true;
 
-
-
 function CreateTribe() {
     
     const navigate = useNavigate();
