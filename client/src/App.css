@@ -1,42 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;700&display=swap");
+
 .custom-navbar {
   background-color: #1f5132;
-}
+ }
 
 html body{
   background-color: #F2E9DC;
-}
+  font-family:'Red Hat Display';
+ }
 
 body {
   padding-bottom: 90px;
   padding-top: 46px;
-}
+ }
 
 .footerlinks {
   padding-bottom: 30px;
   padding-top: 30px;
   background-color: #808F85;
-}
+ }
 
 .footerlinks a {
   text-decoration: none;
   color: black;
-}
+ }
 
 .footerlinks a:hover {
   color: white;
   cursor: pointer;
-}
+ }
 
 .navbarImg:hover{
   transform: scale(1.2);
   transition: 0.5s;
   cursor: pointer;
-}
+ }
 
 .navbarTitle:hover{
   color: white;
   cursor: pointer;
-}
+ }
 
 .searchbar {
   width: 100%;
@@ -52,57 +55,30 @@ body {
   width: 40px;
   height: auto;
   padding-top: 10px;
-}
+ }
 
 .navbarTitle {
   text-decoration: none;
   color: black;
-}
+ } 
 
 .form-container {
     padding-top: 30px;
     max-width: 300px; 
     margin: 0 auto;
-  }
-
-  .loginButton{
-    margin: 0 auto;
-  }
+ }
 
   .logoutButton{
     margin: 0 auto;
     width: 300px;
-  }
-
-  .signUpButton{
-    margin: 0 auto;
-    width: 300px;
-  }
+}
 
   .signUptext{
     padding-top: 30px;
     text-align: center;
-
   }
 
-  .pageTitle{
-    padding-top: 30px;
-    text-align: center;
-    font-family: "Lucida Console", "Courier New", monospace;
 
-  }
-
-  .loginBack{
-    padding-top: 30px;
-    text-align: center;
-  }
-
-  .smallTitle{
-    margin: 0 auto;
-    white-space: nowrap;
-    font-family: "Lucida Console", "Courier New", monospace;
-    font-size: 20px;
-  }
 
   .tribeButton{
     margin: 0 auto;
@@ -132,4 +108,43 @@ body {
 
   .createTribeButton:hover {
     background: #e1e1e1;
+  }
+
+  .logInButton{
+    width: 200px;
+    margin-top: 40px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    background-color: #fff;
+  }
+
+  .logInButton:hover {
+    background: #e1e1e1;
+  }
+
+  .forms{
+    margin-top: 20px;
+    width: 200px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #fff;
+    height: 40px;
+  }
+
+  .sectionMargin {
+    margin-top: 120px;
+  }
+
+  .pageTitle {
+    font-size: 50px;
+    font-weight: bold; 
+  }
+
+  .error {
+    color: red;
   }

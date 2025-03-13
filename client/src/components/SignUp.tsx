@@ -11,32 +11,46 @@ export function SignUp() {
   const navigate = useNavigate();
 
   return (
-      <section>
-          <h1>Register New User</h1>
-          <p>
-              <label htmlFor="username">Username</label>
-              <input type="text" id="username" onChange={(e) => {
-                  setUsername(e.target.value);
+      <section className="sectionMargin flex text-center items-center fixed-top">
+          <div className="text-center">
+          <h1 className="pageTitle">Register new user</h1>
+          <div className="text-left">
+              <label htmlFor="username" className="block font-medium p-3">Username: </label>
+              <input 
+              className="forms" 
+              type="text" 
+              id="username" 
+              onChange={(e) => {setUsername(e.target.value);
               }}></input>
-          </p>
-          <p>
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" onChange={(e) => {
-                setEmail(e.target.value);
+          </div>
+          <div className="text-left">
+            <label htmlFor="email" className="block font-medium p-4">Email: </label>
+            <input 
+            className="forms mt-1"
+            type="email" 
+            id="email" 
+            onChange={(e) => {setEmail(e.target.value);
             }}></input>
-          </p>
-          <p>
-              <label htmlFor="password">Password</label>
-              <input type="password" id="password" onChange={(e) => {
-                  setPassword(e.target.value);
+          </div>
+          <div className="text-left">
+              <label htmlFor="password" className="block font-medium p-3" >Password: </label>
+              <input
+              className="forms mt-1" 
+              type="password" 
+              id="password" 
+              onChange={(e) => {setPassword(e.target.value);
               }}></input>
-          </p>
-          <p><button onClick={async () => {
+          </div>
+          <p><button
+           className="logInButton mt-5"
+            onClick={async () => {
               await registerUser(username, email, password);
               navigate("/home");
           }}>Sign up </button></p>
           <NavLink to="/account" end>Back to login screen</NavLink>
+          </div>
       </section>
+      
   )
 
 }
