@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { UserModel } from '../db/user.db';
 
 
+
 export class UserService {
 
   async createUser(name: string, email: string, password: string): Promise<UserModel> {
@@ -20,10 +21,7 @@ export class UserService {
       email: email,
       password: bcrypt.hashSync(password, salt),
     });
-    
-
-   
-
+  
   }
 
   async findUser(username: string, password: string): Promise<User | undefined> {
@@ -36,6 +34,11 @@ export class UserService {
     }
     return undefined;
   }
+
+  async removeUser(username: string): Promise<void> {
+    await UserModel.destroy({ where: { username: username } });
+  }
+
 
 
 

@@ -1,34 +1,52 @@
 import { UserService } from "../service/UserService";
 import { User } from "../model/user";
 import bcrypt from "bcrypt";
+import { UserModel } from "../db/user.db";
 import { Sequelize } from 'sequelize';
 
+let userService: UserService;
 
-const sequelize = new Sequelize('sqlite::memory:');
-    
+const sequelize = new Sequelize({ dialect: 'sqlite', storage: ':memory:' });
+
+
+//test user
+const user = {
+    username: "testuser",
+    email: "user@gmail.com",
+    password: "password",
+}
+
 beforeAll(async () => {
-    await sequelize.sync();
-});
+    await sequelize.sync({ force: true });
+    await UserModel.sync({ force: true });
+  });
+
+
+  
+  beforeEach(async () => {
+    userService = new UserService();
+})
 
 
 describe("UserService Tests", () => {
 
     //Login test start
 
-    test("User authentication should fail with invalid password", async () => {
-        console.log("Starting test for user authentication with invalid password");
-        const username = "testuser";
-        const email = "user@gmail.com";
-        const password = "password";
-        const wrongPassword = "wrongpassword";
+    test("User authentication should pass with valid credentials", async () => {
+        await userService.createUser(user.username, user.email, user.password);
+        const foundUser = await userService.findUser(user.username, user.password);
+        expect(foundUser).toBeDefined();
+        await userService.removeUser(user.username);
+    }
+    );
 
-        const userService = new UserService();
-        console.log("test2");
-        await userService.createUser(username, email, password);
-        console.log(" Test User created");
-        const foundUser = await userService.findUser(username,wrongPassword);
-        console.log("4")
+    test("User authentication should fail with invalid password", async () => {
+        
+
+        await userService.createUser(user.username, user.email, user.password);
+        const foundUser = await userService.findUser(user.username,"wrongpassword");
         expect(foundUser).toBeUndefined();
+        await userService.removeUser(user.username);
     });
 });
 
