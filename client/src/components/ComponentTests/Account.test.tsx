@@ -15,6 +15,7 @@ describe('Account Component', () => {
         const headingElement = screen.getByText(/Log in to VibeTribe/i);
         expect(headingElement).toBeInTheDocument();
     });
+    
     test('account has a login button', () => {
         render(
             <MemoryRouter>
@@ -26,6 +27,7 @@ describe('Account Component', () => {
         expect(button).toBeInTheDocument();
     }
     );
+
     test('account has navigation link to signup', () => {
         render(
             <MemoryRouter>

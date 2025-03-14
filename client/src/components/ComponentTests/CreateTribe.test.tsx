@@ -15,14 +15,49 @@ describe('CreateTribe Component', () => {
         expect(headingElement).toBeInTheDocument();
     });
     
-    test('CreateTribe has a go back button', () => {
+    
+    test('CreateTribe has navigation link to home', () => {
         render(
-            <MemoryRouter> 
-            <CreateTribe />
-            </MemoryRouter>);
-        const button = screen.getByRole('button', { name: /Go back/i });
-        expect(button).toBeInTheDocument();
+            <MemoryRouter>
+                <CreateTribe />
+            </MemoryRouter>
+    
+        );
+        const link = screen.getByRole('link', { name: /Go back/i });
+        expect(link).toBeInTheDocument();
     }
     );
+    test('renders input fields for title and description', () => {
+        render(
+            <MemoryRouter>
+                <CreateTribe />
+            </MemoryRouter>
+        );
+        const titleInput = screen.getByPlaceholderText(/name/i);
+        const descriptionInput = screen.getByPlaceholderText(/description/i);
 
+        expect(titleInput).toBeInTheDocument();
+        expect(descriptionInput).toBeInTheDocument();
+    });
+
+    test('updates state when typing in inputs', () => {
+        render(
+            <MemoryRouter>
+                <CreateTribe />
+            </MemoryRouter>
+        );
+
+        const titleInput = screen.getByPlaceholderText(/name/i);
+        const descriptionInput = screen.getByPlaceholderText(/description/i);
+
+        fireEvent.change(titleInput, { target: { value: 'Test Tribe' } });
+        fireEvent.change(descriptionInput, { target: { value: 'This is a test tribe' } });
+
+        expect(titleInput).toHaveValue('Test Tribe');
+        expect(descriptionInput).toHaveValue('This is a test tribe');
+    });
+
+
+
+  
 });
