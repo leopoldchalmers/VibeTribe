@@ -47,7 +47,7 @@ function CreateTribe() {
             console.log("Creating tribe:", tribe);
           const response = await axios.post("http://localhost:8080/tribes", tribe);
           console.log("Tribe created:", response.data);
-          navigate("/home");
+          navigate("/");
     
       } catch (error) {
           console.error("Error caught creating tribe:", error);
@@ -58,7 +58,7 @@ function CreateTribe() {
     return (
         <>
         <div className="sectionMargin flex text-center items-center fixed-top">
-        <Link to = "/home"className="goBack text-blue-500 margin">  Go back</Link>
+        <Link to = "/"className="goBack text-blue-500 margin">  Go back</Link>
 
  
         <div className="text-center">

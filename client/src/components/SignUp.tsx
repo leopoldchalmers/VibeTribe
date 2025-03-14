@@ -95,7 +95,7 @@ export function SignUp() {
               if (valid) {
                 try {
                   await registerUser(username, email, password);
-                  navigate("/home");
+                  navigate("/");
                 } catch (error: any) {
                   if (error.response && error.response.status === 400) {
                     const serverErrorMsg = error.response.data;

@@ -69,7 +69,7 @@ export function Account() {
                 }
                 if (loginResult === LoginResult.SUCCESS) {
                   userContext.setUser({ username });
-                  navigate("/home");
+                  navigate("/");
                 }
               }
             }}

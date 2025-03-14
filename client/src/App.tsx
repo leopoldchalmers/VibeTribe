@@ -20,7 +20,7 @@ function App() {
       <BrowserRouter >
         <Navbar />
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/account" element={<Account />} />
           <Route path="/accountinfo" element={<AccountInfo />} />
           <Route path="/signup" element={<SignUp />} />

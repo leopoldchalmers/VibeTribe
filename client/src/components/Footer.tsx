@@ -8,13 +8,13 @@ function Footer(){
         <div className="container-fluid text-center fixed-bottom footerlinks">
           <div className="row">
             <div className="col-4 text">
-              <Link to="/home">About</Link>
+              <Link to="/about">About</Link>
             </div>
             <div className="col-4 text">
-              <Link to="/home">contact</Link>
+              <Link to="/contact">contact</Link>
             </div>
             <div className="col-4 text">
-              <Link to="/home">Help</Link>
+              <Link to="/help">Help</Link>
             </div>
             </div>
         </div>
