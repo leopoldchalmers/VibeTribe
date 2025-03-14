@@ -51,7 +51,7 @@ export async function registerUser(username: string, email: string, password: st
         console.log('User registered');
 
     } catch (e:any) {
-        console.log(e);
+        throw e;
     }
 }
 

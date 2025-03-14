@@ -16,13 +16,15 @@ export function userRouter(userService: UserService): Router {
         session: any
     }
 
+
     userRouter.post("/users", async (req: UserRequest, res: Response) => {
-        if (! await userService.createUser(req.body.username, req.body.email, req.body.password,)) {
-            res.status(400).send("Username already exists");
-            return;
+        try {
+            await userService.createUser(req.body.username, req.body.email, req.body.password);
+            res.status(201).send({ username: req.body.username });
+        } catch (error: any) {
+            res.status(400).send(error.message);
         }
-        res.status(201).send({username: req.body.username});
-    })
+    });
 
     userRouter.post("/users/login", async (req: UserRequest, res: Response) => {
         const user: User | undefined = await userService.findUser(req.body.username, req.body.password);

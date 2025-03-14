@@ -17,18 +17,18 @@ export class UserService {
     }
 
    if (await UserModel.findOne({where: {username: name}})) {
-     return undefined;
-    }
+    throw new Error("Username already exists");
+  }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return undefined;
+      throw new Error("Invalid email format");
     }
     
 
   if (await UserModel.findOne({where: {email: email}})) {
-    return undefined;
+    throw new Error("Email already exists");
   }
 
     const salt = bcrypt.genSaltSync(10);

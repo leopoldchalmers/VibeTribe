@@ -93,8 +93,41 @@ export function SignUp() {
                 valid = false;
               }
               if (valid) {
-                await registerUser(username, email, password);
-                navigate("/home");
+                try {
+                  await registerUser(username, email, password);
+                  navigate("/home");
+                } catch (error: any) {
+                  if (error.response && error.response.status === 400) {
+                    const serverErrorMsg = error.response.data;
+                    if (serverErrorMsg.includes("Username")) {
+                      setErrors((prev) => ({
+                        ...prev,
+                        username: serverErrorMsg,
+                      }));
+                    } else if (serverErrorMsg.includes("Email already exists")) {
+                      setErrors((prev) => ({
+                        ...prev,
+                        email: serverErrorMsg,
+                      }));
+                    } else if(serverErrorMsg.includes("Invalid email format")) {
+                      setErrors((prev) => ({
+                        ...prev,
+                        email: serverErrorMsg,
+                      }));
+                    } 
+                    else {
+                      setErrors((prev) => ({
+                        ...prev,
+                        serverError: serverErrorMsg,
+                      }));
+                    }
+                  } else {
+                    setErrors((prev) => ({
+                      ...prev,
+                      serverError: "An unexpected error occurred",
+                    }));
+                  }
+                }
               }
             }}
           >
