@@ -10,6 +10,8 @@ import { useState } from 'react'
 import {UserContext} from './UserContext.ts'
 import { User } from './api.ts'
 import AccountInfo from './components/AccountInfo.tsx'
+import { About } from './components/about.tsx'
+import { Contact } from './components/Contact.tsx'
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
           <Route path="/accountinfo" element={<AccountInfo />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/createTribe" element={<CreateTribe />} /> 
+          <Route path= "/about" element={<About />} />
+          <Route path= "/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </BrowserRouter>
