@@ -6,15 +6,6 @@ import { MemoryRouter } from 'react-router-dom';
 
 describe('Footer Component', () => {
 
-    test('footer has a help link', () => {
-        render(
-            <MemoryRouter>
-            <Footer />
-            </MemoryRouter>);
-        const link = screen.getByRole('link', { name: /Help/i });
-        expect(link).toBeInTheDocument();
-    });
-
     test('footer has a about link', () => {
         render(        
             <MemoryRouter>

@@ -20,6 +20,11 @@ body {
   background-color: #808F85;
  }
 
+ .copyright {
+  font-size: 1rem;
+  color: rgb(15, 14, 14);
+}
+
 .footerlinks a {
   text-decoration: none;
   color: black;
@@ -85,6 +90,8 @@ body {
 
   .goBack {
     color: #000;
+    margin-left: 25px;
+    margin-top: 90px;
   }
 
   .scrollable-container {
@@ -155,3 +162,7 @@ body {
     width: 500px;
     margin: auto;
   }
+
+.no-points{
+  list-style:none;
+}

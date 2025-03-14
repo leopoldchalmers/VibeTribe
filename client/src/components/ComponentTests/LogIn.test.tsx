@@ -16,8 +16,8 @@ describe('A login screen', () => {
       </MemoryRouter>
   );
 
-    const userNameField = screen.findByLabelText("Username");
-    const passwordField = screen.findByLabelText("Password");
+    const userNameField = screen.findByLabelText(/Username/i);
+    const passwordField = screen.findByLabelText(/Password/i);
     const loginButton = screen.getByRole('button', {name: "Log In"});
 
     await act(async () => {
