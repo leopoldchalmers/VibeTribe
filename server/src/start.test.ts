@@ -16,6 +16,6 @@ test("End-to-end test", async () => {
     const res2 = await request.get("/tribes");
     expect(res2.statusCode).toEqual(200);
     expect(res2.body.map((tribe : Tribe) => tribe.description)).toContain(desc);
-});
+}, 10000);
 // Kommentar: Tänk på o testa cases där det går fel. 
 

@@ -3,6 +3,7 @@ import { User } from "../model/user";
 import bcrypt from "bcrypt";
 import { UserModel } from "../db/user.db";
 import { Sequelize } from 'sequelize';
+import exp from "constants";
 
 let userService: UserService;
 
@@ -25,6 +26,7 @@ beforeAll(async () => {
   
   beforeEach(async () => {
     userService = new UserService();
+    await userService.removeUser(user.username);
 })
 
     //sign up test start
@@ -63,19 +65,15 @@ describe("Creating User Tests", () => {
 
     test("User cant be created with same username", async () => {
         await userService.createUser(user.username, user.email, user.password);
-        const foundUser = await userService.createUser(user.username, user.email, user.password);
-        expect(foundUser).toBeUndefined();
+        await expect(userService.createUser(user.username, user.email, user.password)).rejects.toThrow("Username already exists");
         await userService.removeUser(user.username);
-    }
-    );
+    });
 
     test("User cant be created with same email", async () => {
         await userService.createUser(user.username, user.email, user.password);
-        const foundUser = await userService.createUser("newuser", user.email, user.password);
-        expect(foundUser).toBeUndefined();
+        await expect(userService.createUser("newuser", user.email, user.password)).rejects.toThrow("Email already exists");
         await userService.removeUser(user.username);
-    }
-    );
+    });
 
     test("Check password encryption when creating user", async () => {
         await userService.createUser(user.username, user.email, user.password);
@@ -91,20 +89,15 @@ describe("Creating User Tests", () => {
 
         //Creating user with valid email
         await userService.createUser(user.username, user.email, user.password);
-        const foundUser = await userService.findUser(user.username, user.password);
-        expect(foundUser).toBeDefined();
+        expect(await userService.findUser(user.username, user.password)).toBeDefined();
         await userService.removeUser(user.username);
 
-        //Creating user without @
-        await userService.createUser(user.username, invalidEmail1, user.password);
-        const foundUser2 = await userService.findUser(user.username, user.password);
-        expect(foundUser2).toBeUndefined();
+        // Creating user without @
+        await expect(userService.createUser(user.username, invalidEmail1, user.password)).rejects.toThrow("Invalid email format");
         await userService.removeUser(user.username);
 
-        //Creating user without .
-        await userService.createUser(user.username, invalidEmail2, user.password);
-        const foundUser3 = await userService.findUser(user.username, user.password);
-        expect(foundUser3).toBeUndefined();
+        // Creating user without .
+        await expect(userService.createUser(user.username, invalidEmail2, user.password)).rejects.toThrow("Invalid email format");
         await userService.removeUser(user.username);
     }
     );
@@ -119,7 +112,9 @@ describe("Creating User Tests", () => {
 describe("Login User Tests", () => {
 
     // If user logs in with correct credentials, the session should be created/updated 
-    test("Log in with correct credentials should update the user session", async () => {
+    /*test("Log in with correct credentials should update the user session", async () => {
+
+    */
     
     test("User authentication should fail with invalid password", async () => {
         await userService.createUser(user.username, user.email, user.password);
@@ -134,11 +129,7 @@ describe("Login User Tests", () => {
         expect(foundUser).toBeUndefined();
         await userService.removeUser(user.username);
     });
-    } 
-)
-
-}
-);
+    } );
 
 
 
