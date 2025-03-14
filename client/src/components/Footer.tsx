@@ -7,14 +7,12 @@ function Footer(){
     <footer>
         <div className="container-fluid text-center fixed-bottom footerlinks">
           <div className="row">
+          <p className="col-4 text copyright"> © VibeTribe</p>
             <div className="col-4 text">
               <Link to="/about">About</Link>
             </div>
             <div className="col-4 text">
-              <Link to="/contact">contact</Link>
-            </div>
-            <div className="col-4 text">
-              <Link to="/help">Help</Link>
+              <Link to="/contact">Contact</Link>
             </div>
             </div>
         </div>
