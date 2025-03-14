@@ -14,4 +14,14 @@ describe('Navbar Component', () => {
         expect(link).toBeInTheDocument();
     }
     )
-})
+
+    test('navbar has a account link', () => {
+        render(
+            <MemoryRouter>
+            <Navbar />
+            </MemoryRouter>);
+        const button = screen.getByAltText(/Profile Icon/i);
+        expect(button).toBeInTheDocument();
+    }
+    )
+});

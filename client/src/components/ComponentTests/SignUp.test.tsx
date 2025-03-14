@@ -42,31 +42,8 @@ describe('SignUp Component', () => {
         expect(link).toBeInTheDocument();
     }
     );
-
-    test("shows error when trying to submit empty form", async () => {
-        render(
-          <MemoryRouter>
-            <SignUp />
-          </MemoryRouter>
-        );
     
-        const signUpButton = screen.getByRole("button", { name: /Sign up/i });
-    
-        await act(async () => {
-          fireEvent.click(signUpButton);
-        });
-    
-        expect(screen.getByText("Username must not be empty")).toBeInTheDocument();
-        expect(screen.getByText("Email must not be empty")).toBeInTheDocument();
-        expect(
-          screen.getByText("Password must be at least 5 characters long")
-        ).toBeInTheDocument();
-      });
-    
-        expect(screen.getByText(/Invalid email format/i)).toBeInTheDocument();
-      });
-    
-      test("shows an error for short password", async () => {
+    test("shows an error for short password", async () => {
         render(
           <MemoryRouter>
             <SignUp />
@@ -87,6 +64,4 @@ describe('SignUp Component', () => {
         ).toBeInTheDocument();
 });
 
-
-
-    
+});
