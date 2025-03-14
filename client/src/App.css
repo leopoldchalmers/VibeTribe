@@ -85,6 +85,8 @@ body {
 
   .goBack {
     color: #000;
+    margin-left: 25px;
+    margin-top: 90px;
   }
 
   .scrollable-container {

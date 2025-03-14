@@ -15,19 +15,18 @@ export function AccountInfo() {
   const navigate = useNavigate();
   const { user, setUser} = useContext(UserContext);
   const [errors, setErrors] = useState<Errors>({});
+ 
 
   if (!user) return <div>Please log in to view account details.</div>;
 
   return (
-    <div>
-      <h1>Account Info</h1>
-      <p>Username: {user.username}</p>
-
-      <p>Your tribes:</p>
-      
+    <div className='sectionMargin flex text-center items-center fixed-top'>
+      <h1 className= "pageTitle">Account Info</h1>
+      <h3 className='mt-4'>Username: {user.username}</h3>
 
 
-    <button onClick={async () => {
+
+    <button className="logInButton" onClick={async () => {
       const result = await logout();
       if (result === LogoutResult.SERVER_ERROR) {
         console.log("Server error");
