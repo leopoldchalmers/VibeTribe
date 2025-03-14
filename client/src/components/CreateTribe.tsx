@@ -1,10 +1,12 @@
 import { Tribe } from '../api';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
+import "../App.css";
+
 
 axios.defaults.withCredentials = true;
 
@@ -55,15 +57,15 @@ function CreateTribe() {
 
     return (
         <>
-        <div className="d-grid gap-2 col-6 mx-auto">
+        <div className="sectionMargin flex text-center items-center fixed-top">
+        <Link to = "/home"className="goBack text-blue-500 margin">  Go back</Link>
 
+ 
+        <div className="text-center">
           <h1 className="pageTitle">Create tribe </h1>
         </div>
 
-        <a href = "./home"> 
-        <button type="submit" className="btn btn-light goBack"> Go back</button>
-        </a>
-
+        
         <section data-testid="form">
         <Form  className="form-container" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -90,7 +92,9 @@ function CreateTribe() {
         <button type="submit" className="btn btn-light tribeButton">Create Tribe</button>
         </div>
         </Form>
+        
         </section>
+        </div>
         </>
     
     )

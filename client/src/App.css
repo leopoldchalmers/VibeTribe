@@ -94,7 +94,8 @@ body {
   }
 
   .createTribeButton{
-    margin-left: 580px;
+    display: block;
+    margin: 20px auto;
     width: 300px;
     font-size: 1.2rem;
     border: none;
@@ -102,6 +103,8 @@ body {
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     background-color: #fff;
+    text-align: center;
+
   }
 
   .createTribeButton:hover {
