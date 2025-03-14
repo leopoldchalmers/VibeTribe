@@ -16,7 +16,7 @@ describe('App Component', () => {
       </UserContext.Provider>
     );
     expect(screen.getByRole('link', {name : /VibeTribe/i})).toBeInTheDocument();
-    expect(screen.getByRole('link', {name : /Help/i})).toBeInTheDocument(); 
+    expect(screen.getByRole('link', {name : /About/i})).toBeInTheDocument(); 
   
   }
   );
