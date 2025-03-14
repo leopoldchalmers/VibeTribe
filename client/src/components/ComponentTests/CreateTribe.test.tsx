@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { fireEvent, screen } from '@testing-library/dom';
 import CreateTribe from '../CreateTribe';
 import { MemoryRouter } from 'react-router-dom';
-
+import { UserContext } from '../../UserContext';
 
 describe('CreateTribe Component', () => {
 
@@ -57,7 +57,25 @@ describe('CreateTribe Component', () => {
         expect(descriptionInput).toHaveValue('This is a test tribe');
     });
 
+});
 
+describe('CreateTribe Component - User Input Handling', () => {
+    test('updates title and description state on user input', () => {
+        render(
+            <MemoryRouter>
+                <UserContext.Provider value={{ user: { username: 'testUser' }, setUser: jest.fn() }}>
+                    <CreateTribe />
+                </UserContext.Provider>
+            </MemoryRouter>
+        );
 
-  
+        const titleInput = screen.getByPlaceholderText(/name/i);
+        const descriptionInput = screen.getByPlaceholderText(/description/i);
+
+        fireEvent.change(titleInput, { target: { value: 'New Tribe Name' } });
+        fireEvent.change(descriptionInput, { target: { value: 'A description of the tribe' } });
+
+        expect(titleInput).toHaveValue('New Tribe Name');
+        expect(descriptionInput).toHaveValue('A description of the tribe');
+    });
 });

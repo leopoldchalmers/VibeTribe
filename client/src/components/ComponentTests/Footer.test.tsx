@@ -3,7 +3,6 @@ import { screen } from '@testing-library/dom';
 import Footer from '../Footer';
 import { MemoryRouter } from 'react-router-dom';
 
-
 describe('Footer Component', () => {
 
     test('footer has a about link', () => {

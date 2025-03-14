@@ -1,7 +1,10 @@
-import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
+import { render, act} from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/dom';
 import { SignUp } from '../SignUp';
 import { MemoryRouter } from 'react-router-dom';
+
+jest.mock("axios");
+
 
 describe('SignUp Component', () => {
 
@@ -40,7 +43,50 @@ describe('SignUp Component', () => {
     }
     );
 
+    test("shows error when trying to submit empty form", async () => {
+        render(
+          <MemoryRouter>
+            <SignUp />
+          </MemoryRouter>
+        );
+    
+        const signUpButton = screen.getByRole("button", { name: /Sign up/i });
+    
+        await act(async () => {
+          fireEvent.click(signUpButton);
+        });
+    
+        expect(screen.getByText("Username must not be empty")).toBeInTheDocument();
+        expect(screen.getByText("Email must not be empty")).toBeInTheDocument();
+        expect(
+          screen.getByText("Password must be at least 5 characters long")
+        ).toBeInTheDocument();
+      });
+    
+        expect(screen.getByText(/Invalid email format/i)).toBeInTheDocument();
+      });
+    
+      test("shows an error for short password", async () => {
+        render(
+          <MemoryRouter>
+            <SignUp />
+          </MemoryRouter>
+        );
+    
+        const passwordField = screen.getByLabelText(/Password/i);
+        fireEvent.change(passwordField, { target: { value: "123" } });
+    
+        const signUpButton = screen.getByRole("button", { name: /Sign up/i });
+    
+        await act(async () => {
+          fireEvent.click(signUpButton);
+        });
+    
+        expect(
+          screen.getByText("Password must be at least 5 characters long")
+        ).toBeInTheDocument();
 });
+
 
 
     
