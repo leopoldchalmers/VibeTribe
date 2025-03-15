@@ -43,23 +43,19 @@ describe("Creating User Tests", () => {
     );
 
     test("Return error if username is empty", async () => {
-        await userService.createUser("", user.email, user.password);
-        const foundUser = await userService.findUser("", user.password);
-        expect(foundUser).toBeUndefined();
+        expect(userService.createUser("", user.email, user.password)).rejects.toThrow("All fields required");
     }
     );
 
     test("Return error if email is empty", async () => {
-        await userService.createUser(user.username, "", user.password);
-        const foundUser = await userService.findUser(user.username, user.password);
-        expect(foundUser).toBeUndefined();
+        expect(userService.createUser(user.username, "", user.password)).rejects.toThrow("All fields required");
+        
+
     }
     );
 
     test("Return error if password is empty", async () => {
-        await userService.createUser(user.username, user.email, "");
-        const foundUser = await userService.findUser(user.username, "");
-        expect(foundUser).toBeUndefined();
+        expect(userService.createUser(user.username, user.email, "")).rejects.toThrow("All fields required");   
     }
     );
 
@@ -119,14 +115,14 @@ describe("Login User Tests", () => {
     test("User authentication should fail with invalid password", async () => {
         await userService.createUser(user.username, user.email, user.password);
         const foundUser = await userService.findUser(user.username,"wrongpassword");
-        expect(foundUser).toBeUndefined();
+        expect(foundUser).toBeNull();
         await userService.removeUser(user.username);
     });
 
     test("User authentication should fail with invalid username", async () => {
         await userService.createUser(user.username, user.email, user.password);
         const foundUser = await userService.findUser("wrongusername", user.password);
-        expect(foundUser).toBeUndefined();
+        expect(foundUser).toBeNull;
         await userService.removeUser(user.username);
     });
     } );

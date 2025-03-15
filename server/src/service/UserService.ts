@@ -6,14 +6,14 @@ import { UserModel } from '../db/user.db';
 
 export class UserService {
 
-  async createUser(name: string, email: string, password: string): Promise<UserModel | undefined> {
+  async createUser(name: string, email: string, password: string): Promise<UserModel | null> {
 
 
 
     // Instead of returning undefined, we should throw an error?
     // Instead of if-statements we could use case-switch?
     if (!name || !email || !password) {
-      return undefined;
+      throw new Error("All fields required");
     }
 
    if (await UserModel.findOne({where: {username: name}})) {
@@ -40,15 +40,18 @@ export class UserService {
   
   }
 
-  async findUser(username: string, password: string): Promise<User | undefined> {
-    const user = await UserModel.findOne({ where: { username: username } });
+  async findUser(username: string, password ?: string): Promise<User | null> {
+    if(! password){
+      return await UserModel.findOne({ where: { username: username } });
+    }
+    const user : User | null = await UserModel.findOne({ where: {username}});
     if (user) {
-      const isValid = await bcrypt.compare(password, user.password);
+      const isValid = await bcrypt.compareSync(password, user.password);
       if (isValid) {
         return user;
       }
     }
-    return undefined;
+    return null;
   }
 
   async removeUser(username: string): Promise<void> {

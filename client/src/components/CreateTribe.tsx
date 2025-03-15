@@ -35,6 +35,7 @@ function CreateTribe() {
     }
     tribe.owner = user.username;
     try {
+      console.log("Creating tribe:", tribe);
       const response = await axios.post("http://localhost:8080/tribes", tribe);
       console.log("Tribe created:", response.data);
       navigate("/");

@@ -36,7 +36,7 @@ app.use(cors({
 app.use(express.json());
 
 const userService = new UserService();
-const tribeService = new TribeService();
+const tribeService = new TribeService(userService);
 
 app.use(tribeRouter(tribeService));
 app.use(userRouter(userService));

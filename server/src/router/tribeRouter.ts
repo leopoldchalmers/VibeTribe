@@ -50,7 +50,9 @@ export function tribeRouter(tribeService: TribeService): Router {
                 return;
             }
             //@ts-ignore
+            console.log("Creating tribe for user:", req.session.username);
             const newTribe = await tribeService.createTribe(title, description, req.session.username);
+            console.log("Tribe created:", newTribe);
             res.status(201).send(newTribe);
         } catch (e: any) {
             console.error(e);
