@@ -75,14 +75,11 @@ PostModel.init(
     }
 );
 
-PostModel.hasOne(UserModel, {
-    sourceKey: 'author',
-    foreignKey: 'username',
+PostModel.belongsTo(UserModel, {
+    foreignKey: 'author',
     as: 'author'
 });
-
-PostModel.hasOne(TribeModel, {
-    sourceKey: 'tribe',
-    foreignKey: 'id',
+PostModel.belongsTo(TribeModel, {
+    foreignKey: 'tribe',
     as: 'tribe'
 });

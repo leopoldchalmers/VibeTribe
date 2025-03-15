@@ -5,6 +5,8 @@ export interface ITribeService {
     getTribe(tribeId: number): Promise<Tribe | null>;
     deleteTribe(tribeId: number): Promise<void>;
     getTribes(): Promise<Tribe[]>;
+    /*
     addUserToTribe(username: string, tribeId: number): Promise<void>;
     removeUserFromTribe(username: string, tribeId: number): Promise<void>;
+    */
 }
