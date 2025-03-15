@@ -4,6 +4,7 @@ import { Sequelize } from "sequelize";
 import { TribeModel } from "../db/tribe.db";
 import { UserService } from "./UserService";
 import { UserModel } from "../db/user.db";
+import supertestSession from "supertest-session";
 
 let tribeService: TribeService;
 let userService: UserService;
@@ -114,7 +115,48 @@ describe("TribeService Tests", () => {
     }
     );
 
-    
+
+    test("If a tribe is deleted, it should not exist in database", async () => {
+        console.log("Testing: if a tribe is deleted, it should not exist in database");
+        
+        // Create a user
+        await userService.createUser(user.username, user.email, user.password
+        );
+        console.log("User created");
+
+        // Create a new tribe
+        const createdTribe: Tribe = await tribeService.createTribe("testtribe", "testdescription", user.username);
+
+        // Delete the tribe
+        await tribeService.deleteTribe(createdTribe.id);
+
+        // Fetch the tribe from the DB
+        await expect(tribeService.getTribe(createdTribe.id)).rejects.toThrow("Tribe not found");
+
+        // Cleaning up
+        await userService.removeUser(user.username);
+    }
+    );
+
+    test("If a tribe is deleted with an invalid id, an error should be thrown", async () => {
+        console.log("Testing: if a tribe is deleted with an invalid id, an error should be thrown");
+        
+        // Create a user
+        await userService.createUser(user.username, user.email, user.password
+        );
+        console.log("User created");
+
+        // Delete the tribe
+        await expect(tribeService.deleteTribe(0)).rejects.toThrow("Cant delete... Tribe not found");
+
+        // Cleaning up
+        await userService.removeUser(user.username);
+    }
+    );
+
+
+
+
 
 
 });

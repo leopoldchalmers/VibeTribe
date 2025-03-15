@@ -52,6 +52,10 @@ export class TribeService implements ITribeService {
     }
 
     async deleteTribe(tribeId: number): Promise<void> {
+
+        if (!tribeId) {
+            throw new Error("Cant delete... Tribe not found");
+        }
         await TribeModel.destroy({ where: { id: tribeId } });
     }
 
