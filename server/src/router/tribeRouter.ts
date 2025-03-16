@@ -60,6 +60,23 @@ export function tribeRouter(tribeService: TribeService): Router {
         }
     })
 
+    tribeRouter.get("/tribes/:id", async (
+        req: Request<{id: string}, {}, {}>,
+        res: Response<Tribe | string>
+    ) => {
+        try {
+            const tribeId = Number(req.params.id);
+            if (isNaN(tribeId)) {
+                res.status(400).send("Invalid ID format");
+                return;
+            }
+            const tribe = await tribeService.getTribe(tribeId);
+            res.status(200).send(tribe);
+        } catch (e: any) {
+            res.status(500).send(e.message);
+        }
+    });
+
     tribeRouter.get("/tribes/:user", async (
         req: Request<{user: string}, {}, {}>,
         res: Response<Tribe[] | null>

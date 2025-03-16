@@ -12,6 +12,7 @@ import { User } from './api.ts'
 import AccountInfo from './components/AccountInfo.tsx'
 import { About } from './components/About.tsx'
 import { Contact } from './components/Contact.tsx'
+import { TribeInfo } from './components/TribeInfo.tsx'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/createTribe" element={<CreateTribe />} /> 
           <Route path= "/about" element={<About />} />
           <Route path= "/contact" element={<Contact />} />
+          <Route path="/tribe/:id" element={<TribeInfo />} />
         </Routes>
         <Footer />
       </BrowserRouter>
