@@ -4,7 +4,7 @@ import { TribeModel } from "./tribe.db";
 import { UserModel } from "./user.db";
 
 export class PostModel extends Model<InferAttributes<PostModel>, InferCreationAttributes<PostModel>> {
-  declare id: number;
+  declare id: CreationOptional<number>;
   declare title: string;
   declare description: string;
   declare author: ForeignKey<UserModel['username']>;

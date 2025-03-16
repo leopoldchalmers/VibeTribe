@@ -7,6 +7,9 @@ import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
 import {Link} from "react-router-dom";
 
+import logo from "/logo.png";
+import profileIcon from "../assets/Profile_icon.webp";
+
 function Navbar(){
 
     const {user} = useContext(UserContext);
@@ -25,7 +28,7 @@ function Navbar(){
             <div className="row">
             <div className="col-2 text-start">
                 <Link to="/">
-                    <img src="logo.png" className="navbarImg" alt="Logo"/>
+                    <img src={logo} className="navbarImg" alt="Logo"/>
                 </Link>
             </div>
             <div className="col-8 text-center">
@@ -39,7 +42,7 @@ function Navbar(){
                 className="btn btn-link p-0 border-0"
                 style={{ background: 'none' }}
             >
-                <img src="src/assets/Profile_icon.webp" className="navbarImg" alt="Profile Icon"/>
+                <img src={profileIcon} className="navbarImg" alt="Profile Icon"/>
             </button>
             </div>
             </div>
