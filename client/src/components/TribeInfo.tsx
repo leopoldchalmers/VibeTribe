@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Tribe, Post } from "../api";
 import axios from "axios";
 import { UserContext } from "../UserContext";
-
+import { Modal, Button, Form } from "react-bootstrap";
 
 export function TribeInfo() {
   const { id } = useParams<{ id: string }>();
   const [tribe, setTribe] = useState<Tribe | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [showModal, setShowModal] = useState(false);
   const [newPost, setNewPost] = useState({ title: "", description: "", songLink: "" });
-    const { user } = React.useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const fetchTribe = async () => {
@@ -23,13 +24,13 @@ export function TribeInfo() {
     };
 
     const fetchPosts = async () => {
-        try {
-            const response = await axios.get<Post[]>(`http://localhost:8080/posts`);
-            setPosts(response.data.filter((post) => post.tribe.id === Number(id)));
-        } catch (error) {
-            console.error("Error fetching posts:", error);
-        }
-        };
+      try {
+        const response = await axios.get<Post[]>(`http://localhost:8080/posts`);
+        setPosts(response.data.filter((post) => post.tribe.id === Number(id)));
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
 
     fetchTribe();
     fetchPosts();
@@ -52,15 +53,15 @@ export function TribeInfo() {
       const response = await axios.post("http://localhost:8080/posts", {
         ...newPost,
         author: user.username,
-        tribe: tribe,
+        tribeId: Number(id),
       });
       setPosts([...posts, response.data]);
       setNewPost({ title: "", description: "", songLink: "" });
+      setShowModal(false);
     } catch (error) {
       console.error("Error creating post:", error);
     }
   };
-
 
   if (!tribe) {
     return <div>Loading...</div>;
@@ -68,51 +69,68 @@ export function TribeInfo() {
 
   return (
     <div>
-        <div>
-            <h1>{tribe.title}</h1>
-            <p>{tribe.description}</p>
-            <p>Owner: {tribe.owner}</p>
-            <p>Created At: {new Date(tribe.createdAt).toLocaleDateString()}</p>
-            <p>Updated At: {new Date(tribe.updatedAt).toLocaleDateString()}</p>
-        </div>
-        <div>
-            <h2>Create a new post</h2>
-            <form onSubmit={handlePostSubmit}>
-                <div>
-                <label htmlFor="title">Title:</label>
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    value={newPost.title}
-                    onChange={handlePostChange}
-                />
-                </div>
-                <div>
-                <label htmlFor="description">Description:</label>
-                <input
-                    type="text"
-                    id="description"
-                    name="description"
-                    value={newPost.description}
-                    onChange={handlePostChange}
-                />
-                </div>
-                <div>
-                <label htmlFor="songLink">Song Link:</label>
-                <input
-                    type="text"
-                    id="songLink"
-                    name="songLink"
-                    value={newPost.songLink}
-                    onChange={handlePostChange}
-                />
-                </div>
-                <button type="submit">Create Post</button>
-            </form>
-            </div>
-        </div>
-    
-    
+      <div>
+        <h1>{tribe.title}</h1>
+        <p>{tribe.description}</p>
+        <p>Owner: {tribe.owner}</p>
+        <p>Created At: {new Date(tribe.createdAt).toLocaleDateString()}</p>
+        <p>Updated At: {new Date(tribe.updatedAt).toLocaleDateString()}</p>
+        <Button variant="primary" onClick={() => setShowModal(true)} style={{ position: "absolute", top: "100px", right: "10px" }}>
+          New Post
+        </Button>
+      </div>
+      <div>
+        <h2>Posts</h2>
+        {posts.map(post => (
+          <div key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.description}</p>
+            <p>Song Link: <a href={post.songLink} target="_blank" rel="noopener noreferrer">{post.songLink}</a></p>
+            <p>Author: {post.author}</p>
+            <p>Likes: {post.likes}</p>
+          </div>
+        ))}
+      </div>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Create a new post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handlePostSubmit}>
+            <Form.Group controlId="title">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                name="title"
+                value={newPost.title}
+                onChange={handlePostChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="description">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                name="description"
+                value={newPost.description}
+                onChange={handlePostChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="songLink">
+              <Form.Label>Song Link</Form.Label>
+              <Form.Control
+                type="text"
+                name="songLink"
+                value={newPost.songLink}
+                onChange={handlePostChange}
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Create Post
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    </div>
   );
 }
