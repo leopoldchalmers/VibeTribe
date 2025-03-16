@@ -22,6 +22,7 @@ export type Post = {
     updatedAt : number;
     likes : number;
     tribe : Tribe;
+    songLink : string;
 }
 
 export type User = {

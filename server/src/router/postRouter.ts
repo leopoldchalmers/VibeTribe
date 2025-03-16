@@ -7,7 +7,6 @@ import { User } from "../model/user";
 import { title } from "process";
 
 const postService = new PostService();
-const tribeService = new TribeService();
 
 export const postRouter = express.Router();
 
@@ -47,19 +46,16 @@ postRouter.get("/:id", async (
 });
 
 postRouter.post("/", async (
-    req: Request<{}, {}, { title : string, description: string, author: string, tribe: Tribe }>,
+    req: Request<{}, {}, { title : string, description: string, author: string, tribe: Tribe, songLink: string }>,
     res: Response<Post | string>
 ) => {
     try {
-        const description = req.body.description;
-        const author = req.body.author;
-        const tribe = req.body.tribe;
-        const title = req.body.title;
+        const { title, description, author, tribe, songLink } = req.body;
         if (typeof(description) !== "string") {
             res.status(400).send(`Bad POST call to ${req.originalUrl} --- description has type ${typeof(description)}`);
             return;
         }
-        const newPost = await postService.addPost(title, description, author, tribe);
+        const newPost = await postService.addPost(title, description, author, tribe, songLink);
         res.status(201).send(newPost);
     
     } catch (e: any) {
@@ -69,7 +65,7 @@ postRouter.post("/", async (
         
 
 postRouter.patch("/:id", async (
-    req: Request<{ id: string }, {}, {title: string, description: string}>,
+    req: Request<{ id: string }, {}, {title: string, description: string, songLink: string}>,
     res: Response<Post | string>
 ) => {
     try {
@@ -87,14 +83,13 @@ postRouter.patch("/:id", async (
             return;
         }
 
-        const description = req.body.description;
-        const title = req.body.title;
+        const { title, description, songLink } = req.body;
         if (typeof(description) !== "string") {
             res.status(400).send(`Bad PATCH call to ${req.originalUrl} --- description has type ${typeof(description)}`);
             return;
         }
 
-        const updatedPost = await postService.updatePost(postId, title, description);
+        const updatedPost = await postService.updatePost(postId, title, description, songLink);
         res.status(200).send(updatedPost);
     
         

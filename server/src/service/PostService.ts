@@ -14,7 +14,7 @@ export class PostService {
   }
 
 
-   async addPost(title: string, description: string, author: string, tribe: Tribe) : Promise<Post> {
+   async addPost(title: string, description: string, author: string, tribe: Tribe, songLink: string) : Promise<Post> {
     const post: Post = {
           id: Date.now(),
           title: title,
@@ -23,18 +23,20 @@ export class PostService {
           updatedAt: new Date(Date.now()).toLocaleDateString(),
           author: author,
           likes: 0,
-          tribe: tribe
+          tribe: tribe,
+          songLink: songLink
       };
       this.posts.push(post);
 
       return { ...post };
     }
       
-    async updatePost(id: number, title: string, description: string) : Promise<Post | undefined> {
+    async updatePost(id: number, title: string, description: string, songLink: string) : Promise<Post | undefined> {
       const post = this.posts.find(post => post.id === id);
       if(post) {
         post.title = title;
         post.description = description;
+        post.songLink = songLink;
         post.updatedAt = new Date(Date.now()).toLocaleDateString();
         return { ...post };
       }

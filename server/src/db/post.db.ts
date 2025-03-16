@@ -12,6 +12,7 @@ export class PostModel extends Model<InferAttributes<PostModel>, InferCreationAt
   declare updatedAt: string;
   declare likes: number;
   declare tribe: ForeignKey<TribeModel['id']>;
+    declare songLink: string;
 }
 
 
@@ -64,7 +65,13 @@ PostModel.init(
                 model: TribeModel,
                 key: 'id'
             }
+        },
+
+        songLink: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
+
         
     },
 

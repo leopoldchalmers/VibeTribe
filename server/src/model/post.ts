@@ -10,4 +10,5 @@ export interface Post {
     updatedAt : string;
     likes : number;
     tribe : Tribe;
+    songLink : string;
 }
