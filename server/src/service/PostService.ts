@@ -5,7 +5,6 @@ import { PostModel } from '../db/post.db';
 import { TribeModel } from '../db/tribe.db';
 
 export class PostService {
-  //private posts : Post[] = [];
 
   async getPosts(): Promise<Post[]> {
     const posts = await PostModel.findAll({
