@@ -25,9 +25,7 @@ export class PostService {
    * @returns {Promise<Post | null>} A promise that returns a post if found, or null if not found.
    */
   async getPostById(id: number): Promise<Post | null> {
-    const post = await PostModel.findByPk(id, {
-      include: [{ model: TribeModel, as: 'tribeModel' }]
-    });
+    const post = await PostModel.findByPk(id);
     return post ? post.get({ plain: true }) as Post : null;
   }
 
