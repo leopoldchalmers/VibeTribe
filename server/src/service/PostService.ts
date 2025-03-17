@@ -83,7 +83,7 @@ export class PostService {
    * @param {string} songLink - The new song link associated with the post.
    * @returns {Promise<Post | null>} A promise that returns the updated post, or null if the post was not found.
    */
-  async updatePost(id: number, title: string, description: string, songLink: string): Promise<Post | null> {
+  async updatePost(id: number, title: string, description: string, songLink: string): Promise<Post> {
     const post = await PostModel.findByPk(id);
     if (post) {
       post.title = title;
@@ -93,7 +93,7 @@ export class PostService {
       await post.save();
       return post.get({ plain: true }) as Post;
     }
-    return null;
+    throw new Error("Post not found");
   }
 
   async deletePost(id: number): Promise<void> {

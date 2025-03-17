@@ -115,4 +115,45 @@ describe("PostService Tests", () => {
         expect(titles).toContain("post2");
       });
 
+      test("updatePost should update the post correctly", async () => {
+        const originalPost = await postService.addPost(
+          "original title",
+          "original desc",
+          user.username,
+          createdTribe.id,
+          "original link"
+        );
+    
+        const updatedPost = await postService.updatePost(
+          originalPost.id,
+          "new title",
+          "new desc",
+          "new link"
+        );
+    
+        expect(updatedPost).not.toBeNull();
+        expect(updatedPost?.title).toBe("new title");
+        expect(updatedPost?.description).toBe("new desc");
+        expect(updatedPost?.songLink).toBe("new link");
+    
+        expect(new Date(updatedPost!.updatedAt).getTime()).toBeGreaterThan(
+          new Date(originalPost.updatedAt).getTime()
+        );
+      });
+
+      test("if we call updatePost with a nonexisting post, an error should be thrown", async () => {
+        await expect(postService.updatePost(-1, "title", "desc", "link")).rejects.toThrow("Post not found");
+      });
+
+      test("addPost should allow an empty songLink", async () => {
+        const post = await postService.addPost(
+          "title",
+          "desc",
+          user.username,
+          createdTribe.id,
+          ""
+        );
+        expect(post.songLink).toBe("");
+      });
+
 });
