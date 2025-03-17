@@ -57,12 +57,17 @@ export class PostService {
    * @returns {Promise<Post>} A promise that returns the created post.
    */
   async addPost(title: string, description: string, author: string, tribeId: number, songLink: string): Promise<Post> {
+
+    if (!title || !description || !author || !tribeId) {
+      throw new Error("All fields required");
+    }
+
     const post = await PostModel.create({
       title: title,
       description: description,
+      author: author,
       createdAt: new Date(Date.now()),
       updatedAt: new Date(Date.now()),
-      author: author,
       likes: 0,
       tribe: tribeId,
       songLink: songLink
@@ -89,5 +94,12 @@ export class PostService {
       return post.get({ plain: true }) as Post;
     }
     return null;
+  }
+
+  async deletePost(id: number): Promise<void> {
+    const post = await PostModel.findByPk(id);
+    if (post) {
+      await post.destroy();
+    }
   }
 }

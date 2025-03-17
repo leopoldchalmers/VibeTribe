@@ -42,7 +42,9 @@ PostModel.init(
             references: {
                 model: UserModel,
                 key: 'username'
-            }
+            },
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE"
 
             
 
@@ -69,7 +71,9 @@ PostModel.init(
             references: {
                 model: TribeModel,
                 key: 'id'
-            }
+            },
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE"
         },
 
         songLink: {
