@@ -34,7 +34,6 @@ export class PostService {
     return posts.map(post => post.get({ plain: true }) as Post);
   }
 
-
    async addPost(title: string, description: string, author: string, tribeId: number, songLink: string) : Promise<Post> {
     const post= await PostModel.create({
           title: title,

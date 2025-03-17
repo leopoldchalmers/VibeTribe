@@ -20,7 +20,13 @@ export function userRouter(userService: UserService): Router {
         session: any
     }
 
-
+    /**
+     * Handles POST requests to create a new user.
+     * @param {string} username - The username of the new user.
+     * @param {string} email - The email of the new user.
+     * @param {string} password - The password of the new user.
+     * @returns {Object} The created user's username.
+     */
     userRouter.post("/users", async (req: UserRequest, res: Response) => {
         try {
             await userService.createUser(req.body.username, req.body.email, req.body.password);
@@ -30,6 +36,14 @@ export function userRouter(userService: UserService): Router {
         }
     });
 
+    /**
+     * Handles POST requests for logging in a user.
+     * Verifies the username and password, and stores the username in the session.
+     * @param {string} username - The username of the user attempting to log in.
+     * @param {string} password - The password of the user attempting to log in.
+     * @returns {string} A success message when logged in.
+     */
+    
     userRouter.post("/users/login", async (req: UserRequest, res: Response) => {
         const user: User | null = await userService.findUser(req.body.username, req.body.password);
         if (!user) {
@@ -40,6 +54,10 @@ export function userRouter(userService: UserService): Router {
         res.status(200).send("Logged in");
     })
 
+    /**
+     * Handles GET requests to check the current session status.
+     * @returns {string} The logged-in user's username if logged in, or an error message if not logged in.
+     */
     userRouter.get("/users/session", (req: Request, res: Response) => {
         console.log("Session data:", req.session);
         let username : string | undefined = req.session.username;
@@ -50,12 +68,16 @@ export function userRouter(userService: UserService): Router {
         }
     });
 
+    /**
+     * Handles POST requests to log out the current user.
+     * @returns {string} A success message indicating the user has logged out.
+     */
     userRouter.post("/users/logout", (req: Request, res: Response) => {
         delete req.session.username;
         console.log("LOGGED OUT (USER ROUTER)")
         res.status(200).send("Logged out");
     });
     
-    return userRouter;
+return userRouter;
 }
 
