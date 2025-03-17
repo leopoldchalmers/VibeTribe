@@ -1,7 +1,6 @@
 import { TribeService } from "../service/TribeService";
 import { Tribe } from "../model/tribe";
 import { Sequelize } from "sequelize";
-import { TribeModel } from "../db/tribe.db";
 import { UserService } from "./UserService";
 //import supertestSession from "supertest-session";
 

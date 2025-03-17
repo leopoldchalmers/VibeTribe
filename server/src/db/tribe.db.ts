@@ -1,8 +1,6 @@
 import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes, ForeignKey } from "sequelize";
 import { conn } from "./conn";
-import { Association } from "sequelize";
 import { UserModel } from "./user.db";
-import { PostModel } from "./post.db";
 
 export class TribeModel extends Model<InferAttributes<TribeModel>, InferCreationAttributes<TribeModel>> {
   declare title: string;
