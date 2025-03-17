@@ -46,16 +46,16 @@ postRouter.get("/:id", async (
 });
 
 postRouter.post("/", async (
-    req: Request<{}, {}, { title : string, description: string, author: string, tribe: Tribe, songLink: string }>,
+    req: Request<{}, {}, { title : string, description: string, author: string, tribeId: number, songLink: string }>,
     res: Response<Post | string>
 ) => {
     try {
-        const { title, description, author, tribe, songLink } = req.body;
+        const { title, description, author, tribeId, songLink } = req.body;
         if (typeof(description) !== "string") {
             res.status(400).send(`Bad POST call to ${req.originalUrl} --- description has type ${typeof(description)}`);
             return;
         }
-        const newPost = await postService.addPost(title, description, author, tribe, songLink);
+        const newPost = await postService.addPost(title, description, author, tribeId, songLink);
         res.status(201).send(newPost);
     
     } catch (e: any) {
@@ -90,6 +90,10 @@ postRouter.patch("/:id", async (
         }
 
         const updatedPost = await postService.updatePost(postId, title, description, songLink);
+        if (!updatedPost) {
+            res.status(404).send("Post not found");
+            return;
+        }
         res.status(200).send(updatedPost);
     
         

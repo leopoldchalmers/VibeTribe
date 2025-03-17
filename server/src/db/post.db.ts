@@ -8,8 +8,8 @@ export class PostModel extends Model<InferAttributes<PostModel>, InferCreationAt
   declare title: string;
   declare description: string;
   declare author: ForeignKey<UserModel['username']>;
-  declare createdAt: string;
-  declare updatedAt: string;
+  declare createdAt: Date;
+  declare updatedAt: Date;
   declare likes: number;
   declare tribe: ForeignKey<TribeModel['id']>;
     declare songLink: string;
@@ -84,9 +84,9 @@ PostModel.init(
 
 PostModel.belongsTo(UserModel, {
     foreignKey: 'author',
-    as: 'author'
+    as: 'authorUser'
 });
 PostModel.belongsTo(TribeModel, {
     foreignKey: 'tribe',
-    as: 'tribe'
+    as: 'tribeModel'
 });

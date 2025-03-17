@@ -10,7 +10,7 @@ export type Tribe = {
     owner: string;
     createdAt: Date;
     updatedAt: Date;
-    members: string[];
+    //members: string[];
 }
 
 export type Post = {
@@ -21,7 +21,7 @@ export type Post = {
     createdAt : number;
     updatedAt : number;
     likes : number;
-    tribe : Tribe;
+    tribeId : number;
     songLink : string;
 }
 
@@ -44,6 +44,11 @@ export const createTribe = async (description: string, title: string) => {
         console.log(e);
         return undefined;
       }
+}
+
+export const getTribeById = async (id: number) => {
+    const response = await axios.get<Tribe>(`${BASE_URL}/tribes/${id}`);
+    return response.data;
 }
     
 export async function registerUser(username: string, email: string, password: string) : Promise<void> {
@@ -91,4 +96,21 @@ export async function logout() : Promise<LogoutResult> {
         return LogoutResult.SERVER_ERROR;
     }
 }
+
+
+export const createPost = async (title: string, description: string, author: string, tribeId: number, songLink: string) => {
+    try {
+        const response = await axios.post<Post>(`${BASE_URL}/posts`, { title, description, author, tribeId, songLink });
+        return response.data;
+    } catch (e: any) {
+        console.log(e);
+        throw e;
+    }
+}
+
+export const getPostsByTribeId = async (tribeId: number) => {
+    const response = await axios.get<Post[]>(`${BASE_URL}/posts?tribeId=${tribeId}`);
+    return response.data;
+}
+
 

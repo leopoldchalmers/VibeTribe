@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { Tribe, Post } from "../api";
+import { Tribe, Post, getPostsByTribeId, createPost, getTribeById } from "../api";
 import axios from "axios";
 import { UserContext } from "../UserContext";
 import { Modal, Button, Form } from "react-bootstrap";
+import "./TribeInfo.css";
 
 export function TribeInfo() {
   const { id } = useParams<{ id: string }>();
@@ -16,8 +17,8 @@ export function TribeInfo() {
   useEffect(() => {
     const fetchTribe = async () => {
       try {
-        const response = await axios.get<Tribe>(`http://localhost:8080/tribes/${id}`);
-        setTribe(response.data);
+        const tribe = await getTribeById(Number(id)); 
+        setTribe(tribe);
       } catch (error) {
         console.error("Error fetching tribe:", error);
       }
@@ -25,8 +26,8 @@ export function TribeInfo() {
 
     const fetchPosts = async () => {
       try {
-        const response = await axios.get<Post[]>(`http://localhost:8080/posts`);
-        setPosts(response.data.filter((post) => post.tribe.id === Number(id)));
+        const posts = await getPostsByTribeId(Number(id)); 
+        setPosts(posts);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -50,12 +51,8 @@ export function TribeInfo() {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:8080/posts", {
-        ...newPost,
-        author: user.username,
-        tribeId: Number(id),
-      });
-      setPosts([...posts, response.data]);
+      const post = await createPost(newPost.title, newPost.description, user.username, Number(id), newPost.songLink);
+      setPosts([...posts, post]);
       setNewPost({ title: "", description: "", songLink: "" });
       setShowModal(false);
     } catch (error) {
@@ -68,8 +65,8 @@ export function TribeInfo() {
   }
 
   return (
-    <div>
-      <div>
+    <div className="tribe-info-container">
+      <div className="tribe-details">
         <h1>{tribe.title}</h1>
         <p>{tribe.description}</p>
         <p>Owner: {tribe.owner}</p>
@@ -79,10 +76,10 @@ export function TribeInfo() {
           New Post
         </Button>
       </div>
-      <div>
+      <div className="post-list">
         <h2>Posts</h2>
         {posts.map(post => (
-          <div key={post.id}>
+          <div key={post.id} className="post-item">
             <h3>{post.title}</h3>
             <p>{post.description}</p>
             <p>Song Link: <a href={post.songLink} target="_blank" rel="noopener noreferrer">{post.songLink}</a></p>
