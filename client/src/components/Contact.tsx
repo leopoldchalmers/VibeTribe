@@ -12,9 +12,9 @@ export function Contact() {
             <ul className="no-points">
                 <li><span><b>Email:</b></span> hannamag@chalmers.se </li>
                 <li><span><b>Email:</b></span> hildala@chalmers.se</li>
-                <li><span><b>Email:</b></span> </li>
-                <li><span><b>Email:</b></span> </li>
-                <li><span><b>Email:</b></span></li>
+                <li><span><b>Email:</b></span> emiuw@chalmers.se</li>
+                <li><span><b>Email:</b></span> leopoldw@chalmers.se</li>
+                <li><span><b>Email:</b></span> senjak@chalmers.se</li>
             </ul>
         </div>
         </section>

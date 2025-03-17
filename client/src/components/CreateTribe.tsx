@@ -1,19 +1,16 @@
-import { Tribe } from '../api';
+import { Tribe, createTribe } from '../api';
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { UserContext } from '../UserContext';
-import axios from 'axios';
 
 function CreateTribe() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
 
-  const [tribe, setTribe] = useState<Omit<Tribe, "id">>({
+  const [tribe, setTribe] = useState<Omit<Tribe, "id" | "createdAt" | "updatedAt">>({
     owner: "",
     title: "",
-    description: "",
-    createdAt: new Date(),
-    updatedAt: new Date()
+    description: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,10 +28,12 @@ function CreateTribe() {
     }
     tribe.owner = user.username;
     try {
-      console.log("Creating tribe:", tribe);
-      const response = await axios.post("http://localhost:8080/tribes", tribe);
-      console.log("Tribe created:", response.data);
+      const createdTribe = await createTribe(tribe.description, tribe.title);
+      console.log("Created tribe:", createdTribe)
+    if (createdTribe) {
+      setTribe(createdTribe);
       navigate("/");
+    }
     } catch (error) {
       console.error("Error caught creating tribe:", error);
     }

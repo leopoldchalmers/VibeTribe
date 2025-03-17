@@ -16,8 +16,6 @@ import { UserService } from "./service/UserService";
 
 export const app = express();
 
-//app.use(cors());
-
 console.log("SESSION_SECRET: ", process.env.SESSION_SECRET);
 
 if (!process.env.SESSION_SECRET) {
@@ -40,7 +38,4 @@ const tribeService = new TribeService(userService);
 
 app.use(tribeRouter(tribeService));
 app.use(userRouter(userService));
-
-//app.use("/tribes", tribeRouter);
 app.use("/posts", postRouter);
-//app.use("/users", userRouter);

@@ -1,10 +1,6 @@
 import express, { Request, Response, Router } from "express";
-import { Tribe } from "../model/tribe";
 import { PostService } from "../service/PostService";
-import { TribeService } from "../service/TribeService";
 import { Post } from "../model/post";
-import { User } from "../model/user";
-import { title } from "process";
 
 const postService = new PostService();
 

@@ -17,6 +17,30 @@ export function Account() {
   
     const navigate = useNavigate();
     const userContext = useContext(UserContext);
+
+    const handleLogin = async () => {
+      const validationErrors: Errors = {};
+      if (username.trim() === "") {
+        validationErrors.username = "Username must not be empty";
+      }
+      if (password.length < 5) {
+        validationErrors.password = "Password must be at least 5 characters long";
+      }
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
+      setErrors({});
+      const loginResult = await login(username, password);
+      if (loginResult === LoginResult.INVALID_CREDENTIALS) {
+        setErrors({ username: "Username or password invalid" });
+      } else if (loginResult === LoginResult.SERVER_ERROR) {
+        setErrors({ serverError: "An error occurred. Please try again later." });
+      } else if (loginResult === LoginResult.SUCCESS) {
+        userContext.setUser({ username });
+        navigate("/");
+      }
+    };
   
     return (
       <section className="sectionMargin flex justify-center items-center fixed-top">
@@ -48,30 +72,7 @@ export function Account() {
           {errors.serverError && <p className="error">{errors.serverError}</p>}
   
           <button
-            className="logInButton"
-            onClick={async () => {
-              setErrors({});
-              if (username.length === 0) {
-                setErrors((prev) => ({ ...prev, username: "Username must not be empty" }));
-              }
-              if (password.length < 5) {
-                setErrors((prev) => ({ ...prev, password: "Password must be at least 5 characters long" }));
-              }
-              if (!errors.password && !errors.username) {
-                const loginResult = await login(username, password);
-                if (loginResult === LoginResult.INVALID_CREDENTIALS) {
-                  setErrors((prev) => ({ ...prev, username: "Username or password invalid" }));
-                }
-                if (loginResult === LoginResult.SERVER_ERROR) {
-                  setErrors((prev) => ({ ...prev, serverError: "An error occurred. Please try again later." }));
-                }
-                if (loginResult === LoginResult.SUCCESS) {
-                  userContext.setUser({ username });
-                  navigate("/");
-                }
-              }
-            }}
-          >
+            className="logInButton" onClick= {handleLogin}>
             Log In
           </button>
   

@@ -11,11 +11,6 @@ export class TribeModel extends Model<InferAttributes<TribeModel>, InferCreation
   declare owner: ForeignKey<UserModel['username']>;
   declare createdAt: Date;
   declare updatedAt: Date;
-    //declare members: string[];
-  //declare static associations: {
-   // posts: Association<TribeModel, PostModel>;
-
-
 }
 
 TribeModel.init(

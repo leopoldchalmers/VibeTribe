@@ -1,11 +1,7 @@
 import "../App.css"
-
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
-
-import { useNavigate } from "react-router-dom";
-import {Link} from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
 import logo from "/logo.png";
 import profileIcon from "../assets/Profile_icon.webp";
 
@@ -38,8 +34,8 @@ function Navbar(){
             <div className="col-2 text-end">
                 <button 
                 onClick={handleAccountClick} 
-                className="btn btn-link p-0 border-0"
-                style={{ background: 'none' }}
+                className="btn btn-link p-0 border-0 account-btn"
+                
             >
                 <img src={profileIcon} className="navbarImg" alt="Profile Icon"/>
             </button>

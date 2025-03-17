@@ -8,8 +8,7 @@ export function PostComponent({ post }: { post: Post }) {
             <p>{post.description}</p>
             <p>Author: {post.author}</p>
             <p>Likes: {post.likes}</p>
-            <p>Tribe: {post.tribe.description}</p>
-        </div>
+         </div>
     );
 
 }   

@@ -33,7 +33,6 @@ export class TribeService implements ITribeService {
             owner: owner,
             createdAt: new Date(Date.now()),
             updatedAt: new Date(Date.now()),
-            //members: [owner]
         });
         return tribeModel.get({ plain: true }) as Tribe;
     }
@@ -58,23 +57,4 @@ export class TribeService implements ITribeService {
         }
         await TribeModel.destroy({ where: { id: tribeId } });
     }
-
-    /*
-    async addUserToTribe(username: string, tribeId: number): Promise<void> {
-        const tribe = await TribeModel.findByPk(tribeId);
-        if (tribe && tribe.members.find(member => member === username) === undefined) {
-            tribe.members.push(username);
-            await tribe.save();
-        }
-    }
-
-
-    async removeUserFromTribe(username: string, tribeId: number): Promise<void> {
-        const tribe = await TribeModel.findByPk(tribeId);
-        if (tribe && tribe.members.find(member => member === username) !== undefined) {
-            tribe.members = tribe.members.filter(member => member !== username);
-            await tribe.save();
-        }
-    }
-    */
 }

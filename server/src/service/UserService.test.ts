@@ -1,9 +1,6 @@
 import { UserService } from "../service/UserService";
-import { User } from "../model/user";
-import bcrypt from "bcrypt";
 import { UserModel } from "../db/user.db";
 import { Sequelize } from 'sequelize';
-import exp from "constants";
 
 let userService: UserService;
 

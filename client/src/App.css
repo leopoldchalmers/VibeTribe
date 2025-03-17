@@ -166,3 +166,7 @@ body {
 .no-points{
   list-style:none;
 }
+
+.account-btn{
+  background: none;
+}

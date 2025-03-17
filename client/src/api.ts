@@ -10,7 +10,6 @@ export type Tribe = {
     owner: string;
     createdAt: Date;
     updatedAt: Date;
-    //members: string[];
 }
 
 export type Post = {

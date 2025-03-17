@@ -41,7 +41,7 @@ export function AccountInfo() {
       
     }}>Log out</button>   
     {errors.logoutError ? 
-    (<p style={{color: "red"}}>{errors.logoutError}</p>)
+    (<p className = "error">{errors.logoutError}</p>)
     : (<></>) } 
     </div>
   )

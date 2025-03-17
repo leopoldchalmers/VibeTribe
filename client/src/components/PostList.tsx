@@ -1,7 +1,7 @@
 import { Post } from '../api';
 
 
-export function TribeList({ posts }: { posts: Post[] }) {
+export function PostList({ posts }: { posts: Post[] }) {
     if (!posts || posts.length === 0) {
         return <div>No tribes available</div>; 
     }

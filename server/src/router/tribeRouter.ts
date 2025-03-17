@@ -2,8 +2,6 @@ import express, { Request, Response, Router} from "express";
 import { Tribe } from "../model/tribe";
 import { TribeService } from "../service/TribeService";
 
-//const tribeService = new TribeService();
-
 export function tribeRouter(tribeService: TribeService): Router {
     const tribeRouter = express.Router();
 
@@ -11,17 +9,15 @@ export function tribeRouter(tribeService: TribeService): Router {
         session: any
     }
 
-    tribeRouter.get("/tribes", async (
-        req: TribeRequest,
-        res: Response<Tribe[] | string>
-    ) => {
+    tribeRouter.get("/tribes", async (req, res) => {
         try {
-            const tribes = await tribeService.getTribes();
-            res.status(200).send(tribes);
+          const tribes = await tribeService.getTribes();
+          res.status(200).send(tribes);
         } catch (e: any) {
-            res.status(500).send(e.message);
+          res.status(500).send(e.message);
         }
-    });
+      });
+      
 
 
     interface CreateTribeRequest extends Request {
@@ -49,7 +45,6 @@ export function tribeRouter(tribeService: TribeService): Router {
                 res.status(400).send(`Bad PUT call to ${req.originalUrl} --- description has type ${typeof(description)}`);
                 return;
             }
-            //@ts-ignore
             console.log("Creating tribe for user:", req.session.username);
             const newTribe = await tribeService.createTribe(title, description, req.session.username);
             console.log("Tribe created:", newTribe);
@@ -77,7 +72,7 @@ export function tribeRouter(tribeService: TribeService): Router {
         }
     });
 
-    tribeRouter.get("/tribes/:user", async (
+    tribeRouter.get("/tribes/owner/:user", async (
         req: Request<{user: string}, {}, {}>,
         res: Response<Tribe[] | null>
     ) => {
