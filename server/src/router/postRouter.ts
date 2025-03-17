@@ -4,12 +4,11 @@ import { Post } from "../model/post";
 
 const postService = new PostService();
 
-export const postRouter = express.Router();
-
 /**
  * postRouter is a Router that defines routes for post-related API calls 
  * postRouter has routes for getting all posts, getting a post by ID, creating a post, and updating a post 
 */
+export const postRouter = express.Router();
 
     /**
      * Handles GET requests to fetch all posts or posts by tribe ID.

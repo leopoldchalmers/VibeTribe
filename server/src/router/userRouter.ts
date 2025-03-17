@@ -11,7 +11,6 @@ declare module 'express-session' {
  * userRouter is a Router that defines routes for user-related API calls
  * userRouter has routes for creating a user, logging in,logging out, and checking the session status 
  */
-
 export function userRouter(userService: UserService): Router {
     const userRouter = express.Router();
 

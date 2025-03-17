@@ -6,7 +6,6 @@ import { TribeService } from "../service/TribeService";
  * tribeRouter is a Router that defines routes for tribe-related API calls
  * tribeRouter has routes for getting all tribes, getting a tribe by ID, creating a tribe, and getting tribes by owner
  */
-
 export function tribeRouter(tribeService: TribeService): Router {
     const tribeRouter = express.Router();
 
