@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, Router } from "express";
 import { Tribe } from "../model/tribe";
 import { PostService } from "../service/PostService";
 import { TribeService } from "../service/TribeService";
@@ -10,17 +10,27 @@ const postService = new PostService();
 
 export const postRouter = express.Router();
 
-postRouter.get("/", async (
-    req: Request<{}, {}, {}>,
-    res: Response<Array<Post> | String>
-) => {
+postRouter.get("/", async (req: Request, res: Response): Promise<void> => {
     try {
+        const tribeIdParam = req.query.tribeId;
+        if (tribeIdParam) {
+            const tribeId = Number(tribeIdParam);
+            if (isNaN(tribeId)) {
+                res.status(400).send("Invalid tribeId format");
+                return;
+            }
+            const posts = await postService.getPostsByTribeId(tribeId);
+            res.status(200).json(posts);
+            return;
+        }
         const posts = await postService.getPosts();
-        res.status(200).send(posts);
+        res.status(200).json(posts);
     } catch (e: any) {
         res.status(500).send(e.message);
     }
 });
+
+  
 
 postRouter.get("/:id", async (
     req: Request<{ id: string }>, 
