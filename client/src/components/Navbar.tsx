@@ -1,5 +1,4 @@
 import "../App.css"
-import 'bootstrap/dist/css/bootstrap.css';
 
 import { useContext } from "react";
 import { UserContext } from "../UserContext";

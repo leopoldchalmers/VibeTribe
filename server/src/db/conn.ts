@@ -14,8 +14,3 @@ if (process.env.NODE_ENV === "test") {
 export async function initDB() {
   await conn.sync({alter: true, force: false});
 }
-/*
-sequelize.authenticate()
-    .then(() => console.log("Database connected!"))
-    .catch(err => console.error('Error: ', err));
-    */

@@ -4,7 +4,7 @@ import { Sequelize } from "sequelize";
 import { TribeModel } from "../db/tribe.db";
 import { UserService } from "./UserService";
 import { UserModel } from "../db/user.db";
-import supertestSession from "supertest-session";
+//import supertestSession from "supertest-session";
 
 let tribeService: TribeService;
 let userService: UserService;

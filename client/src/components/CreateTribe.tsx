@@ -1,11 +1,8 @@
 import { Tribe } from '../api';
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import axios from "axios";
 import { UserContext } from '../UserContext';
-import "../App.css";
-
-axios.defaults.withCredentials = true;
+import axios from 'axios';
 
 function CreateTribe() {
   const navigate = useNavigate();
@@ -15,7 +12,6 @@ function CreateTribe() {
     owner: "",
     title: "",
     description: "",
-    members: ["test"],
     createdAt: new Date(),
     updatedAt: new Date()
   });

@@ -1,10 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from '../UserContext';
-import axios from 'axios';
 import { logout, LogoutResult } from "../api";
-
-axios.defaults.withCredentials = true;
 
 interface Errors {
   logoutError ?: string

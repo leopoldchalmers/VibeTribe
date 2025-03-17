@@ -1,5 +1,3 @@
-import "../App.css"
-import 'bootstrap/dist/css/bootstrap.css';
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login, LoginResult } from "../api";
