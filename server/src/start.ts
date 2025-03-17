@@ -9,7 +9,6 @@ import { postRouter } from "./router/postRouter";
 import { userRouter } from "./router/userRouter";
 import cors from "cors";
 import session from "express-session";
-import { log } from "console";
 import { TribeService } from "./service/TribeService";
 import { UserService } from "./service/UserService";
 
