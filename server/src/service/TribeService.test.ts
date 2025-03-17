@@ -2,6 +2,7 @@ import { TribeService } from "../service/TribeService";
 import { Tribe } from "../model/tribe";
 import { Sequelize } from "sequelize";
 import { UserService } from "./UserService";
+import { setupTestDB } from "../setupTestDB";
 //import supertestSession from "supertest-session";
 
 let tribeService: TribeService;
@@ -18,7 +19,7 @@ const user = {
 
 beforeAll(async () => {
   // Sync database before all tests
-  await sequelize.sync({ force: true });
+  await setupTestDB(sequelize);
 });
 
 beforeEach(async () => {
