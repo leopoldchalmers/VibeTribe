@@ -26,7 +26,7 @@ export function tribeRouter(tribeService: TribeService): Router {
     }
 
     tribeRouter.post("/tribes", async (
-        req: CreateTribeRequest, // TODO Delete owner
+        req: CreateTribeRequest, 
         res: Response<Tribe | string>
     ) => {
         try {

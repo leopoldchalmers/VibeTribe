@@ -6,9 +6,9 @@ export interface Post {
     title : string;
     description : string;
     author : string;
-    createdAt : string;
-    updatedAt : string;
+    createdAt : Date;
+    updatedAt : Date;
     likes : number;
-    tribe : Tribe;
+    tribe : number;
     songLink : string;
 }

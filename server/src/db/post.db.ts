@@ -12,7 +12,7 @@ export class PostModel extends Model<InferAttributes<PostModel>, InferCreationAt
   declare updatedAt: Date;
   declare likes: number;
   declare tribe: ForeignKey<TribeModel['id']>;
-    declare songLink: string;
+  declare songLink: string;
 }
 
 

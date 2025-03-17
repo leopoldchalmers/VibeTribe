@@ -47,12 +47,7 @@ TribeModel.init(
         type: DataTypes.DATE,
         allowNull: false
     }
-    /*
-    members: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull : false
-    }
-    */
+    
     },
 
     {

@@ -8,10 +8,6 @@ export class UserService {
 
   async createUser(name: string, email: string, password: string): Promise<UserModel | null> {
 
-
-
-    // Instead of returning undefined, we should throw an error?
-    // Instead of if-statements we could use case-switch?
     if (!name || !email || !password) {
       throw new Error("All fields required");
     }
