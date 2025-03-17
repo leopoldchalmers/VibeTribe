@@ -43,6 +43,9 @@ PostModel.init(
                 model: UserModel,
                 key: 'username'
             }
+
+            
+
         }, 
         
         createdAt: {
