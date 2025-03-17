@@ -5,18 +5,27 @@ import { UserContext } from "../UserContext";
 
 export function Account() {
   
+  /**
+   * The account page is a page that allows the user to log in to VibeTribe
+   */
     interface Errors {
         username?: string;
         password?: string;
         serverError?: string;
     }
-  
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [errors, setErrors] = useState<Errors>({});
   
     const navigate = useNavigate();
     const userContext = useContext(UserContext);
+
+    /**
+     * This function handles the login process. It validates the username and password, and then logs the user in if the credentials are correct.
+     * If the credentials are incorrect, the user is shown an error message. 
+     * If there is a server error, the user is shown a server error message.
+     * If the login is successful, the user is redirected to the home page.
+     */
 
     const handleLogin = async () => {
       const validationErrors: Errors = {};

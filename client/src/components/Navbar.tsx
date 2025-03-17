@@ -7,6 +7,14 @@ import profileIcon from "../assets/Profile_icon.webp";
 
 function Navbar(){
 
+    /**
+     * The navbar is a component that displays the VibeTribe logo, the title of the app, and a button to navigate to the account page
+     * The navbar is fixed to the top of the page
+     * The navbar is displayed on all pages
+     * The navbar checks if the user is logged in, and changes the Account-button to navigate to the account page if the user is logged in
+     * The navbar uses the UserContext to check if the user is logged in
+     */
+
     const {user} = useContext(UserContext);
     const navigate = useNavigate();
 

@@ -6,6 +6,14 @@ import { Modal, Button, Form } from "react-bootstrap";
 import "./TribeInfo.css";
 
 export function TribeInfo() {
+  /**
+   * The TribeInfo component is a component that displays the details of a single tribe
+   * The TribeInfo component takes the tribe id from the URL and fetches the tribe and its posts from the server
+   * The TribeInfo component displays the tribe's title, description, owner, and creation date
+   * The TribeInfo component displays the posts of the tribe
+   * The TribeInfo component has a button that allows the user to create a new post
+   */
+  
   const { id } = useParams<{ id: string }>();
   const [tribe, setTribe] = useState<Tribe | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);

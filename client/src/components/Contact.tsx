@@ -3,6 +3,10 @@ import "../App.css";
 
 export function Contact() {
 
+    /**
+     * The contact page is a page that tells the user how to contact the developers of VibeTribe
+     */
+
     return (
         <section className="sectionMargin flex text-center items-center fixed-top">
 
