@@ -1,6 +1,4 @@
 import { Post } from '../model/post';
-import { User } from '../model/user';
-import { Tribe } from '../model/tribe';
 import { PostModel } from '../db/post.db';
 import { TribeModel } from '../db/tribe.db';
 

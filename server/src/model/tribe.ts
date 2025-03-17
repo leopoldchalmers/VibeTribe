@@ -1,5 +1,3 @@
-import { Post } from "./post";
-
 export interface Tribe {
     id : number,
     title : string;
