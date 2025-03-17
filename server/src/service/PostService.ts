@@ -2,6 +2,11 @@ import { Post } from '../model/post';
 import { PostModel } from '../db/post.db';
 import { TribeModel } from '../db/tribe.db';
 
+
+/**
+ * PostService is a service that manages posts
+ * PostService has methods for getting all posts, getting a post by ID, creating a post, and updating a post
+ */
 export class PostService {
 
   async getPosts(): Promise<Post[]> {

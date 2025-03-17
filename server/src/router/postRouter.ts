@@ -6,6 +6,11 @@ const postService = new PostService();
 
 export const postRouter = express.Router();
 
+/**
+ * postRouter is a Router that defines routes for post-related API calls 
+ * postRouter has routes for getting all posts, getting a post by ID, creating a post, and updating a post 
+ */
+
 postRouter.get("/", async (req: Request, res: Response): Promise<void> => {
     try {
         const tribeIdParam = req.query.tribeId;

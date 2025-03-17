@@ -2,6 +2,10 @@ import { Sequelize } from 'sequelize';
 
 export let conn : Sequelize;
 
+/**
+ * conn is a Sequelize object that represents a connection to the database
+ */
+
 if (process.env.NODE_ENV === "test") {
   conn = new Sequelize({
     dialect: 'sqlite',

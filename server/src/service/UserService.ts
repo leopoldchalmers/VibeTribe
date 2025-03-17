@@ -2,7 +2,10 @@ import { User } from '../model/user';
 import bcrypt from "bcrypt";
 import { UserModel } from '../db/user.db';
 
-
+/**
+ * UserService is a service that manages users
+ * UserService has methods for creating and finding users and removing users 
+ */
 
 export class UserService {
 

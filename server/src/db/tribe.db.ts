@@ -11,6 +11,10 @@ export class TribeModel extends Model<InferAttributes<TribeModel>, InferCreation
   declare updatedAt: Date;
 }
 
+/** 
+ * TribeModel is a model that represents a tribe in the database
+ */
+
 TribeModel.init(
     {
     id: {
