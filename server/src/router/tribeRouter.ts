@@ -13,23 +13,32 @@ export function tribeRouter(tribeService: TribeService): Router {
     interface TribeRequest{
         session: any
     }
-
+        
+    /**
+     * Handles GET requests to fetch all tribes.
+     * @returns {Tribe[]} A list of all tribes.
+     */
     tribeRouter.get("/tribes", async (req, res) => {
         try {
-          const tribes = await tribeService.getTribes();
-          res.status(200).send(tribes);
+            const tribes = await tribeService.getTribes();
+            res.status(200).send(tribes);
         } catch (e: any) {
-          res.status(500).send(e.message);
+            res.status(500).send(e.message);
         }
-      });
-      
-
-
+    });
+        
     interface CreateTribeRequest extends Request {
         body: { title : string, description : string, owner: string },
         session: any
     }
 
+    /**
+     * Handles POST requests to create a new tribe.
+     * Requires a `title` and `description` in the request body, and verifies that the user is logged in.
+     * @param {string} title - The title of the new tribe.
+     * @param {string} description - The description of the new tribe.
+     * @returns {Tribe | string} The newly created tribe or an error message.
+     */
     tribeRouter.post("/tribes", async (
         req: CreateTribeRequest, 
         res: Response<Tribe | string>
@@ -60,6 +69,11 @@ export function tribeRouter(tribeService: TribeService): Router {
         }
     })
 
+    /**
+     * Handles GET requests to fetch a tribe by its ID.
+     * @param {string} id - The ID of the tribe to retrieve.
+     * @returns {Tribe | string} The requested tribe or an error message.
+     */
     tribeRouter.get("/tribes/:id", async (
         req: Request<{id: string}, {}, {}>,
         res: Response<Tribe | string>
@@ -77,6 +91,11 @@ export function tribeRouter(tribeService: TribeService): Router {
         }
     });
 
+    /**
+     * Handles GET requests to fetch all tribes owned by a specific user.
+     * @param {string} user - The username of the tribe owner.
+     * @returns {Tribe[] | null} A list of tribes owned by the user or an empty list if no tribes exist.
+     */
     tribeRouter.get("/tribes/owner/:user", async (
         req: Request<{user: string}, {}, {}>,
         res: Response<Tribe[] | null>
@@ -90,7 +109,6 @@ export function tribeRouter(tribeService: TribeService): Router {
         }
     });
 
-    return tribeRouter;
-    
+return tribeRouter;
 
 }
