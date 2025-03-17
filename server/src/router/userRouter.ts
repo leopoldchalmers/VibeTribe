@@ -7,6 +7,10 @@ declare module 'express-session' {
         username?: string;
     }
 }
+/**
+ * userRouter is a Router that defines routes for user-related API calls
+ * userRouter has routes for creating a user, logging in,logging out, and checking the session status 
+ */
 
 export function userRouter(userService: UserService): Router {
     const userRouter = express.Router();
@@ -49,7 +53,7 @@ export function userRouter(userService: UserService): Router {
     userRouter.post("/users/logout", (req: Request, res: Response) => {
         delete req.session.username;
         console.log("LOGGED OUT (USER ROUTER)")
-        res.status(200).send("blabla Logged out");
+        res.status(200).send("Logged out");
     });
     
     return userRouter;

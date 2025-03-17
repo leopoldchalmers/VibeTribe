@@ -4,6 +4,11 @@ import { ITribeService } from "../dbservice/ITribeService";
 import { UserService } from "./UserService";
 import { TribeModel } from "../db/tribe.db";
 
+/**
+ * TribeService is a service that manages tribes
+ * TribeService has methods for creating tribes, deleting tribes, and getting tribes by user, id, and all tribes
+ */
+
 export class TribeService implements ITribeService {
     private userService: UserService;
 

@@ -2,6 +2,12 @@ import "../App.css"
 import { Link } from "react-router-dom";
 
 function Footer(){
+
+  /**
+   * The footer is a component that displays the links to the about and contact pages
+   * The footer is fixed to the bottom of the page
+   * The footer is displayed on all pages
+   */
     return (
     <footer>
         <div className="container-fluid text-center fixed-bottom footerlinks py-3">

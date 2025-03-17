@@ -14,7 +14,9 @@ export class PostModel extends Model<InferAttributes<PostModel>, InferCreationAt
   declare tribe: ForeignKey<TribeModel['id']>;
   declare songLink: string;
 }
-
+/**
+ * PostModel is a model that represents a post in the database 
+ */
 
 PostModel.init(
     {

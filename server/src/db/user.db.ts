@@ -13,6 +13,9 @@ export class UserModel extends Model<InferAttributes<UserModel>, InferCreationAt
     posts: Association<UserModel, PostModel>;
   };
 }
+/**
+ * UserModel is a model that represents a user in the database
+ */
 
 UserModel.init(
   {

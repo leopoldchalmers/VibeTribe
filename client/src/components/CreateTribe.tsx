@@ -7,6 +7,10 @@ function CreateTribe() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
 
+  /**
+   * The create tribe page is a page that allows the user to create a new tribe
+   */
+
   const [tribe, setTribe] = useState<Omit<Tribe, "id" | "createdAt" | "updatedAt">>({
     owner: "",
     title: "",
@@ -21,11 +25,16 @@ function CreateTribe() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    
     e.preventDefault();
     if (!user) {
       console.error("User is not logged in");
       return;
     }
+    /**
+     * The user must be logged in to create a tribe
+     */
+
     tribe.owner = user.username;
     try {
       const createdTribe = await createTribe(tribe.description, tribe.title);
@@ -38,6 +47,11 @@ function CreateTribe() {
       console.error("Error caught creating tribe:", error);
     }
   };
+  /**
+   * The user must provide a title and description for the tribe
+   * The user is redirected to the home page after creating a tribe
+   * If there is an error creating the tribe, the error is logged
+   */
 
   return (
     <>

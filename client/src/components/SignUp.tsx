@@ -5,6 +5,14 @@ import { registerUser } from "../api";
 import { Link, useNavigate } from "react-router-dom";
 
 export function SignUp() {
+  /**
+   * The SignUp component is a page that allows the user to register a new account
+   * The SignUp component has input fields for the user to enter a username, email, and password
+   * The SignUp component has a button that allows the user to submit the registration form
+   * The SignUp component displays error messages if the user enters invalid information
+   * The SignUp component redirects the user to the home page if the registration is successful
+   */
+  
   interface Errors {
     username?: string;
     email?: string;

@@ -7,6 +7,10 @@ interface Errors {
   logoutError ?: string
 }
 
+/**
+ * AccountInfo component that displays the user's username and a button to log out
+ */
+
 export function AccountInfo() {
 
   const navigate = useNavigate();
