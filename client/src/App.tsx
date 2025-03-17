@@ -10,11 +10,18 @@ import { useState } from 'react'
 import {UserContext} from './UserContext.ts'
 import { User } from './api.ts'
 import AccountInfo from './components/AccountInfo.tsx'
-import { About } from './components/About.tsx'
+import { About } from './components/about.tsx'
 import { Contact } from './components/Contact.tsx'
 import { TribeInfo } from './components/TribeInfo.tsx'
 
 function App() {
+  /**
+   * The App component is the main component of the application
+   * The App component uses the UserContext to store the user state
+   * The App component uses the UserContext to pass the user state to the Navbar and AccountInfo components
+   * The App component uses the BrowserRouter to enable routing in the application
+   * The App component uses the Navbar, Footer, Home, Account, SignUp, CreateTribe, and AccountInfo components to display the application
+   */
 
   const [user, setUser] = useState<User | undefined>(undefined)
 

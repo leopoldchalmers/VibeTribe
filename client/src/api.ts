@@ -1,5 +1,13 @@
 import axios from 'axios';
+
+/**
+ * This file contains the functions that interact with the backend API.
+ * The functions in this file are used by the components to fetch data from the backend.
+ * The functions in this file are used to fetch data from the backend and return it to the components.
+ */
+
 axios.defaults.withCredentials = true;
+
 
 const BASE_URL = 'http://localhost:8080';
 
