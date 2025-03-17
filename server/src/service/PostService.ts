@@ -17,9 +17,7 @@ export class PostService {
   }
 
   async getPostById(id: number): Promise<Post | null> {
-    const post = await PostModel.findByPk(id, {
-      include: [{ model: TribeModel, as: 'tribeModel' }]
-    });
+    const post = await PostModel.findByPk(id);
     return post ? post.get({ plain: true }) as Post : null;
   }
 
