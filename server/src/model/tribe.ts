@@ -1,11 +1,8 @@
-import { Post } from "./post";
-
 export interface Tribe {
-    id : number;
+    id : number,
+    title : string;
     description : string;
-    posts: Post[];
-    owner: number;
+    owner: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
-
-
-

@@ -1,13 +1,11 @@
-import { User } from './user';
-import { Tribe } from './tribe';
-
 export interface Post {
     id : number;
     title : string;
     description : string;
-    author : User;
-    createdAt : number;
-    updatedAt : number;
+    author : string;
+    createdAt : Date;
+    updatedAt : Date;
     likes : number;
-    tribe : Tribe;
+    tribe : number;
+    songLink : string;
 }

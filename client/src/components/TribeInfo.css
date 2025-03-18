@@ -1,0 +1,24 @@
+.tribe-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .tribe-details {
+    margin-bottom: 20px;
+  }
+
+  .tribe-details h1 {
+    font-weight: bold; 
+}
+  
+  .posts-list {
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .post-item {
+    margin-bottom: 20px;
+  }

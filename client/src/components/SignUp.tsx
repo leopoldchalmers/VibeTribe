@@ -1,88 +1,155 @@
-import { Form } from "react-bootstrap";
-import "../App.css"
-import 'bootstrap/dist/css/bootstrap.css';
-import { useNavigate } from "react-router-dom";
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
-import axios from "axios";
+import { registerUser } from "../api/api";
+import { Link, useNavigate } from "react-router-dom";
 
+export function SignUp() {
+  /**
+   * The SignUp component is a page that allows the user to register a new account
+   * The SignUp component has input fields for the user to enter a username, email, and password
+   * The SignUp component has a button that allows the user to submit the registration form
+   * The SignUp component displays error messages if the user enters invalid information
+   * The SignUp component redirects the user to the home page if the registration is successful
+   */
+  
+  interface Errors {
+    username?: string;
+    email?: string;
+    password?: string;
+    serverError?: string;
+  }
 
-function SignUp() {
-
+  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errors, setErrors] = useState<Errors>({});
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prevState => ({
-        ...prevState,
-        [e.target.name]: e.target.value
-    }));
-};
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:8080/users", formData);
-      console.log("User created:", response.data);
-      localStorage.setItem("user", JSON.stringify(response.data));
-      navigate("/home");
-
-  } catch (error) {
-      console.error("Error creating user:", error);
-  }
-  };
-
   return (
-    <>
-      <div className="d-grid gap-2 col-6 mx-auto">
-        <h1 className="pageTitle">Sign up to VibeTribe </h1>
-      </div>
+    <section className="sectionMargin flex text-center items-center fixed-top">
+      <div className="text-center">
+        <h1 className="pageTitle">Register new user</h1>
 
-      <Form className="form-container" onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-
-          <Form.Label>First Name</Form.Label>
-          <Form.Control 
-          type="text"
-          name="name"
-          placeholder="First Name" 
-          value={formData.name} 
-          onChange={handleChange} 
-           />
-          <Form.Label>Email address</Form.Label>
-          <Form.Control 
-          type="email" 
-          name="email"
-          placeholder="name@example.com" 
-          value={formData.email}
-          onChange={handleChange}
+        <div className="text-left">
+          <label htmlFor="username" className="block font-medium p-3">
+            Username:
+          </label>
+          <input
+            className="forms"
+            type="text"
+            id="username"
+            onChange={(e) => setUsername(e.target.value)}
           />
-          <Form.Label>Password</Form.Label>
-          <Form.Control 
-          type="password" 
-          name="password"
-          placeholder="Password" 
-          value={formData.password}
-          onChange={handleChange}
-          />
-        </Form.Group>
-        
-      
-        <div className="d-grid gap-2 col-6 mx-auto">
-        <button type="submit" className="btn btn-light loginButton">Create Account</button>
+          {errors.username && <p className="error">{errors.username}</p>}
         </div>
-        </Form>
 
-      <div className="d-grid gap-2 col-6 mx-auto loginBack" >
-        <button type="button" className="btn btn-light loginButton" onClick={() => navigate("/account")} >Already have an accout</button>
+        <div className="text-left">
+          <label htmlFor="email" className="block font-medium p-4">
+            Email:
+          </label>
+          <input
+            className="forms mt-1"
+            type="email"
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
+        </div>
+
+        <div className="text-left">
+          <label htmlFor="password" className="block font-medium p-3">
+            Password:
+          </label>
+          <input
+            className="forms mt-1"
+            type="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {errors.password && <p className="error">{errors.password}</p>}
+        </div>
+
+        <p>
+          <button
+            className="logInButton mt-4"
+            onClick={async () => {
+              setErrors({});
+              let valid = true;
+
+              if (username.length === 0) {
+                setErrors((prev) => ({
+                  ...prev,
+                  username: "Username must not be empty",
+                }));
+                valid = false;
+              }
+
+              if (email.length === 0) {
+                setErrors((prev) => ({
+                  ...prev,
+                  email: "Email must not be empty",
+                }));
+                valid = false;
+              }
+
+              if (password.length < 5) {
+                setErrors((prev) => ({
+                  ...prev,
+                  password: "Password must be at least 5 characters long",
+                }));
+                valid = false;
+              }
+              if (valid) {
+                try {
+                  await registerUser(username, email, password);
+                  navigate("/");
+                } catch (error: any) {
+                  if (error.response && error.response.status === 400) {
+                    const serverErrorMsg = error.response.data;
+                    if (serverErrorMsg.includes("Username")) {
+                      setErrors((prev) => ({
+                        ...prev,
+                        username: serverErrorMsg,
+                      }));
+                    } else if (serverErrorMsg.includes("Email already exists")) {
+                      setErrors((prev) => ({
+                        ...prev,
+                        email: serverErrorMsg,
+                      }));
+                    } else if(serverErrorMsg.includes("Invalid email format")) {
+                      setErrors((prev) => ({
+                        ...prev,
+                        email: serverErrorMsg,
+                      }));
+                    } 
+                    else {
+                      setErrors((prev) => ({
+                        ...prev,
+                        serverError: serverErrorMsg,
+                      }));
+                    }
+                  } else {
+                    setErrors((prev) => ({
+                      ...prev,
+                      serverError: "An unexpected error occurred",
+                    }));
+                  }
+                }
+              }
+            }}
+          >
+            Sign up
+          </button>
+        </p>
+
+        <p className="flex items-center space-x-2">
+          <span>Already have an account? </span>
+          <Link to="/account" className="goBack text-blue-500">
+            Log in
+          </Link>
+        </p>
       </div>
-
-    </>
-  )
+    </section>
+  );
 }
-
-export default SignUp;

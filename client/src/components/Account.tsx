@@ -1,57 +1,96 @@
-import { Form } from "react-bootstrap";
-import "../App.css"
-import 'bootstrap/dist/css/bootstrap.css';
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { login, LoginResult } from "../api/api";
+import { UserContext } from "../context/UserContext";
 
-function Account() {
-
+export function Account() {
+  
+  /**
+   * The account page is a page that allows the user to log in to VibeTribe
+   */
+    interface Errors {
+        username?: string;
+        password?: string;
+        serverError?: string;
+    }
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [errors, setErrors] = useState<Errors>({});
+  
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState<any>(null);
+    const userContext = useContext(UserContext);
 
-    useEffect(() => {
-      const userFromLocalStorage = localStorage.getItem("user");
-      if (userFromLocalStorage) {
-        setIsLoggedIn(true);
-        setUser(JSON.parse(userFromLocalStorage));
+    /**
+     * This function handles the login process. It validates the username and password, and then logs the user in if the credentials are correct.
+     * If the credentials are incorrect, the user is shown an error message. 
+     * If there is a server error, the user is shown a server error message.
+     * If the login is successful, the user is redirected to the home page.
+     */
+
+    const handleLogin = async () => {
+      const validationErrors: Errors = {};
+      if (username.trim() === "") {
+        validationErrors.username = "Username must not be empty";
       }
-    }, []);
-
+      if (password.length < 5) {
+        validationErrors.password = "Password must be at least 5 characters long";
+      }
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
+      setErrors({});
+      const loginResult = await login(username, password);
+      if (loginResult === LoginResult.INVALID_CREDENTIALS) {
+        setErrors({ username: "Username or password invalid" });
+      } else if (loginResult === LoginResult.SERVER_ERROR) {
+        setErrors({ serverError: "An error occurred. Please try again later." });
+      } else if (loginResult === LoginResult.SUCCESS) {
+        userContext.setUser({ username });
+        navigate("/");
+      }
+    };
+  
     return (
-        <>
-        <div className="d-grid gap-2 col-6 mx-auto">
-          {isLoggedIn ? (
-            <h1 className="pageTitle">Welcome back, {user?.name}!</h1> 
-            ) : (
-            <h1 className="pageTitle">Log in to VibeTribe </h1>
-          )}
-        </div>   
-      
-    
-    <Form className="form-container">
-      {isLoggedIn ? null : (
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="name@example.com" />
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      )}
-    </Form>
-            {isLoggedIn ? null : (
-            <div className="d-grid gap-2 col-6 mx-auto">
+      <section className="sectionMargin flex justify-center items-center fixed-top">
+        <div className="text-center">
+          <h1 className="pageTitle">Log in to VibeTribe</h1>
+  
+          <div className="text-left">
+            <label htmlFor="username" className="block font-medium p-3">Username: </label>
+            <input
+              type="text"
+              id="username"
+              className="forms"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {errors.username && <p className="error">{errors.username}</p>}
+          </div>
+  
+          <div className="text-left">
+            <label htmlFor="password" className="block font-medium p-3">Password: </label>
+            <input
+              type="password"
+              id="password"
+              className="forms"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {errors.password && <p className="error">{errors.password}</p>}
+          </div>
+  
+          {errors.serverError && <p className="error">{errors.serverError}</p>}
+  
+          <button
+            className="logInButton" onClick= {handleLogin}>
+            Log In
+          </button>
+  
+          <p className="flex items-center space-x-2 mt-4">
+            <span>Don't have an account?  </span>
+            <Link to="/signup" className="goBack"> Sign up</Link>
+          </p>
 
-            <button type="button" className="btn btn-light loginButton" >Log in</button>
-            <p className="signUptext">Don't have an account?</p>  
-            <button type="button" className="btn btn-light signUpButton" onClick={()=> navigate("/signup")}  >Sign up</button>
-            </div>
-            )}
-        </>
-      
-    )
- 
-} 
-
-
-export default Account;
+        </div>
+      </section>
+    );
+  }

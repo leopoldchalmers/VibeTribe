@@ -1,10 +1,10 @@
 import { app } from "./start";
+import { initDB } from "./db/conn";
 
 
 /**
 * App Variables
 */
-
 
 const PORT : number = 8080;
 
@@ -17,3 +17,5 @@ const PORT : number = 8080;
 app.listen(PORT, () => {
      console.log(`listening on port ${PORT}`);
 }); 
+
+initDB();

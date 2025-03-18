@@ -1,45 +1,106 @@
 import { Post } from '../model/post';
-import { User } from '../model/user';
-import { Tribe } from '../model/tribe';
+import { PostModel } from '../db/post.db';
+import { TribeModel } from '../db/tribe.db';
+import { IPostService } from '../dbservice/IPostService';
 
-export class PostService {
-  private posts : Post[] = [];
+/**
+ * PostService is a service that manages posts.
+ * PostService has methods for getting all posts, getting a post by ID, creating a post, and updating a post.
+ */
+export class PostService implements IPostService {
 
-  async getPosts() : Promise<Post[]> { // Async function means that it will return a promise of Post[] sometime, it does not freeze the code, thats why we use. Async requires a Promise
-      return JSON.parse(JSON.stringify(this.posts));
+  /**
+   * Retrieves all posts from the database, including their associated tribe.
+   * @returns {Promise<Post[]>} A promise that returns an array of posts.
+   */
+  async getPosts(): Promise<Post[]> {
+    const posts = await PostModel.findAll({
+      include: [{ model: TribeModel, as: 'tribeModel' }]
+    });  
+    return posts.map(post => post.get({ plain: true }) as Post);
   }
 
-  async getPostById(id: number) : Promise<Post | undefined> {
-      return this.posts.find(post => post.id === id);
+  /**
+   * Retrieves a specific post by its ID from the database, including its associated tribe.
+   * @param {number} id - The ID of the post to retrieve.
+   * @returns {Promise<Post | null>} A promise that returns a post if found, or null if not found.
+   */
+  async getPostById(id: number): Promise<Post | null> {
+    const post = await PostModel.findByPk(id);
+    return post ? post.get({ plain: true }) as Post : null;
   }
 
+  /**
+   * Retrieves all posts associated with a specific tribe by the tribe's ID.
+   * @param {number} tribeId - The ID of the tribe to retrieve posts for.
+   * @returns {Promise<Post[]>} A promise that returns an array of posts associated with the given tribe.
+   */
+  async getPostsByTribeId(tribeId: number): Promise<Post[]> {
+    const posts = await PostModel.findAll({
+      where: { tribe: tribeId }, 
+      include: [{
+        model: TribeModel,
+        as: 'tribeModel',
+        required: true 
+      }]
+    });
 
-   async addPost(title: string, description: string, author: User, tribe: Tribe) : Promise<Post> {
-    const post: Post = {
-          id: Date.now(),
-          title: title,
-          description: description,
-          createdAt:  Date.now(),
-          updatedAt: Date.now(),
-          author: author,
-          likes: 0,
-          tribe: tribe
-      };
-      this.posts.push(post);
+    return posts.map(post => post.get({ plain: true }) as Post);
+  }
 
-      return { ...post };
+  /**
+   * Creates a new post and stores it in the database.
+   * @param {string} title - The title of the new post.
+   * @param {string} description - The description of the new post.
+   * @param {string} author - The author of the new post.
+   * @param {number} tribeId - The ID of the tribe that the post belongs to.
+   * @param {string} songLink - The link to the song associated with the post.
+   * @returns {Promise<Post>} A promise that returns the created post.
+   */
+  async addPost(title: string, description: string, author: string, tribeId: number, songLink: string): Promise<Post> {
+
+    if (!title || !description || !author || !tribeId) {
+      throw new Error("All fields required");
     }
-      
-    async updatePost(id: number, title: string, description: string) : Promise<Post | undefined> {
-      const post = this.posts.find(post => post.id === id);
-      if(post) {
-        post.title = title;
-        post.description = description;
-        post.updatedAt = Date.now();
-        return { ...post };
-      }
-      return undefined;
 
-}   
+    const post = await PostModel.create({
+      title: title,
+      description: description,
+      author: author,
+      createdAt: new Date(Date.now()),
+      updatedAt: new Date(Date.now()),
+      likes: 0,
+      tribe: tribeId,
+      songLink: songLink
+    });
+    return post.get({ plain: true }) as Post;
+  }
 
+  /**
+   * Updates an existing post in the database by its ID.
+   * @param {number} id - The ID of the post to update.
+   * @param {string} title - The new title of the post.
+   * @param {string} description - The new description of the post.
+   * @param {string} songLink - The new song link associated with the post.
+   * @returns {Promise<Post | null>} A promise that returns the updated post, or null if the post was not found.
+   */
+  async updatePost(id: number, title: string, description: string, songLink: string): Promise<Post> {
+    const post = await PostModel.findByPk(id);
+    if (post) {
+      post.title = title;
+      post.description = description;
+      post.songLink = songLink;
+      post.updatedAt = new Date();
+      await post.save();
+      return post.get({ plain: true }) as Post;
+    }
+    throw new Error("Post not found");
+  }
+
+  async deletePost(id: number): Promise<void> {
+    const post = await PostModel.findByPk(id);
+    if (post) {
+      await post.destroy();
+    }
+  }
 }
