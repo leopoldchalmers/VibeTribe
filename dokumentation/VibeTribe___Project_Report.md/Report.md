@@ -95,8 +95,8 @@ a password that is at least 5 characters long. You will then need to log in to
 access the features.
 
 
-![Figure 1: Login screen](dokumentation/VibeTribe___Project_Report.md/ornohtc2.png)
-![Figure 2: Register screen](dokumentation/VibeTribe___Project_Report.md/mcxdm25m.png)
+![Figure 1: Login screen](ornohtc2.png)
+![Figure 2: Register screen](mcxdm25m.png)
 
 2.2.2 Create a tribe
 
