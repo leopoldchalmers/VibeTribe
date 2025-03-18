@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { UserContext } from '../UserContext';
-import { logout, LogoutResult } from "../api";
+import { UserContext } from "../context/UserContext";
+import { logout, LogoutResult } from "../api/api";
 
 interface Errors {
   logoutError ?: string

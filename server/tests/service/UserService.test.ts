@@ -1,5 +1,5 @@
-import { UserService } from "../service/UserService";
-import { UserModel } from "../db/user.db";
+import { UserService } from "../../src/service/UserService";
+import { UserModel } from "../../src/db/user.db";
 import { Sequelize } from 'sequelize';
 
 let userService: UserService;

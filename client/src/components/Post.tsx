@@ -1,4 +1,4 @@
-import { Post } from "../api";
+import { Post } from "../api/api";
 
 
 export function PostComponent({ post }: { post: Post }) {

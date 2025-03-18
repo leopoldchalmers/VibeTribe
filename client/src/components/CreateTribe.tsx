@@ -1,7 +1,7 @@
-import { Tribe, createTribe } from '../api';
+import { Tribe, createTribe } from '../api/api';
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import { UserContext } from '../UserContext';
+import { UserContext } from "../context/UserContext";
 
 function CreateTribe() {
   const navigate = useNavigate();

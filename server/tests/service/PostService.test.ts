@@ -1,13 +1,13 @@
-import { PostService } from "./PostService";
-import { User } from "../model/user";
-import { Tribe } from "../model/tribe";
-import { TribeService } from "./TribeService";
-import { UserService } from "./UserService";
+import { PostService } from "../../src/service/PostService";
+import { User } from "../../src/model/user";
+import { Tribe } from "../../src/model/tribe";
+import { TribeService } from "../../src/service/TribeService";
+import { UserService } from "../../src/service/UserService";
 import { Sequelize } from "sequelize";
-import { PostModel } from "../db/post.db";
-import { TribeModel } from "../db/tribe.db";
-import { UserModel } from "../db/user.db";
-import { conn } from "../db/conn";
+import { PostModel } from "../../src/db/post.db";
+import { TribeModel } from "../../src/db/tribe.db";
+import { UserModel } from "../../src/db/user.db";
+import { conn } from "../../src/db/conn";
 
 let postService: PostService;
 let tribeService: TribeService;

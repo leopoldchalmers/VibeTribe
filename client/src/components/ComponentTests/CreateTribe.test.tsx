@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { fireEvent, screen } from '@testing-library/dom';
 import CreateTribe from '../CreateTribe';
 import { MemoryRouter } from 'react-router-dom';
-import { UserContext } from '../../UserContext';
+import { UserContext } from "../../context/UserContext";
 
 describe('CreateTribe Component', () => {
 
@@ -11,7 +11,7 @@ describe('CreateTribe Component', () => {
             <MemoryRouter> 
             <CreateTribe />
             </MemoryRouter>);
-            
+
         const headingElement = screen.getByRole('heading', {name:/Create tribe/i});
         expect(headingElement).toBeInTheDocument();
     });

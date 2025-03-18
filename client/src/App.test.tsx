@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import App from './App';
-import { UserContext } from './UserContext';
+import { UserContext } from "./context/UserContext";
 
 describe('App Component', () => {
 

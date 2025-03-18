@@ -1,7 +1,7 @@
 import { TribeList } from "../components/TribeList";
-import { Tribe, getTribes } from "../api";
+import { Tribe, getTribes } from "../api/api";
 import { useEffect, useState, useContext } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 

@@ -1,4 +1,4 @@
-import { Tribe } from "../api";
+import { Tribe } from "../api/api";
 import "./Card.css";
 import { Link } from "react-router-dom";
 

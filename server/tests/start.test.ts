@@ -1,7 +1,7 @@
-import { app } from "./start";
-import { Tribe } from "./model/tribe";
-import { Post } from "./model/post";
-import { conn } from "./db/conn";
+import { app } from "../src/start";
+import { Tribe } from "../src/model/tribe";
+import { Post } from "../src/model/post";
+import { conn } from "../src/db/conn";
 
 const session = require("supertest-session");
     describe("End-to-end Tests", () => {

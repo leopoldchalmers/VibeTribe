@@ -1,6 +1,6 @@
 import "../App.css"
 import { useContext } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.webp";
 import profileIcon from "../assets/Profile_icon.webp";

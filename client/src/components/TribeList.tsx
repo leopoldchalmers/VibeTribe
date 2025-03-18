@@ -1,4 +1,4 @@
-import { Tribe } from "../api";
+import { Tribe } from "../api/api";
 import { TribeCard } from "./TribeCard";
 import "./Card.css"; 
 import "../App.css";

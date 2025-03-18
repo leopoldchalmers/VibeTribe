@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login, LoginResult } from "../api";
-import { UserContext } from "../UserContext";
+import { login, LoginResult } from "../api/api";
+import { UserContext } from "../context/UserContext";
 
 export function Account() {
   

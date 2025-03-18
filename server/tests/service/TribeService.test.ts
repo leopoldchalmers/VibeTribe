@@ -1,9 +1,9 @@
-import { TribeService } from "../service/TribeService";
-import { Tribe } from "../model/tribe";
+import { TribeService } from "../../src/service/TribeService";
+import { Tribe } from "../../src/model/tribe";
 import { Sequelize } from "sequelize";
-import { UserService } from "./UserService";
-import { UserModel } from "../db/user.db";
-import { TribeModel } from "../db/tribe.db";
+import { UserService } from "../../src/service/UserService";
+import { UserModel } from "../../src/db/user.db";
+import { TribeModel } from "../../src/db/tribe.db";
 
 let tribeService: TribeService;
 let userService: UserService;

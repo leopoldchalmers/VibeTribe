@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { User } from './api'
+import { User } from '../api/api'
 
 /**
  * The UserContext is a context that stores the user state

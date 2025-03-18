@@ -1,8 +1,8 @@
 import { render, screen} from '@testing-library/react';
 import Home from '../Home';
 import { MemoryRouter } from 'react-router-dom';
-import { UserContext } from '../../UserContext';
-import * as api from '../../api';
+import { UserContext } from "../../context/UserContext";
+import * as api from '../../api/api';
 
 jest.mock('../../api');
 

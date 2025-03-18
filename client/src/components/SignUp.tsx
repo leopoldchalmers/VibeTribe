@@ -1,7 +1,7 @@
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
-import { registerUser } from "../api";
+import { registerUser } from "../api/api";
 import { Link, useNavigate } from "react-router-dom";
 
 export function SignUp() {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { Tribe, Post, getPostsByTribeId, createPost, getTribeById } from "../api";
-import { UserContext } from "../UserContext";
+import { Tribe, Post, getPostsByTribeId, createPost, getTribeById } from "../api/api";
+import { UserContext } from "../context/UserContext";
 import { Modal, Button, Form } from "react-bootstrap";
 import "./TribeInfo.css";
 
@@ -55,6 +55,7 @@ export function TribeInfo() {
     e.preventDefault();
     if (!user) {
       console.error("User is not logged in");
+      alert("You must be logged in to create a post");
       return;
     }
     try {
