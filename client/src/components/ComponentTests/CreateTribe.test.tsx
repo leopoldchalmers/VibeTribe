@@ -11,28 +11,30 @@ describe('CreateTribe Component', () => {
             <MemoryRouter> 
             <CreateTribe />
             </MemoryRouter>);
+            
         const headingElement = screen.getByRole('heading', {name:/Create tribe/i});
         expect(headingElement).toBeInTheDocument();
     });
-    
     
     test('CreateTribe has navigation link to home', () => {
         render(
             <MemoryRouter>
                 <CreateTribe />
             </MemoryRouter>
-    
         );
+
         const link = screen.getByRole('link', { name: /Go back/i });
         expect(link).toBeInTheDocument();
     }
     );
+
     test('renders input fields for title and description', () => {
         render(
             <MemoryRouter>
                 <CreateTribe />
             </MemoryRouter>
         );
+        
         const titleInput = screen.getByPlaceholderText(/name/i);
         const descriptionInput = screen.getByPlaceholderText(/description/i);
 
@@ -60,6 +62,7 @@ describe('CreateTribe Component', () => {
 });
 
 describe('CreateTribe Component - User Input Handling', () => {
+
     test('updates title and description state on user input', () => {
         render(
             <MemoryRouter>
@@ -78,4 +81,5 @@ describe('CreateTribe Component - User Input Handling', () => {
         expect(titleInput).toHaveValue('New Tribe Name');
         expect(descriptionInput).toHaveValue('A description of the tribe');
     });
+
 });

@@ -10,7 +10,7 @@ import { useState } from 'react'
 import {UserContext} from './UserContext.ts'
 import { User } from './api.ts'
 import AccountInfo from './components/AccountInfo.tsx'
-import { About } from './components/about.tsx'
+import { About } from './components/About.tsx'
 import { Contact } from './components/Contact.tsx'
 import { TribeInfo } from './components/TribeInfo.tsx'
 

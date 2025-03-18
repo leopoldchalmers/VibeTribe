@@ -40,8 +40,6 @@ export class TribeService implements ITribeService {
             throw new Error("All fields required");
         }
 
-        console.log("TEST TEST TEST");
-        console.log(owner);
         const user: User | null = await this.userService.findUser(owner);
         if (!user) {
             throw new Error("User not found");

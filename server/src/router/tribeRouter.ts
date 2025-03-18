@@ -48,20 +48,24 @@ export function tribeRouter(tribeService: TribeService): Router {
                 res.status(403).send("Not logged in");
                 return;
             }
+
             const title = req.body.title;
             const description = req.body.description;
+
             if (!title || !description) {
                 res.status(400).send("All fields are required");
                 return;
             }
+
             if (typeof(description) !== "string") {
                 res.status(400).send(`Bad PUT call to ${req.originalUrl} --- description has type ${typeof(description)}`);
                 return;
             }
-            console.log("Creating tribe for user:", req.session.username);
+
             const newTribe = await tribeService.createTribe(title, description, req.session.username);
-            console.log("Tribe created:", newTribe);
+
             res.status(201).send(newTribe);
+
         } catch (e: any) {
             console.error(e);
             res.status(500).send(e.message);
@@ -73,6 +77,7 @@ export function tribeRouter(tribeService: TribeService): Router {
      * @param {string} id - The ID of the tribe to retrieve.
      * @returns {Tribe | string} The requested tribe or an error message.
      */
+    
     tribeRouter.get("/tribes/:id", async (
         req: Request<{id: string}, {}, {}>,
         res: Response<Tribe | string>

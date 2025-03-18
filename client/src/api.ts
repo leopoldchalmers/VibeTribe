@@ -39,8 +39,8 @@ export type Tribe = {
  * @property {string} title - The title of the post.
  * @property {string} description - The description of the post.
  * @property {number} author - The author ID of the post.
- * @property {number} createdAt - The timestamp when the post was created.
- * @property {number} updatedAt - The timestamp when the post was last updated.
+ * @property {Date} createdAt - The timestamp when the post was created.
+ * @property {Date} updatedAt - The timestamp when the post was last updated.
  * @property {number} likes - The number of likes the post has.
  * @property {number} tribeId - The ID of the tribe to which the post belongs.
  * @property {string} songLink - The link to the song related to the post.
@@ -51,8 +51,8 @@ export type Post = {
     title : string;
     description : string;
     author : number;
-    createdAt : number;
-    updatedAt : number;
+    createdAt : Date;
+    updatedAt : Date;
     likes : number;
     tribeId : number;
     songLink : string;
@@ -210,5 +210,3 @@ export const getPostsByTribeId = async (tribeId: number) => {
     const response = await axios.get<Post[]>(`${BASE_URL}/posts?tribeId=${tribeId}`);
     return response.data;
 }
-
-

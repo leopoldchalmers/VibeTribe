@@ -1,12 +1,13 @@
 import { Post } from '../model/post';
 import { PostModel } from '../db/post.db';
 import { TribeModel } from '../db/tribe.db';
+import { IPostService } from '../dbservice/IPostService';
 
 /**
  * PostService is a service that manages posts.
  * PostService has methods for getting all posts, getting a post by ID, creating a post, and updating a post.
  */
-export class PostService {
+export class PostService implements IPostService {
 
   /**
    * Retrieves all posts from the database, including their associated tribe.

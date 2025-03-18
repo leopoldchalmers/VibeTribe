@@ -10,10 +10,9 @@ describe('About Component', () => {
           <About />
       </MemoryRouter>
     );
+
         const title = screen.getByText(/About VibeTribe/i);
     expect(title).toBeInTheDocument();
   });
 
 });
-
-

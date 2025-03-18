@@ -9,6 +9,7 @@ jest.mock("axios")
 const mockedAxios = axios as jest.Mocked<typeof axios>
 
 describe('A login screen', () => {
+  
   test('when Log In is clicked, sends the username and password to the server', async () => {
     render(
       <MemoryRouter>
@@ -30,7 +31,5 @@ describe('A login screen', () => {
       {username : "Hilda", password: "12345"}
     );
   })
+
 });
-
-
-

@@ -13,8 +13,8 @@ describe('SignUp Component', () => {
         <MemoryRouter>
             <SignUp />
         </MemoryRouter>
-
     );
+
         const headingElement = screen.getByText(/Register new user/i);
         expect(headingElement).toBeInTheDocument();
     });
@@ -24,8 +24,8 @@ describe('SignUp Component', () => {
             <MemoryRouter>
                 <SignUp />
             </MemoryRouter>
-    
         );
+
         const button = screen.getByRole('button', { name: /Sign up/i });
         expect(button).toBeInTheDocument();
     }
@@ -36,8 +36,8 @@ describe('SignUp Component', () => {
             <MemoryRouter>
                 <SignUp />
             </MemoryRouter>
-    
         );
+        
         const link = screen.getByRole('link', { name: /Log in/i });
         expect(link).toBeInTheDocument();
     }

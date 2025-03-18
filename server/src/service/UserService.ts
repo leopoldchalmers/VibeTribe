@@ -1,12 +1,13 @@
 import { User } from '../model/user';
 import bcrypt from "bcrypt";
 import { UserModel } from '../db/user.db';
+import { IUserService } from '../dbservice/IUserService';
 
 /**
  * UserService is a service that manages users.
  * UserService has methods for creating, finding, and removing users.
  */
-export class UserService {
+export class UserService implements IUserService {
 
   /**
    * Creates a new user with the given details and stores it in the database.
@@ -36,11 +37,13 @@ export class UserService {
     }
 
     const salt = bcrypt.genSaltSync(10);
+    
     return await UserModel.create({
       username: name,
       email: email,
       password: bcrypt.hashSync(password, salt),
     });
+    
   }
 
   /**
@@ -55,11 +58,14 @@ export class UserService {
     }
 
     const user: User | null = await UserModel.findOne({ where: { username } });
+
     if (user) {
       const isValid = await bcrypt.compareSync(password, user.password);
+
       if (isValid) {
         return user;
       }
+
     }
     return null;
   }
@@ -69,7 +75,9 @@ export class UserService {
    * @param {string} username - The username of the user to remove.
    * @returns {Promise<void>} A promise that returns when the user is successfully removed.
    */
+
   async removeUser(username: string): Promise<void> {
     await UserModel.destroy({ where: { username: username } });
   }
+
 }

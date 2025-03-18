@@ -6,6 +6,3 @@ export interface Tribe {
     createdAt: Date;
     updatedAt: Date;
 }
-
-
-

@@ -58,7 +58,6 @@ export function userRouter(userService: UserService): Router {
      * @returns {string} The logged-in user's username if logged in, or an error message if not logged in.
      */
     userRouter.get("/users/session", (req: Request, res: Response) => {
-        console.log("Session data:", req.session);
         let username : string | undefined = req.session.username;
         if (username) {
             res.status(200).send(`Logged in as: ${username}`);
@@ -73,10 +72,8 @@ export function userRouter(userService: UserService): Router {
      */
     userRouter.post("/users/logout", (req: Request, res: Response) => {
         delete req.session.username;
-        console.log("LOGGED OUT (USER ROUTER)")
         res.status(200).send("Logged out");
     });
     
 return userRouter;
 }
-

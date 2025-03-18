@@ -45,9 +45,6 @@ PostModel.init(
             },
             onDelete: "CASCADE",
             onUpdate: "CASCADE"
-
-            
-
         }, 
         
         createdAt: {
@@ -80,8 +77,6 @@ PostModel.init(
             type: DataTypes.STRING,
             allowNull: true
         }
-
-        
     },
 
     {
@@ -95,6 +90,7 @@ PostModel.belongsTo(UserModel, {
     foreignKey: 'author',
     as: 'authorUser'
 });
+
 PostModel.belongsTo(TribeModel, {
     foreignKey: 'tribe',
     as: 'tribeModel'

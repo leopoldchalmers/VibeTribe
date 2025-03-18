@@ -17,15 +17,12 @@ export function AccountInfo() {
   const { user, setUser} = useContext(UserContext);
   const [errors, setErrors] = useState<Errors>({});
  
-
   if (!user) return <div>Please log in to view account details.</div>;
 
   return (
     <div className='sectionMargin flex text-center items-center fixed-top'>
       <h1 className= "pageTitle">Account Info</h1>
       <h3 className='mt-4'>Username: {user.username}</h3>
-
-
 
     <button className="logInButton" onClick={async () => {
       const result = await logout();

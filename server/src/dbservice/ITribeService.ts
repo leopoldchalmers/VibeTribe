@@ -10,4 +10,5 @@ export interface ITribeService {
     getTribe(tribeId: number): Promise<Tribe | null>;
     deleteTribe(tribeId: number): Promise<void>;
     getTribes(): Promise<Tribe[]>;
+    getTribesByUser(username: string): Promise<Tribe[] | null>;
 }

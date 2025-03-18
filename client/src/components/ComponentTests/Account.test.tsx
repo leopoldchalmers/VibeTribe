@@ -7,11 +7,11 @@ describe('Account Component', () => {
 
     test('renders the heading Log in to VibeTribe', () => {
         render(
-        <MemoryRouter>
-            <Account />
+            <MemoryRouter>
+                <Account />
         </MemoryRouter>
+        );
 
-    );
         const headingElement = screen.getByText(/Log in to VibeTribe/i);
         expect(headingElement).toBeInTheDocument();
     });
@@ -21,8 +21,8 @@ describe('Account Component', () => {
             <MemoryRouter>
                 <Account />
             </MemoryRouter>
-    
         );
+
         const button = screen.getByRole('button', { name: /Log in/i });
         expect(button).toBeInTheDocument();
     }
@@ -33,8 +33,8 @@ describe('Account Component', () => {
             <MemoryRouter>
                 <Account />
             </MemoryRouter>
-    
         );
+
         const link = screen.getByRole('link', { name: /Sign up/i });
         expect(link).toBeInTheDocument();
     }

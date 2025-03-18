@@ -1,4 +1,5 @@
-import {User} from '../model/user';
+import { UserModel } from "../db/user.db";
+import { User } from "../model/user";
 
 /**
  * IUserService is an interface that represents the methods that a UserService class must implement
@@ -6,6 +7,7 @@ import {User} from '../model/user';
  */
 
 export interface IUserService {
-    createUser(name: string, email: string, password: string): Promise<User>;
-    findUser(username: string, password: string): Promise<User | undefined>;
+    createUser(name: string, email: string, password: string): Promise<UserModel | null>;
+    findUser(username: string, password: string): Promise<User | null>;
+    removeUser(username: string): Promise<void>;
 }

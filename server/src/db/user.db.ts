@@ -13,6 +13,7 @@ export class UserModel extends Model<InferAttributes<UserModel>, InferCreationAt
     posts: Association<UserModel, PostModel>;
   };
 }
+
 /**
  * UserModel is a model that represents a user in the database
  */
@@ -23,19 +24,22 @@ UserModel.init(
       type: DataTypes.STRING,
       primaryKey: true
     },
+
     email: {
       type: DataTypes.STRING,
       allowNull: false
     },
+
     password: {
         type: DataTypes.STRING,
         allowNull: false
       },
+
   },
+  
   {
     sequelize: conn,
     tableName: "users",
     timestamps: false,
   }
 );
-

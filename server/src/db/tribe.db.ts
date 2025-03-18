@@ -17,19 +17,23 @@ export class TribeModel extends Model<InferAttributes<TribeModel>, InferCreation
 
 TribeModel.init(
     {
+
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
+
     title: {
         type: DataTypes.STRING,
         allowNull: false
     },
+
     description: {
         type : DataTypes.STRING,
         allowNull: false
     },
+
     owner: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -45,6 +49,7 @@ TribeModel.init(
         type: DataTypes.DATE,
         allowNull: false
     },
+    
     updatedAt: {
         type: DataTypes.DATE,
         allowNull: false

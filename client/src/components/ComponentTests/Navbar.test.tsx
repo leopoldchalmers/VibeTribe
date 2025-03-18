@@ -10,6 +10,7 @@ describe('Navbar Component', () => {
             <MemoryRouter>
             <Navbar />
             </MemoryRouter>);
+            
         const link = screen.getByRole('link', { name: /VibeTribe/i });
         expect(link).toBeInTheDocument();
     }
@@ -20,8 +21,10 @@ describe('Navbar Component', () => {
             <MemoryRouter>
             <Navbar />
             </MemoryRouter>);
+
         const button = screen.getByAltText(/Profile Icon/i);
         expect(button).toBeInTheDocument();
     }
     )
+
 });
