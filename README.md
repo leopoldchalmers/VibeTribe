@@ -1,5 +1,4 @@
-The report is a Report.md file in the documentation folder in the the repository: 
-/dokumentation/VibeTribe_Project_Report.md
+The report is a Report.md file
 
 Vibetribe
     -client
