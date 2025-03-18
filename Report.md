@@ -96,7 +96,7 @@ access the features.
 
 
 
-![Figure 1: Login screen](2myliw1k.png)
+![Figure 1: Login screen](ornohtc2.png)
 
 
 
@@ -790,7 +790,7 @@ ifdescriptionis not a string (Body: appropriate error message)
 
 
 
-![Figure 3: ER-diagram of database](ornohtc2.png)
+![Figure 3: ER-diagram of database](2myliw1k.png)
 
 ## 4 Responsibilities
 
