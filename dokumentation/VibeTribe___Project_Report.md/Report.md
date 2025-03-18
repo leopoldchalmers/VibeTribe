@@ -95,8 +95,8 @@ a password that is at least 5 characters long. You will then need to log in to
 access the features.
 
 
-![Figure 1: Login screen](./ornohtc2.png)
-![Figure 2: Register screen](./mcxdm25m.png)
+<img src="ornohtc2.png" alt="Figure 1: Login screen" width="300"/>
+<img src="mcxdm25m.png" alt="Figure 2: Register screen" width="300"/>
 
 2.2.2 Create a tribe
 
@@ -785,7 +785,7 @@ ifdescriptionis not a string (Body: appropriate error message)
     posts, but each post can only be connected to one tribe.
 
 
-![Figure 3: ER-diagram of database](./mcxdm25m.png)
+<img src="md/2myliw1k.png" alt="Figure 1: ER-diagram of database" width="300"/>
 
 ## 4 Responsibilities
 
