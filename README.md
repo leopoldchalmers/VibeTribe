@@ -96,10 +96,11 @@ access the features.
 
 
 ```
-Figure 1: Login screen
+![Figure 1: Login screen](images/2myliw1k.png)
+
 ```
 ```
-Figure 2: Register screen
+![Figure 2: Register screen](images/mcxdm25m.png)
 ```
 2.2.2 Create a tribe
 
@@ -789,7 +790,7 @@ ifdescriptionis not a string (Body: appropriate error message)
 
 
 ```
-Figure 3: Enter Caption
+![Figure 3: ER-diagram of database](images/ornohtc2.png)
 ```
 ## 4 Responsibilities
 
