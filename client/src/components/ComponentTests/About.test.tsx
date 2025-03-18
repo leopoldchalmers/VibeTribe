@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { About } from '../about';
+import { About } from '../About';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('About Component', () => {

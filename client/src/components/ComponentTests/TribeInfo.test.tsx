@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { TribeInfo } from "../TribeInfo";
-import * as api from "../../api";
+import * as api from '../../api/api';
 
-jest.mock("../../api");
+jest.mock("../../api/api");
 
 describe("TribeInfo Component", () => {
   const mockTribe = {

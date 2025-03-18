@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { UserContext } from "../../context/UserContext";
 import * as api from '../../api/api';
 
-jest.mock('../../api');
+jest.mock('../../api/api');
 
 describe('Home', () => {
 
