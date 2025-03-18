@@ -2,7 +2,7 @@ import "../App.css"
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
 import { useNavigate, Link } from "react-router-dom";
-import logo from "/logo.png";
+import logo from "../assets/logo.webp";
 import profileIcon from "../assets/Profile_icon.webp";
 
 function Navbar(){

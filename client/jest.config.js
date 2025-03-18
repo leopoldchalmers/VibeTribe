@@ -8,5 +8,6 @@ export default {
   moduleNameMapper: {
     "\\.(css|less|sass|scss)$": "identity-obj-proxy",
     "^.+\\.svg$": "jest-transformer-svg",
+    '\\.(jpg|jpeg|png|webp)$': '<rootDir>/__mocks__/fileMock.js',
   },
 };
