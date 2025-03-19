@@ -22,3 +22,29 @@
   .post-item {
     margin-bottom: 20px;
   }
+
+  .postButton {
+    display: block;
+    margin: 20px auto;
+    margin-right: 50px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    background-color: #fff;
+    text-align: center;
+    color: black;
+  }
+
+  .createButton{
+    margin: 20px auto;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-align: center;
+    color:#fff;
+    background-color: #000;
+  }

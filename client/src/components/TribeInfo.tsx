@@ -80,7 +80,7 @@ export function TribeInfo() {
         <p>Owner: {tribe.owner}</p>
         <p>Created At: {new Date(tribe.createdAt).toLocaleDateString()}</p>
         <p>Updated At: {new Date(tribe.updatedAt).toLocaleDateString()}</p>
-        <Button variant="primary" onClick={() => setShowModal(true)} style={{ position: "absolute", top: "100px", right: "10px" }}>
+        <Button variant="primary" className="postButton" onClick={() => setShowModal(true)} style={{ position: "absolute", top: "100px", right: "10px" }}>
           New Post
         </Button>
       </div>
@@ -130,7 +130,7 @@ export function TribeInfo() {
                 onChange={handlePostChange}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" className="createButton" type="submit">
               Create Post
             </Button>
           </Form>
