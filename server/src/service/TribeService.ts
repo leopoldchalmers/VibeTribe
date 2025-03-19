@@ -1,6 +1,6 @@
 import { Tribe } from "../model/tribe";
 import { User } from "../model/user";
-import { ITribeService } from "../dbservice/ITribeService";
+import { ITribeService } from "../iService/ITribeService";
 import { UserService } from "./UserService";
 import { TribeModel } from "../db/tribe.db";
 

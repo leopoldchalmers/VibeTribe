@@ -1,7 +1,7 @@
 import { User } from '../model/user';
 import bcrypt from "bcrypt";
 import { UserModel } from '../db/user.db';
-import { IUserService } from '../dbservice/IUserService';
+import { IUserService } from '../iService/IUserService';
 
 /**
  * UserService is a service that manages users.

@@ -1,7 +1,7 @@
 import { Post } from '../model/post';
 import { PostModel } from '../db/post.db';
 import { TribeModel } from '../db/tribe.db';
-import { IPostService } from '../dbservice/IPostService';
+import { IPostService } from '../iService/IPostService';
 
 /**
  * PostService is a service that manages posts.
