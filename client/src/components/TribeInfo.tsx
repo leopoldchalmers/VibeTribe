@@ -90,7 +90,7 @@ export function TribeInfo() {
           <div key={post.id} className="post-item">
             <h3>{post.title}</h3>
             <p>{post.description}</p>
-            <p>Song Link: <a href={post.songLink} target="_blank" rel="noopener noreferrer">{post.songLink}</a></p>
+            <p>Music Link: <a href={post.songLink} target="_blank" rel="noopener noreferrer">{post.songLink}</a></p>
             <p>Author: {post.author}</p>
             <p>Likes: {post.likes}</p>
           </div>
@@ -122,7 +122,7 @@ export function TribeInfo() {
               />
             </Form.Group>
             <Form.Group controlId="songLink">
-              <Form.Label>Song Link</Form.Label>
+              <Form.Label>Music Link</Form.Label>
               <Form.Control
                 type="text"
                 name="songLink"
